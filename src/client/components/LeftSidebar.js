@@ -4,7 +4,7 @@ import './LeftSidebar.css';
 class LeftSidebar extends Component {
     render() {
         return (
-            <div className="left-sidebar ps-relative" id="left-sidebar">
+            <div className="left-sidebar ps-fixed" id="left-sidebar">
                 <div className="ps-sticky js-sticky-leftnav">
                     <nav role="navigation">
                         <ul className="nav-links">
