@@ -1,0 +1,52 @@
+import React, { Component } from 'react';
+
+class ListItem extends Component {
+    render() {
+        return (
+            <div className="item-list narrow d-flex align-items-center">
+                <div className="cp d-flex">
+                    <div className="votes">
+                        <div className="mini-counts">
+                            <span title="0 votes">0</span>
+                        </div>
+                        <div>votes</div>
+                    </div>
+                    <div className="status">
+                        <div className="mini-counts">
+                            <span title="0 votes">0</span>
+                        </div>
+                        <div>answers</div>
+                    </div>
+                    <div className="views">
+                        <div className="mini-counts">
+                            <span title="0 votes">0</span>
+                        </div>
+                        <div>views</div>
+                    </div>
+                </div>
+                <div className="list-sumary w-100">
+                    <h3>
+                        <a href="#q" className="hyper-link">How to convert one-dimensional lstm into three-dimensional one</a>
+                    </h3>
+                    <div className="tags d-flex align-items-center">
+                        <a href="#tag" className="post-tag">
+                            python
+                        </a>
+                        <a href="#tag" className="post-tag">
+                            javascript
+                        </a>
+                        <a href="#tag" className="post-tag">
+                            reactjs
+                        </a>
+                    </div>
+                    <div className="started ml-auto" dir="ltr">
+                        <a href="#relativetime">asked 44 min ago</a>
+                    </div>
+                    <div className="clear-fix"></div>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default ListItem;

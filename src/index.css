@@ -173,6 +173,11 @@ code {
   text-align: left;
 }
 
+/* CLEAR FIX */
+.clear-fix {
+  clear: both;
+}
+
 @media screen and (max-width: 1290px) {
   .container {
     margin: 0 6px;
