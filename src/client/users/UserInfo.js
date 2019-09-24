@@ -12,7 +12,7 @@ const UserInfo = props => {
                 <a href="/user/123">{props.username}</a>
                 <span className="user-location">{props.userLocation}</span>
                 <div className="-flair">
-                    <span className="reputation-score" title="reputation this week: 1,110 total reputation: 413,462" dir="ltr">props.userReputation</span>
+                    <span className="reputation-score" title="reputation this week: 1,110 total reputation: 413,462" dir="ltr">{props.userReputation}</span>
                 </div>
             </div>
             <div className="user-tags clear-fix">

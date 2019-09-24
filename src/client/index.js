@@ -7,6 +7,7 @@ import Content from './components/Content';
 import Footer from './components/Footer';
 import TagsComponent from './tags/TagsComponent';
 import UsersComponent from './users/UsersComponent';
+import QuestionsComponent from './questions/QuestionsComponent';
 
 class Index extends React.Component {
     render() {
@@ -20,6 +21,7 @@ class Index extends React.Component {
                     <Route exact path="/" component={Content} />
                     <Route exact path="/tags" component={TagsComponent} />
                     <Route exact path="/users" component={UsersComponent} />
+                    <Route exact path="/questions" component={QuestionsComponent} />
                 </div>
                 <Footer />
             </>

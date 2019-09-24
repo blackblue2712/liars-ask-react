@@ -33,6 +33,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #242729;
 }
 
 ul {
@@ -40,9 +41,16 @@ ul {
   padding: 0;
   margin: 0;
 }
-
+pre {
+  padding: 12px;
+}
 a {
   text-decoration: none;
+}
+a, .s-link {
+  color: #07C;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -96,6 +104,9 @@ code {
 .justify-content-center {
   justify-content: center;
 }
+.justify-content-end {
+  justify-content: flex-end
+}
 
 /**/
 .s-input {
@@ -117,12 +128,57 @@ code {
 .mr-auto {
   margin-right: auto;
 }
+.mr24 {
+  margin-right: 24px;
+}
 .mb16 {
   margin-bottom: 16px;
 }
 .mb24 {
   margin-bottom: 24px;
 }
+.mt24 {
+  margin-top: 24px;
+}
+.mr2 {
+  margin-right: 2px !important;
+}
+.mb8 {
+  margin-bottom: 8px !important;
+}
+.mr16 {
+  margin-right: 16px !important;
+}
+.mt16 {
+  margin-top: 12px;
+}
+.ml20 {
+  margin-left: 20px;
+}
+
+/* PADDING */
+.pl-auto {
+  padding-left: auto;
+}
+.pr-auto {
+  padding-right: auto;
+}
+.pb16 {
+  padding-bottom: 16px;
+}
+.pb24 {
+  padding-bottom: 24px;
+}
+.pr2 {
+  padding-right: 2px !important;
+}
+.pb8 {
+  padding-bottom: 8px !important;
+}
+.pr16 {
+  padding-right: 16px !important;
+}
+
 
 .container {
   margin: 0 120px;
@@ -175,7 +231,9 @@ code {
 .s-btn__outline {
   background: transparent;
 }
-
+.s-btn-group {
+  min-width: 102px;
+}
 .s-btn-group .s-btn{
   border: 1px solid;
   border-right-width: 0;
@@ -320,4 +378,16 @@ code {
 
 .oc7 {
   opacity: .7 !important;
+}
+
+.fc-light {
+  color: #6a737c !important;
+}
+
+.bb {
+  border-bottom-style: solid !important;
+  border-bottom-width: 1px !important;
+}
+.bc-black-2 {
+  border-color: #e4e6e8 !important;
 }

@@ -10,7 +10,7 @@ class TagsComponent extends Component {
                     <div className="grid d-flex align-items-centers mb16">
                         <h1 className="fs-headline1 mr-auto">Users</h1>
                     </div>
-                    <p className="mb24 f13 fw350">Find users for soi :)</p>
+                    <p className="mb24 f13 fw350">Find users for ... :)</p>
                     <div className="grid-ai grid-tags mb16 d-flex align-items-center">
                         <div className="ps-relative mr-auto">
                             <input type="text" name="usersfilter" placeholder="Filter by user" maxLength="240" className="s-input s-input__search js-search-users" />
