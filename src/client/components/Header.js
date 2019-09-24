@@ -3,6 +3,73 @@ import './Header.css';
 import brandLogo from '../images/logo@256.png';
 
 class Header extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            toggleMenu: false,
+            toggleSearch: false,
+            toggleProducts: false
+        }
+
+        // this.handleToggleMenu = this.handleToggleMenu.bind(this);
+    }
+
+    componentDidMount () {
+        
+    }
+
+    handleToggleMenu = () => {
+        let toggleButton = document.querySelector("a.left-sidebar-toggle");
+        let leftSide = document.querySelector(".left-sidebar");
+        
+        let { toggleMenu } = this.state;
+
+        if(!toggleMenu) {
+            toggleButton.classList.add("topbar-icon-on");
+            leftSide.classList.add("topbar-icon-on");
+            // this.setState( {toggleMenu: true} );
+        } else {
+            
+            toggleButton.classList.remove("topbar-icon-on");
+            leftSide.classList.remove("topbar-icon-on");
+            // this.setState( {toggleMenu: false} );
+        }
+        this.setState( function (prevState, props) {
+            return {toggleMenu: !prevState.toggleMenu}
+        });
+    }
+
+    handleToggleSearch = () => {
+        let { toggleSearch } = this.state;
+        if(!toggleSearch) {
+            document.querySelector(".s-input").style.display = "block";
+        } else {
+            document.querySelector(".s-input").style.display = "none";
+        }
+
+        this.setState( function(prevState, props) {
+            return { toggleSearch: !prevState.toggleSearch }
+        })
+    }
+
+    handleToggleProducts = () => {
+        let { toggleProducts } = this.state;
+
+        if(!toggleProducts) {
+            document.querySelector("#products-popover").style.display = "block";
+            
+        } else {
+            document.querySelector("#products-popover").style.display = "none";
+            
+        }
+
+        this.setState( function(prevState, props) {
+            return { toggleProducts: !prevState.toggleProducts }
+        })
+    }
+
     render() {
         return (
             <header id="header" className="ps-fixed w-100">
@@ -12,15 +79,68 @@ class Header extends Component {
                             <img src={brandLogo} alt="brand-logo"/>
                         </a>
                     </div>
-                    <a href="#toggle" className="left-sidebar-toggle d-flex align-items-center justify-content-center">
+                    <a  className="left-sidebar-toggle d-flex align-items-center justify-content-center"
+                        href="#toggle"
+                        onClick={this.handleToggleMenu}
+                    >
                         <span className="ps-absolute"></span>
                     </a>
                     <ul className="menu-horizontal w-100 d-flex align-items-center">
+                        <li className="item-top item-top--radius ps-relative">
+                            <a
+                                href="#product"
+                                onClick={this.handleToggleProducts}
+                            >
+                                Products
+                            </a>
+                            <div id="products-popover" className="s-popover ps-absolute">
+                                <div className="s-popover--arrow"></div>
+                                <ul className="list-rest s-anchors">
+                                    <li>
+                                        <a href="/">
+                                            <span className="fs-body1 d-block">Liars ask</span>
+                                            <span className="fs-caption d-block">Public questions and answers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/teams">
+                                            <span className="fs-body1 d-block">Teams</span>
+                                            <span className="fs-caption d-block">Private questions and answers for your team</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/teams">
+                                            <span className="fs-body1 d-block">Enterprise</span>
+                                            <span className="fs-caption d-block">Private self-hosted questions and answers for your enterprise</span>
+                                        </a>
+                                    </li>
+                                    <hr className="oc7"/>
+                                    <li>
+                                        <a href="/teams">
+                                            <span className="fs-body1 d-block">Talent</span>
+                                            <span className="fs-caption d-block">Hire technical talent</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/teams">
+                                            <span className="fs-body1 d-block">Advertising</span>
+                                            <span className="fs-caption d-block">Reach developers worldwide</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                         <li className="w-100">
                             <form action="#search">
                                 <div className="ps-relative">
-                                    <input type="text" name="q" placeholder="Search..." maxLength="240" className="s-input s-input__search js-search-field" />
+                                    <input type="text" name="q" placeholder="Search..." maxLength="240" className="s-input s-input__search js-search-field w-100" />
                                     <svg aria-hidden="true" className="svg-icon s-input-icon s-input-icon__search iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"></path></svg>
+                                    <svg
+                                        aria-hidden="false" className="svg-icon s-input-icon s-input-icon__search iconSearch d-none" width="18" height="18" viewBox="0 0 18 18"
+                                        onClick={this.handleToggleSearch}
+                                    >
+                                            <path d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"></path>
+                                    </svg>
                                 </div>
                             </form>
                         </li>

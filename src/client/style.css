@@ -5,7 +5,7 @@
     top: 50%;
     left: .7em;
     margin-top: -9px;
-    pointer-events: none;
+    cursor: pointer;
 }
 
 .svg-icon {

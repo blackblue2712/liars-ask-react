@@ -38,18 +38,32 @@
     top: 22px;
     left: 17px;
 }
+
+.topbar-icon-on span {
+    height: 0;
+}
+
 .left-sidebar-toggle span::before, .left-sidebar-toggle span::after {
     position: absolute;
     content: '';
     width: 18px;
     height: 2px;
     left: 0;
-    background: #848d95;
     top: -5px;
+    background: #848d95;
     transition: all ease-in-out .1s;
 }
 .left-sidebar-toggle span::after {
     top: 5px;
+}
+
+.topbar-icon-on span::before {
+    transform: rotate(-45deg);
+    top: 2px;
+}
+.topbar-icon-on span::after {
+    transform: rotate(45deg);
+    top: 2px;
 }
 
 .item-top {
@@ -57,6 +71,18 @@
     line-height: 53px;
     margin-left: 10px;
     margin-top: -3px;
+}
+.item-top--radius {
+    height: auto !important;
+    line-height: 16px;
+    margin-right: 12px;
+}
+.item-top--radius > a {
+    border-radius: 15px;
+    height: auto !important;
+    padding: 6px 16px !important;
+    font-size: 14px;
+    color: #535a60;
 }
 .item-top:hover .svg-icon {
     fill: #3B4045;
@@ -69,4 +95,66 @@
 }
 .item-top a:hover {
     background: #EFF0F1;
+}
+
+.s-popover {
+    width: 14rem;
+    background: white;
+    box-shadow: 3px 3px 6px 1px rgba(0, 0, 0, .4) !important;
+    z-index: 999;
+    top: 38px;
+    padding: 8px 4px;
+    border-radius: 5px;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    display: none;
+}
+
+.s-popover a{
+    padding: 6px 16px !important;
+    font-size: 14px;
+    color: #535a60;
+    width: 100%;
+    border-radius: 2px;
+    
+}
+
+.s-popover a:hover{
+    background-color: #f2720c !important;
+    color: white;
+}
+
+.fs-body1 {
+    font-size: 14px !important;
+}
+
+.fs-caption {
+    opacity: .7;
+    font-size: 12px !important;
+}
+
+.s-popover--arrow {
+    color: white;
+}
+
+.s-popover--arrow:before {
+    content: "";
+    left: 50%;
+    top: -16px;
+    z-index: 99999;
+    margin-left: -8px;
+    position: absolute;
+    border: 8px solid transparent;
+    border-bottom-color: black;
+}
+
+.s-popover--arrow:after {
+    content: "";
+    left: 50%;
+    top: -16px;
+    z-index: 999999;
+    margin-left: -8px;
+    position: absolute;
+    border: 8px solid transparent;
+    border-bottom-color: white;
 }

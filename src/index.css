@@ -1,3 +1,27 @@
+*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+html
+{
+   scroll-behavior:smooth
+}
 * {
   box-sizing: border-box;
 }
@@ -62,6 +86,9 @@ code {
 .d-inline {
   display: inline !important;
 }
+.d-none {
+  display: none !important;
+}
 
 .align-items-center {
   align-items: center;
@@ -73,7 +100,6 @@ code {
 /**/
 .s-input {
   -webkit-appearance: none;
-  width: 100%;
   margin: 0;
   padding: .6em 2.7em;
   border: 1px solid #bbc0c4;
@@ -93,6 +119,9 @@ code {
 }
 .mb16 {
   margin-bottom: 16px;
+}
+.mb24 {
+  margin-bottom: 24px;
 }
 
 .container {
@@ -172,6 +201,15 @@ code {
 .text-left {
   text-align: left;
 }
+.fw400 {
+  font-weight: 400
+}
+.fw350 {
+  font-weight: 350
+}
+.f13 {
+  font-size: 13px;
+}
 
 /* CLEAR FIX */
 .clear-fix {
@@ -195,6 +233,20 @@ code {
     margin-top: 24px;
     float: left !important;
     width: 90% !important;
+  }
+  .nearfooter {
+    max-width: 100% !important; 
+  }
+
+  .js-search-tags {
+    width: 100%;
+  }
+  .grid-tags {
+    display: block !important;
+  }
+  .grid-tags .s-btn-group {
+    margin-top: 24px;
+    text-align: right;
   }
 }
 
@@ -222,7 +274,16 @@ code {
     margin-left: 0 !important;
   }
   .left-sidebar {
+    background: white;
+    height: auto !important;
     display: none;
+    position: fixed !important;
+    top: 27px;
+    left: 0;
+    box-shadow: 3px 3px 6px 1px rgba(0, 0, 0, .4) !important;
+    width: 220px !important;
+    padding: 24px 4px 24px 4px;
+    
   }
   .fs-headline1 {
     font-size: 1.276923rem !important;
@@ -234,4 +295,29 @@ code {
   .left-sidebar-toggle {
     display: block !important;
   }
+
+  .js-search-field {
+    display: none;
+  }
+
+  /* svg[aria-hidden="true"] {
+    display: none;
+  } */
+  svg[aria-hidden="false"] {
+    display: block !important;
+  }
+}
+@media screen and (min-width: 527px) {
+  .left-sidebar-toggle {
+    display: none !important;
+  }
+}
+
+
+.topbar-icon-on {
+  display: block;
+}
+
+.oc7 {
+  opacity: .7 !important;
 }
