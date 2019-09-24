@@ -21,6 +21,37 @@
     width: 164px;
 }
 
+.left-sidebar-toggle {
+    display: none;
+    width: 44px;
+    height: 47px;
+    margin-right: 6px;
+}
+.left-sidebar-toggle:hover {
+    color: #3b4045;
+    background-color: #eff0f1;
+}
+.left-sidebar-toggle span{
+    width: 18px;
+    height: 2px;
+    background-color: #848d95;
+    top: 22px;
+    left: 17px;
+}
+.left-sidebar-toggle span::before, .left-sidebar-toggle span::after {
+    position: absolute;
+    content: '';
+    width: 18px;
+    height: 2px;
+    left: 0;
+    background: #848d95;
+    top: -5px;
+    transition: all ease-in-out .1s;
+}
+.left-sidebar-toggle span::after {
+    top: 5px;
+}
+
 .item-top {
     height: 47px;
     line-height: 53px;

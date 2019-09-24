@@ -12,6 +12,9 @@ class Header extends Component {
                             <img src={brandLogo} alt="brand-logo"/>
                         </a>
                     </div>
+                    <a href="#toggle" className="left-sidebar-toggle d-flex align-items-center justify-content-center">
+                        <span className="ps-absolute"></span>
+                    </a>
                     <ul className="menu-horizontal w-100 d-flex align-items-center">
                         <li className="w-100">
                             <form action="#search">

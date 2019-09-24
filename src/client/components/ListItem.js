@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Tags from './Tags';
 
 class ListItem extends Component {
     render() {
@@ -28,17 +29,7 @@ class ListItem extends Component {
                     <h3>
                         <a href="#q" className="hyper-link">How to convert one-dimensional lstm into three-dimensional one</a>
                     </h3>
-                    <div className="tags d-flex align-items-center">
-                        <a href="#tag" className="post-tag">
-                            python
-                        </a>
-                        <a href="#tag" className="post-tag">
-                            javascript
-                        </a>
-                        <a href="#tag" className="post-tag">
-                            reactjs
-                        </a>
-                    </div>
+                    <Tags />
                     <div className="started ml-auto" dir="ltr">
                         <a href="#relativetime">asked 44 min ago</a>
                     </div>

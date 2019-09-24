@@ -4,6 +4,8 @@ import Header from './components/Header';
 import LeftSidebar from './components/LeftSidebar';
 import Content from './components/Content';
 import Mainbar from './components/Mainbar';
+import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
 function index() {
     return <div id="wrap">
@@ -14,8 +16,11 @@ function index() {
             <LeftSidebar />
             <Content>
                 <Mainbar />
+                <Sidebar />
             </Content>
+            
         </div>
+        <Footer />
     </div>
 }
 
