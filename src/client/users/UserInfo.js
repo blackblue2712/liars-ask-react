@@ -5,7 +5,7 @@ const UserInfo = props => {
         <div className="grid-layout--cell tags-cell">
             <div className="user-gavatar48">
                 <a href="/users/123">
-                    <img src={props.userImage} alt="none"/>
+                    <img loading="lazy" src={props.userImage} alt="none"/>
                 </a>
             </div>
             <div className="user-detail">

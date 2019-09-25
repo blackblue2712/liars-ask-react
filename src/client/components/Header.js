@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
-import brandLogo from '../images/logo@256.png';
+import brandLogo from '../images/logo.png';
 
 class Header extends Component {
 
@@ -75,12 +76,12 @@ class Header extends Component {
             <header id="header" className="ps-fixed w-100">
                 <div className="container d-flex align-items-center">
                     <div className="brand-logo d-flex align-items-center">
-                        <a href="/">
+                        <Link to="/">
                             <img src={brandLogo} alt="brand-logo"/>
-                        </a>
+                        </Link>
                     </div>
                     <a  className="left-sidebar-toggle d-flex align-items-center justify-content-center"
-                        href="#toggle"
+                        href="#tg"
                         onClick={this.handleToggleMenu}
                     >
                         <span className="ps-absolute"></span>

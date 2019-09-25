@@ -4,6 +4,7 @@ import Post from './Post';
 import Code from 'react-code-prettify';
 import UserInfo from '../users/UserInfo';
 import Sidebar from '../components/Sidebar';
+import AskAQuestion from '../components/AskAQuestion';
 
 const codeString2 = `
 #overlay {
@@ -34,7 +35,7 @@ class QuestionsComponent extends Component {
                         <div className="grid d-flex align-items-centers mb16">
                             <h1 className="fs-headline1 mr-auto">How can I make a CSS glass/blur effect work for an overlay?</h1>
                             <div className="s-btn-group ml20">
-                                <a href="#popular" className="s-btn s-btn__outline s-btn__primary">Ask Question</a>
+                                <AskAQuestion />
                             </div>
                         </div>
 

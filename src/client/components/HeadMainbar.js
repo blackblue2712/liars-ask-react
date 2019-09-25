@@ -1,4 +1,5 @@
 import React from 'react';
+import AskAQuestion from './AskAQuestion';
 
 const HeadMainbar = props => {
     return (
@@ -6,7 +7,7 @@ const HeadMainbar = props => {
             <div className="grid d-flex align-items-centers mb16">
                 <h1 className="fs-headline1 mr-auto">Top Question</h1>
                 <div>
-                    <a className="s-btn s-btn__primary s-btn__outline" href="#ask-question">Ask Question</a>
+                    <AskAQuestion />
                 </div>
             </div>
             <div className="grid-ai mb16 text-right">

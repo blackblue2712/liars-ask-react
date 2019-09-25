@@ -27,6 +27,7 @@ class LeftSidebar extends Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className="left-sidebar ps-fixed" id="left-sidebar">
                 <div className="ps-sticky js-sticky-leftnav">
@@ -44,7 +45,7 @@ class LeftSidebar extends Component {
                             <li className="">
                                 <ul>
                                     <li id="/tags" className="canactive">
-                                        <Link className="nav-links--link" to="./tags">Tags</Link>
+                                        <Link className="nav-links--link" to="/tags">Tags</Link>
                                     </li>
                                     <li id="/users" className="canactive">
                                         <Link className="nav-links--link" to="/users">Users</Link>

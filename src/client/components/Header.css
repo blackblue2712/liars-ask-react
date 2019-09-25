@@ -18,7 +18,9 @@
 }
 
 .brand-logo img {
-    width: 164px;
+    /* width: 164px; */
+    height: 50px;
+    padding-right: 50px;
 }
 
 .left-sidebar-toggle {
