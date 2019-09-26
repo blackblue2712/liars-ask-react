@@ -34,7 +34,8 @@ class Post extends Component {
                         /> 
                     </div>
                     <div className="post-taglist d-flex align-items-center">
-                        <Tags />
+                        <Tags name="css"/>
+                        <Tags name="scss"/>
                     </div>
                 </div>
                 

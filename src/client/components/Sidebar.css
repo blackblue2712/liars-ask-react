@@ -7,6 +7,7 @@
 .s-sidebarwidget {
     border: 1px solid #e4e6e8;
     border-top: none;
+    box-shadow: 0 4px 8px rgba(59,64,69,0.2) !important;
 }
 
 .s-sidebarwidget--header {
@@ -16,8 +17,8 @@
     font-weight: bold;
     padding: 12px 15px;
     pointer-events: none;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    /* border-top-left-radius: 3px;
+    border-top-right-radius: 3px; */
     border-top: 1px solid #e4e6e8;
 }
 .s-sidebarwidget--header:not(:nth-child(1)) {

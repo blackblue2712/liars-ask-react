@@ -489,8 +489,8 @@ code {
 .bd-none {
   border: none !important;
 }
-.s-btn__outline:hover {
-  background-color: rgba(0,119,204,0.05);
+.s-btn__hovero:hover {
+  background-color: rgba(0,119,204,0.05) !important;
 }
 
 .bdb-none {

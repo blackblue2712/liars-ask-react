@@ -10,13 +10,13 @@ const converter = new Showdown.Converter({
   tasklists: true
 });
 
-export default function Mde() {
-  const [value, setValue] = React.useState("**Hello world!!!**");
+export default function Mde(props) {
+  const [value, setValue] = React.useState("");
   const [selectedTab, setSelectedTab] = React.useState("write");
   return (
     <div className="container">
       <ReactMde
-        value={value}
+        value={props.value || value}
         onChange={setValue}
         selectedTab={selectedTab}
         onTabChange={setSelectedTab}

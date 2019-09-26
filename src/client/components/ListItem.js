@@ -29,7 +29,9 @@ class ListItem extends Component {
                     <h3>
                         <a href="#q" className="hyper-link">How to convert one-dimensional lstm into three-dimensional one</a>
                     </h3>
-                    <Tags />
+                    <Tags name="glutter" close={false}/>
+                    <Tags name="dart" close={false}/>
+                    <Tags name="go lang" close={false}/>
                     <div className="started ml-auto" dir="ltr">
                         <a href="#relativetime">asked 44 min ago</a>
                     </div>

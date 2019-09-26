@@ -46,7 +46,7 @@ class ButtonGuild extends React.Component {
     render() {
         return (
             <>
-                <div className={`wrap-button-guild is-expanded${this.props.class || ''}`}>
+                <div className={`wrap-button-guild ${this.props.class || ''}`}>
                     <button className="button-guild d-flex algin-items-center w-100 py12" onClick={this.handleShowDown(this.props.index)}>
                         <div className="d-flex algin-items-center mr-auto">
                             <div className="grid--cell mr12">

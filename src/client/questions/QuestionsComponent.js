@@ -5,6 +5,7 @@ import Code from 'react-code-prettify';
 import UserInfo from '../users/UserInfo';
 import Sidebar from '../components/Sidebar';
 import AskAQuestion from '../components/AskAQuestion';
+import Mde from '../editor/Mde';
 
 const codeString2 = `
 #overlay {
@@ -97,7 +98,7 @@ class QuestionsComponent extends Component {
                                     <div className="d-flex justify-content-end">
                                         <UserInfo
                                             username={Math.random().toString(36).substring(7)}
-                                            userLocation="Bratislava, Slovakiaaaaaaaaaaaaaaaaaaa"
+                                            userLocation="Bratislava, Slovakia"
                                             userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
                                             userReputation="1,110"
                                         />
@@ -111,8 +112,9 @@ class QuestionsComponent extends Component {
 
                     <div id="youranswer">
                         <div className="answers-header">
-                            <h2>Your answer</h2>
-                            
+                            <h2 className="mb24">Your answer</h2>
+                            <Mde />
+                            <button className="s-btn s-btn__outline s-btn__primary mt24">Post your answer</button>
                         </div>
                     </div>
                 </div>

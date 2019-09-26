@@ -13,6 +13,20 @@ const ModalPopup = props => {
         // delete localStorage
     }
 
+    const onDragExit = e => {
+        let element = document.querySelector(".js-modal--dialog");
+        let halfWidth = element.clientWidth/2;
+        let halfHeight = element.clientHeight/2;
+
+        element.style.top = e.clientY + halfHeight + "px";
+        element.style.left = e.clientX  + halfWidth + "px";
+    }
+
+    const handleStartWriting = () => {
+        document.querySelector(".s-modal").style.display = "none";
+        document.querySelector("#title").focus();
+    }
+
     useEffect( () => {
         // document.querySelector("#root").onclick = () => {
         //     document.querySelector(".s-modal").style.display = "none";
@@ -21,8 +35,14 @@ const ModalPopup = props => {
 
     return (
         <div className="s-modal js-welcom-modal ps-fixed">
-            <div className="s-modal--dialog js-modal--dialog wmx4 ps-relative">
-                <h1 className="s-modal--header">
+            <div
+                className="s-modal--dialog js-modal--dialog wmx4 ps-relative"
+                draggable={true}
+                onDragEnd={onDragExit}
+            >
+                <h1 className="s-modal--header"
+                    
+                >
                     Asking a good question
                 </h1>
                 <div className="s-modal--body">
@@ -52,8 +72,8 @@ const ModalPopup = props => {
                     </p>
                 </div>
                 <div className="s-modal--footer">
-                    <button className="s-btn s-btn__outline s-btn__primary s-btn--cb mt24 mr24">Start writing</button>
-                    <button className="s-btn s-btn__outline mt24 bd-none" onClick={closeDialogForever}>Don't show me this again</button>
+                    <button onClick={handleStartWriting} className="s-btn s-btn__outline s-btn__primary mt24 mr24">Start writing</button>
+                    <button className="s-btn s-btn__outline s-btn__hovero mt24 bd-none" onClick={closeDialogForever}>Don't show me this again</button>
                 </div>
                 <img className="ps-absolute r12 b0" width="53" height="65" src="https://cdn.sstatic.net/Img/ask/robot-raising-hand.gif?v=369c8833cde4" alt="robo-raising" />
                 <button className="s-modal--close s-btn js-modal-close ps-absolute" onClick={closeDialog}>

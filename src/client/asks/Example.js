@@ -4,14 +4,45 @@ import './Asks.css';
 import "./Mainbar.css";
 import Mde from '../editor/Mde';
 import Sidebar from './Sidebar';
-import ModalPopup from './ModalPopup';
+import Tags from '../components/Tags';
 
+let value = '```';
+value += `
+@media screen and (max-width: 980px) {
+    #mainbar {
+        width: 100% !important;
+    }
+    #sidebar {
+        margin-top: 24px;
+        float: left !important;
+        width: 90% !important;
+    }
+    .nearfooter {
+        max-width: 100% !important; 
+    }
+  
+    .js-search-tags {
+        width: 100%;
+    }
+    .grid-tags {
+        display: block !important;
+    }
+    .grid-tags .s-btn-group {
+        margin-top: 24px;
+        text-align: right;
+    }
+}
+`
+value += '```';
 
-const Asks = () => {
+const Example = () => {
     useEffect( () => {
         let editor = document.querySelector("textarea.mde-text ");
-        editor.setAttribute("id", "questionBody")
-        editor.setAttribute("name", "questionBody")
+        editor.setAttribute("id", "questionBody");
+        editor.setAttribute("name", "questionBody");
+
+        let tagsIncludedSize = document.querySelector(".tags-included").offsetWidth;
+        document.querySelector("#tageditor-replacing-tagnames--input").style.paddingLeft = tagsIncludedSize + 10 + "px";
     })
 
     
@@ -21,7 +52,7 @@ const Asks = () => {
                 <div className="main-head">
                     <div className="grid d-flex align-items-center mb16">
                         <h1 className="fs-headline1 mr-auto">Ask a public question</h1>
-                        <Link className="s-btn s-btn__outline s-btn__primary s-btn__primary" to="/questions/ask/example">See example</Link>
+                        <Link className="s-btn s-btn__outline s-btn__primary s-btn__primary" to="/questions/ask">Ask question</Link>
                     </div>
                 </div>
                 <div id="question-form">
@@ -33,7 +64,10 @@ const Asks = () => {
                             </label>
                         </div>
                         <div className="ps-relative mb16">
-                            <input id="title" name="title" type="text" className="s-input w-100" placeholder="What's your programming question? Be specific"/>
+                            <input
+                                id="title" name="title" type="text" className="s-input w-100" placeholder="What's your programming question? Be specific"
+                                value="How to reponsive web with @media css- ask for syntax"
+                            />
                         </div>
                         
                         <div className="post-editor mb16">
@@ -42,7 +76,9 @@ const Asks = () => {
                                     Question body
                                     <p className="s-desscription mt4">Include all the infomation someone would need to answer your question</p>
                                 </label>
-                                <Mde loadingPreview="Loading..."/>
+                                <Mde
+                                    value={value}
+                                />
                                 {/* CAPTOPN */}
                                 <div className="d-flex align-items-center pb12 fc-light fs-caption mt16 mb24">
                                     <div className="mr16">
@@ -65,12 +101,26 @@ const Asks = () => {
                                         <p className="s-desscription mt4">Add upto 5 tags to describe what your question is about</p>
                                     </label>
                                     <div className="ps-relative mb16">
-                                        <input id="tagnames" name="tagnames" type="text" className="s-input w-100" placeholder="e.g. (javascript xml react)"/>
+                                        <input 
+                                            id="tagnames" name="tagnames" type="text" className="s-input w-100 d-none" placeholder="e.g. (javascript xml react)"
+                                            value="css scss less"    
+                                        />
+                                        <div className="tags-editor ps-relative" >
+                                            <span className="tags-included ps-absolute">
+                                                <Tags name="css" close={true}/>
+                                                <Tags name="scss" close={true}/>
+                                                <Tags name="less" close={true}/>
+                                            </span>
+                                        <input
+                                            type="text" className=" s-input w-100" placeholder="e.g. (javascript xml react)"
+                                            id="tageditor-replacing-tagnames--input"
+                                            readOnly
+                                        />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button className="s-btn s-btn__outline s-btn__primary mt24">Post your question</button>
                     </div>
                 </div>
                 
@@ -78,11 +128,9 @@ const Asks = () => {
 
             <Sidebar />
             <div className="clear-fix"></div>
-
-            <ModalPopup />
             
         </div>
     )
 }
 
-export default Asks;
+export default Example;

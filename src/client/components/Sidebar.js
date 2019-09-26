@@ -24,7 +24,11 @@ const Sidebar = props => {
                     <span className="s-sidebarwidget--title">Watched</span>
                 </div>
                 <div className="s-sidebar-widget--content s-sidebar-widget--items">
-                    <Tags />
+                        <Tags name="python"/>
+                        <Tags name="javascript"/>
+                        <Tags name="reactjs"/>
+                        <Tags name="react native"/>
+                        <Tags name="nodejs"/>
                     <div className="clear-fix"></div>
                 </div>
             </div>
