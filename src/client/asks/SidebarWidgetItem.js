@@ -28,7 +28,7 @@ class SidebarWidgetItem extends Component {
                                 index={2} 
                                 icon={[<img key={2} src="https://cdn.sstatic.net/Img/list-3.svg?v=323a95564232" width="16" height="16" alt="3."/>]}
                                 title={'Show some code'}
-                                child={[< >When appropriate, share the minimum amount of code others need to reproduce your problem (also called a minimum, reproducible example)</>]}
+                                child={[<p key={2}>When appropriate, share the minimum amount of code others need to reproduce your problem (also called a minimum, reproducible example)</p>]}
                             />
                         </div>
                     </div>

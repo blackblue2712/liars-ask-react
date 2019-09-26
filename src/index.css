@@ -257,6 +257,9 @@ code {
   color: #07C;
   transition: .5s;
 }
+.s-btn--cb:hover {
+  color: black !important;
+}
 .s-btn__primary:hover {
   color: #FFF;
   background-color: #0095ff;
@@ -477,4 +480,19 @@ code {
 .ba {
   border-style: solid !important;
   border-width: 1px !important;
+}
+
+.wmx4 {
+  max-width: 32.4102564rem !important;
+}
+
+.bd-none {
+  border: none !important;
+}
+.s-btn__outline:hover {
+  background-color: rgba(0,119,204,0.05);
+}
+
+.bdb-none {
+  border-bottom: none !important;
 }

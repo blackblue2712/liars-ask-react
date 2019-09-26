@@ -3,6 +3,7 @@ import './Asks.css';
 import "./Mainbar.css";
 import Mde from '../editor/Mde';
 import Sidebar from './Sidebar';
+import ModalPopup from './ModalPopup';
 
 
 const Asks = () => {
@@ -67,7 +68,7 @@ const Asks = () => {
                                 </div>
                             </div>
                         </div>
-                        <a className="s-btn s-btn__outline s-btn__primary mt24" href="/questions/ask">Post your question</a>
+                        <button className="s-btn s-btn__outline s-btn__primary mt24">Post your question</button>
                     </div>
                 </div>
                 
@@ -75,6 +76,9 @@ const Asks = () => {
 
             <Sidebar />
             <div className="clear-fix"></div>
+
+            <ModalPopup />
+            
         </div>
     )
 }
