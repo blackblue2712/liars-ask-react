@@ -49,8 +49,8 @@ class LeftSidebar extends Component {
                                     <li id="/admin/users" className="canactive">
                                         <Link className="nav-links--link" to="/admin/users">Users</Link>
                                     </li>
-                                    <li id="/admin/questions" className="canactive">
-                                        <Link className="nav-links--link" to="/admin/questions">Questions</Link>
+                                    <li id="/admin/announcements" className="canactive">
+                                        <Link className="nav-links--link" to="/admin/announcements">Announcements</Link>
                                     </li>
                                     <li>
                                         <ul>

@@ -46,6 +46,7 @@ const Auth = () => {
                                 color: "blue"
                             }}
                             onClick={handleChangeUI("reg")}
+                            href="#c"
                         >Register a new accoun</a>
                     </div>
                 </form>
@@ -79,6 +80,7 @@ const Auth = () => {
                                 color: "blue"
                             }}
                             onClick={handleChangeUI("sig")}
+                            href="#c"
                         >Login</a>
                     </div>
                 </form>
