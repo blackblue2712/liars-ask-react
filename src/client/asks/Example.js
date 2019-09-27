@@ -6,7 +6,9 @@ import Mde from '../editor/Mde';
 import Sidebar from './Sidebar';
 import Tags from '../components/Tags';
 
-let value = '```';
+let value = `>Just like this
+`;
+value += '```';
 value += `
 @media screen and (max-width: 980px) {
     #mainbar {

@@ -64,7 +64,9 @@ const ModalPopup = props => {
                         index={5} 
                         icon={[<img key={5} src="https://cdn.sstatic.net/Img/list-3.svg?v=323a95564232" width="16" height="16" alt="3."/>]}
                         title={'When appropriate, show some code'}
-                        child={[<p key={5}>When appropriate, share the minimum amount of code others need to reproduce your problem (also called a minimum, reproducible example)</p>]}
+                        child={[
+                            <p key={5}>When appropriate, share the minimum amount of code others need to reproduce your problem (also called a minimum, reproducible example)</p>
+                        ]}
                         class="bdb-none"
                     />
                     <p>

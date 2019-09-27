@@ -38,19 +38,19 @@ class LeftSidebar extends Component {
                                     <span className="-link--chanel-name">Liars ask</span>
                                 </a>
                             </li>
-                            <li id="/" className="youarehere canactive">
-                                <Link className="nav-links--link" to="/">Home</Link>
+                            <li id="/admin" className="youarehere canactive">
+                                <Link className="nav-links--link" to="/admin">Home</Link>
                             </li>
                             <li className="">
                                 <ul>
-                                    <li id="/tags" className="canactive">
-                                        <Link className="nav-links--link" to="/tags">Tags</Link>
+                                    <li id="/admin/tags" className="canactive">
+                                        <Link className="nav-links--link" to="/admin/tags">Tags</Link>
                                     </li>
-                                    <li id="/users" className="canactive">
-                                        <Link className="nav-links--link" to="/users">Users</Link>
+                                    <li id="/admin/users" className="canactive">
+                                        <Link className="nav-links--link" to="/admin/users">Users</Link>
                                     </li>
-                                    <li id="/questions" className="canactive">
-                                        <Link className="nav-links--link" to="/questions">Questions</Link>
+                                    <li id="/admin/questions" className="canactive">
+                                        <Link className="nav-links--link" to="/admin/questions">Questions</Link>
                                     </li>
                                     <li>
                                         <ul>
