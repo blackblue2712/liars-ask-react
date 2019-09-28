@@ -151,6 +151,12 @@ code {
 .mt24 {
   margin-top: 24px;
 }
+.mt36 {
+  margin-top: 36px;
+}
+.mb36 {
+  margin-bottom: 36px !important;
+}
 .mr2 {
   margin-right: 2px !important;
 }
@@ -174,6 +180,9 @@ code {
 }
 .mr12 {
   margin-right: 12px;
+}
+.mb12 {
+  margin-bottom: 12px;
 }
 
 
@@ -202,6 +211,9 @@ code {
 .p16 {
   padding: 16px !important;
 }
+.p20 {
+  padding: 20px !important;
+}
 .pt24 {
   padding-top: 24px;
 }
@@ -218,6 +230,12 @@ code {
 }
 .pb12 {
   padding-bottom: 12px !important;
+}
+.pt36 {
+  padding-top: 36px;
+}
+.pb36 {
+  padding-bottom: 36px;
 }
 
 .container {
@@ -539,4 +557,49 @@ input[type=checkbox]:checked:after {
 
 .bd50 {
   border-radius: 50%;
+}
+
+.required-7sPBq3 {
+  color: #f04747;
+  padding-left: 4px;
+  font-size: 11px;
+}
+
+.bdb-black {
+  border-bottom: 1px solid #e4e6e8;
+}
+
+.btn-outlined.colorRed {
+  color: #f04747;
+  border-color: rgba(240,71,71,.3);
+}
+.btn-outlined.colorRed:hover {
+  border-color: rgba(240,71,71,.6);
+}
+.btn-outlined.colorGreen {
+  border-color: #75d7aa;
+  color: #3ca374;
+}
+.btn-outlined.colorGreen:hover {
+  border-color: #25aa6d;
+}
+
+.btn-cancel {
+  color: #000000;
+}
+.btn-cancel:hover {
+  text-decoration: underline; 
+}
+
+.btn-sm {
+  height: 32px;
+  min-width: 60px;
+  min-height: 32px;
+  line-height: 0px;
+}
+
+.text-description--small {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
 }

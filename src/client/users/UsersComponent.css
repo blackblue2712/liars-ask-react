@@ -88,3 +88,33 @@
     color: #0C0D0E;
     line-height: 1.61538462;
 } 
+
+.subtag .post-title label {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #8e9297;
+}
+
+.userInfoEditting {
+    padding: 20px;
+    /* border: 1px solid #faa61a; */
+    border-radius: 3px;
+}
+
+.btn-change-avatar {
+    width: 140px;
+    height: 140px;
+    padding: 0;   
+}
+.btn-change-avatar img{
+    width: 140px;
+    height: 140px;
+    margin: 0;
+
+}
+
+.profile-user--about {
+    font-size: 12px;
+}
