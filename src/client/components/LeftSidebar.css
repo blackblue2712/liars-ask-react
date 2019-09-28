@@ -1,3 +1,6 @@
+
+  
+
 .left-sidebar {
     width: 164px;
     height: calc(100vh - 50px);
@@ -17,7 +20,7 @@
     padding-left: 30px;
     line-height: 1.8;
     font-size: 13px;
-    color: #535a60;
+    color: var(--leftside-color) !important;
 }
 .nav-links--link:hover {
     color: #0C0D0E;

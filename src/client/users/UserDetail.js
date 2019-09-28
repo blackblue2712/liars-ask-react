@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Mde from '../editor/Mde';
 
 
@@ -8,33 +8,22 @@ const UserDetail =  props => {
     useEffect( () => {
         let editor = document.querySelector("textarea.mde-text ");
         editor.setAttribute("id", "bio")
-        editor.setAttribute("name", "bio")
-
-        // let tagsIncludedSize = document.querySelector(".tags-included").offsetWidth;
-        // document.querySelector("#tageditor-replacing-tagnames--input").style.paddingLeft = tagsIncludedSize + 10 + "px";
+        editor.setAttribute("name", "bio");
     })
 
 
     return (
         <div id="content">
             <div className="main-head">
-                {/* <div className="grid d-flex align-items-centers mb16">
-                    <h1 className="fs-headline1 mr-auto">Đặng Hữu Nghĩa</h1>
-                </div>
-                <p className="mb24 f13 fw350">B1706729</p> */}
-                <div className="subheader d-flex align-items-center w-100">
+
+                <div className="subheader d-flex align-items-center w-100 mt24">
                     <div id="tabs" className="d-flex align-items-center w-100">
-                        <a href="#u" >Profile</a>
-                        <a href="#u" className="youarehere">Activity</a>
+                        <a href="#u" >Activity</a>
                         <a href="#u" >Developer Story</a>
-                        <a href="#u" >Edit profile and setting</a>
+                        <a href="#u" className="youarehere">Edit profile and setting</a>
+                        <a href="#u" >Profile</a>
                     </div>
-                    {/* <div className="mini-avatar ml-auto d-flex align-items-center w-100" style={{justifyContent: "flex-end"}}>
-                        <div className="name">Đặng Hữu Nghĩa</div>
-                        <Link to="/users/1" className="d-flex align-items-center">
-                            <img className="bd50 mb8" width="40" height="40" src="https://res.cloudinary.com/ddrw0yq95/image/upload/v1569644228/75926534_p0_lo7upq.jpg" alt="avatar"/>
-                        </Link>
-                    </div> */}
+                    
                 </div>
 
                 <div id="mainbar" className="subtag mt36">
@@ -89,7 +78,7 @@ const UserDetail =  props => {
                         <h4>TWO-FACTOR AUTHENTICATION</h4>
                         <div className="d-flex">
                             <p className="text-description--small">You must verify your account before you can enable two-factor authentication</p>
-                            <img src="https://discordapp.com/assets/cdea41ede63f61153e4a3c0531fa3873.svg" alt="two-auth"/>
+                            <img style={{width: "50%"}} className="oc7" src="https://discordapp.com/assets/cdea41ede63f61153e4a3c0531fa3873.svg" alt="two-auth"/>
                         </div>
                     </div>
 
@@ -118,6 +107,7 @@ const UserDetail =  props => {
                 </div>
                 <div id="sidebar">
                     <div className="profile-user--about mb16 mt36 bs-md p20">
+                    <h3 className="mb24">ABOUT</h3>
                         <ul>
                             <li className="mb8">
                                 <div className="d-flex align-items-center">
@@ -160,6 +150,7 @@ const UserDetail =  props => {
                     </div>
 
                     <div className="profile-user--about mb16 mt36 bs-md p20">
+                        <h3 className="mb24">LANGUAGE</h3>
                         <ul>
                             <li className="mb12">
                                 <div className="d-flex align-items-center">
@@ -177,6 +168,22 @@ const UserDetail =  props => {
                                 <div className="d-flex align-items-center">
                                     <img src="https://discordapp.com/assets/f23c5c28c4429691f7c54af93876d661.png" width="18" alt="japanese"/>
                                     <div className="grid--cell fl1">&nbsp; Japanese</div>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                    <div className="profile-user--about mb16 mt36 bs-md p20">
+                        <h3 className="mb24">BASIC SETTING</h3>
+                        <ul>
+                            <li className="mb12">
+                                <div className="theme-switch-wrapper d-flex align-items-center">
+                                    <label className="theme-switch" htmlFor="darkmode">
+                                        <input type="checkbox" id="darkmode" />
+                                        <div className="slider round"></div>
+                                </label>
+                                &nbsp; <p className="ml-auto">DARK MODE</p>
                                 </div>
                             </li>
                             
