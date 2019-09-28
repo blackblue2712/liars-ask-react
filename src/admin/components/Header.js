@@ -98,10 +98,10 @@ class Header extends Component {
                                 <div className="s-popover--arrow"></div>
                                 <ul className="list-rest s-anchors">
                                     <li>
-                                        <a href="/">
+                                        <Link to="/">
                                             <span className="fs-body1 d-block">Liars ask</span>
                                             <span className="fs-caption d-block">Public questions and answers</span>
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
                                         <a href="/teams">

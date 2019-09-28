@@ -12,14 +12,16 @@ class LeftSidebar extends Component {
     }
 
     componentDidMount () {
-        let whereami = this.props.location.pathname;
+        let whereami = this.props.location.pathname.split("/")[1];
+        if(whereami === "") whereami = "home";
         Array.from(document.querySelectorAll(".canactive")).map( el => el.classList.remove("youarehere"));
         if(document.getElementById(whereami)) {
             document.getElementById(whereami).classList.add("youarehere");
         }
     }
     componentDidUpdate () {
-        let whereami = this.props.location.pathname;
+        let whereami = this.props.location.pathname.split("/")[1];
+        if(whereami === "") whereami = "home";
         Array.from(document.querySelectorAll(".canactive")).map( el => el.classList.remove("youarehere"));
         if(document.getElementById(whereami)) {
             document.getElementById(whereami).classList.add("youarehere");
@@ -38,18 +40,18 @@ class LeftSidebar extends Component {
                                     <span className="-link--chanel-name">Liars ask</span>
                                 </a>
                             </li>
-                            <li id="/" className="youarehere canactive">
+                            <li id="home" className="youarehere canactive">
                                 <Link className="nav-links--link" to="/">Home</Link>
                             </li>
                             <li className="">
                                 <ul>
-                                    <li id="/tags" className="canactive">
+                                    <li id="tags" className="canactive">
                                         <Link className="nav-links--link" to="/tags">Tags</Link>
                                     </li>
-                                    <li id="/users" className="canactive">
+                                    <li id="users" className="canactive">
                                         <Link className="nav-links--link" to="/users">Users</Link>
                                     </li>
-                                    <li id="/questions" className="canactive">
+                                    <li id="questions" className="canactive">
                                         <Link className="nav-links--link" to="/questions">Questions</Link>
                                     </li>
                                     <li>

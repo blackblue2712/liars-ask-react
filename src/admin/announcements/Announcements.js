@@ -10,7 +10,7 @@ class Announcements extends Component {
                         <h1 className="fs-headline1 mr-auto">Announcements</h1>
                         <Link to="/admin/announcements/new" className="s-btn s-btn__outline s-btn__primary">Add new announcement</Link>
                     </div>
-                    <p className="mb24 f13 fw350">A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p>
+                    {/* <p className="mb24 f13 fw350">A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p> */}
                     <div className="grid-ai grid-tags mb16 d-flex align-items-center">
                         <div className="ps-relative mr-auto">
                             <input type="text" name="tagsfilter" placeholder="Filter by tag name" maxLength="240" className="s-input s-input__search js-search-tags" />

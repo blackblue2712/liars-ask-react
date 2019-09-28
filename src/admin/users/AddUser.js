@@ -19,7 +19,7 @@ const AddUser = props => {
                     <h1 className="fs-headline1 mr-auto">Add a new User</h1>
                     {/* <Link to="/admin/tags/new" className="s-btn s-btn__outline s-btn__primary">Add new tag</Link> */}
                 </div>
-                <p className="mb24 f13 fw350">A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p>
+                {/* <p className="mb24 f13 fw350">A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p> */}
             </div>
 
             <div id="mainbar">

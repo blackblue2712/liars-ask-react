@@ -98,10 +98,10 @@ class Header extends Component {
                                 <div className="s-popover--arrow"></div>
                                 <ul className="list-rest s-anchors">
                                     <li>
-                                        <a href="/">
+                                        <Link to="/admin">
                                             <span className="fs-body1 d-block">Liars ask</span>
                                             <span className="fs-caption d-block">Public questions and answers</span>
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
                                         <a href="/teams">
@@ -144,6 +144,11 @@ class Header extends Component {
                                     </svg>
                                 </div>
                             </form>
+                        </li>
+                        <li className="item-top">
+                            <Link to="/users/1" className="d-flex align-items-center bd50">
+                                <img className="bd50" width="40" height="40" src="https://res.cloudinary.com/ddrw0yq95/image/upload/v1569644228/75926534_p0_lo7upq.jpg" alt="avatar"/>
+                            </Link>
                         </li>
                         <li className="item-top">
                             <a href="#help">
