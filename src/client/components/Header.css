@@ -14,7 +14,7 @@
 }
 
 .brand-logo {
-    min-height: 50px;
+    max-height: 50px;
 }
 
 .brand-logo img {
@@ -107,8 +107,8 @@
     top: 38px;
     padding: 8px 4px;
     border-radius: 5px;
-    transform: translate(-50%, 0%);
-    left: 50%;
+    /* transform: translate(-50%, 0%);
+    left: 50%; */
     display: none;
 }
 
@@ -159,4 +159,20 @@
     position: absolute;
     border: 8px solid transparent;
     border-bottom-color: white;
+}
+
+#products-popover {
+    left: -67px !important;
+}
+
+#user-popover {
+    top: 46px !important;
+    
+    right: -30px !important;
+}
+#user-popover .s-popover--arrow:before {
+    left: 78% !important;
+}
+#user-popover .s-popover--arrow:after {
+    left: 78% !important;
 }

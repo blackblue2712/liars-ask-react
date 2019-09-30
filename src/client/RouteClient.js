@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import './style.css';
 import Header from './components/Header';
 import LeftSidebar from './components/LeftSidebar';
@@ -11,6 +11,7 @@ import QuestionsComponent from './questions/QuestionsComponent';
 import Asks from './asks/Asks';
 import Example from './asks/Example';
 import UserDetail from './users/UserDetail';
+import PrivateRoute from '../PirvateRoute';
 
 const RouteClient = props => {
     return <>
@@ -19,13 +20,13 @@ const RouteClient = props => {
             style={{marginTop: "50px"}}
         >
             <LeftSidebar />
-            <Route exact path="/" component={Content} />
-            <Route exact path="/tags" component={TagsComponent} />
-            <Route exact path="/users" component={UsersComponent} />
-            <Route exact path="/users/:userId" component={UserDetail} />
-            <Route exact path="/questions" component={QuestionsComponent} />
-            <Route exact path="/questions/ask" component={Asks} />
-            <Route exact path="/questions/ask/example" component={Example} />
+            <PrivateRoute exact path="/" component={Content} />
+            <PrivateRoute exact path="/tags" component={TagsComponent} />
+            <PrivateRoute exact path="/users" component={UsersComponent} />
+            <PrivateRoute exact path="/users/:userId" component={UserDetail} />
+            <PrivateRoute exact path="/questions" component={QuestionsComponent} />
+            <PrivateRoute exact path="/questions/ask" component={Asks} />
+            <PrivateRoute exact path="/questions/ask/example" component={Example} />
 
             {/* <Route component={Footer} /> */}
         </div>
@@ -33,4 +34,4 @@ const RouteClient = props => {
     </>
 }
 
-export default RouteClient;
+export default withRouter(RouteClient);

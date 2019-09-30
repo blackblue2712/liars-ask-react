@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { postSignup, postSignin, authenticate, isAuthenticated } from '../controllers/userController';
+import { withRouter } from 'react-router-dom';
 import './style.css';
 
 window.onload = () => {
@@ -21,23 +23,79 @@ const handleChangeUI = (next) => {
         }
     }
 }
-
-const Auth = () => {
     
+
+const Auth = (props) => {
+    // Check is autheticated
+    if(isAuthenticated()) {
+        props.history.push("/");
+    }
+
+    const handleSubmit = (email, password) => {
+        window.event.preventDefault();
+        postSignin( {email, password} )
+        .then( res => {
+            if(!res.payload) {
+                alert(res.message)
+            } else {
+                authenticate(res.payload, () => {
+                    props.history.push("/");
+                })
+            }
+        })
+    }
+
+    const handleRegister = (email, password, passwordAg) => {
+        window.event.preventDefault();
+        let patt = /\d+/;
+
+        if (password.match(patt) === null || password.length < 6) {
+            alert("password have at least 6 characters and must contain 1 number");
+        } else if(password !== passwordAg) {
+            alert("password and password again do not match!")
+        } else {
+            postSignup( {email, password} )
+            .then( res => {
+                if(res && !res.payload) {
+                    alert(res.message)
+                } else {
+                    //
+                    handleChangeUI()();
+                }
+            })
+        }
+    }
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [r_email, r_setEmail] = useState("");
+    const [r_password, r_setPassword] = useState("");
+    const [r_passwordAg, r_setPasswordAg] = useState("");
+
     return ( <div id="wrap-auth">
             <div className="box on" id="form-sig">
                 <h2>Login</h2>
                 <form action="/auth" method="POST">
                     <div className="inputBox">
-                        <input type="text" name="username" required="" autoComplete={"off"} />
-                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text" name="email" required="" 
+                            onChange={ (e) => setEmail(e.target.value) }
+                        />
+                        <label htmlFor="email">Email</label>
                     </div>
                     <div className="inputBox">
-                        <input type="password" name="password" required="" />
+                        <input
+                            type="password" name="password" required=""
+                            onChange={ (e) => setPassword(e.target.value) }
+                        />
                         <label htmlFor="password">Password</label>
                     </div>
                     <div className="d-flex align-items-center">
-                        <input type="submit" name="" value="Submit" />
+                        <input
+                            type="submit" name="" value="Submit"
+                            onClick={ () => handleSubmit(email, password)}
+                        />
                         <a
                             className="s-btn s-btn__outline s-btn__hovero bd-none ml-auto"
                             style={{
@@ -55,23 +113,31 @@ const Auth = () => {
                 <h2>Register</h2>
                 <form action="/auth" method="POST">
                     <div className="inputBox">
-                        <input type="text" name="username" required="" autoComplete={"off"} />
-                        <label htmlFor="username">Username</label>
-                    </div>
-                    <div className="inputBox">
-                        <input type="text" name="username" required="" autoComplete={"off"} />
+                        <input
+                            type="email" name="email" required="" autoComplete={"off"}
+                            onChange={ (e) => r_setEmail(e.target.value) }
+                        />
                         <label htmlFor="email">Email</label>
                     </div>
                     <div className="inputBox">
-                        <input type="password" name="password" required="" />
+                        <input
+                            type="password" name="password" required=""
+                            onChange={ (e) => r_setPassword(e.target.value) }
+                        />
                         <label htmlFor="password">Password</label>
                     </div>
                     <div className="inputBox">
-                        <input type="password" name="password-again" required="" />
+                        <input
+                            type="password" name="password-again" required=""
+                            onChange={ (e) => r_setPasswordAg(e.target.value) }
+                        />
                         <label htmlFor="password-again">Password again</label>
                     </div>
                     <div className="d-flex align-items-center">
-                        <input type="submit" name="" value="Submit" />
+                        <input
+                            type="submit" name="" value="Submit"
+                            onClick={() => handleRegister(r_email, r_password, r_passwordAg)}
+                        />
                         <a
                             className="s-btn s-btn__outline s-btn__hovero bd-none ml-auto"
                             style={{
@@ -90,4 +156,4 @@ const Auth = () => {
     )
 }
 
-export default Auth;
+export default withRouter(Auth);

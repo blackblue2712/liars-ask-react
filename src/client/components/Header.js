@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './Header.css';
-import brandLogo from '../images/logo.png';
+import brandLogo from '../../images/logo.png';
+import signoutIcon from '../../images/logout.svg'
+import { isAuthenticated, getSignout } from '../controllers/userController';
 
 class Header extends Component {
 
@@ -11,14 +13,18 @@ class Header extends Component {
         this.state = {
             toggleMenu: false,
             toggleSearch: false,
-            toggleProducts: false
+            toggleProducts: false,
+            toggleUser: false,
+            uid: null,
         }
 
         // this.handleToggleMenu = this.handleToggleMenu.bind(this);
     }
 
     componentDidMount () {
-        
+        if(isAuthenticated()) {
+            this.setState( {uid: isAuthenticated().user._id} );
+        }
     }
 
     handleToggleMenu = () => {
@@ -71,7 +77,32 @@ class Header extends Component {
         })
     }
 
+    handleToggleUser = () => {
+        let { toggleUser } = this.state;
+
+        if(!toggleUser) {
+            document.querySelector("#user-popover").style.display = "block";
+            
+        } else {
+            document.querySelector("#user-popover").style.display = "none";
+            
+        }
+
+        this.setState( function(prevState, props) {
+            return { toggleUser: !prevState.toggleUser }
+        })
+    }
+
+    handleSignout = () => {
+        getSignout()
+        .then( res => {
+            window.localStorage.removeItem("jwt");
+            this.props.history.push("/auth");
+        })
+    }
+
     render() {
+        const { uid } = this.state;
         return (
             <header id="header" className="ps-fixed w-100">
                 <div className="container d-flex align-items-center">
@@ -145,10 +176,38 @@ class Header extends Component {
                                 </div>
                             </form>
                         </li>
-                        <li className="item-top">
-                            <Link to="/users/1" className="d-flex align-items-center bd50">
+                        <li className="item-top item-top--radius ps-relative">
+                            <div
+                                className="d-flex align-items-center bd50 cs-pointer"
+                                onClick={this.handleToggleUser}
+                            >    
                                 <img className="bd50" width="40" height="40" src="https://res.cloudinary.com/ddrw0yq95/image/upload/v1569644228/75926534_p0_lo7upq.jpg" alt="avatar"/>
-                            </Link>
+                            </div>
+                            <div id="user-popover" className="s-popover ps-absolute">
+                                <div className="s-popover--arrow"></div>
+                                <ul className="list-rest s-anchors">
+                                    <li>
+                                        <Link to={`/users/${uid}`}>
+                                            <span className="fs-body1 d-block">Your profile</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/questions">
+                                            <span className="fs-body1 d-block">Your questions</span>
+                                        </Link>
+                                    </li>
+                                    <hr className="oc7"/>
+                                    <li>
+                                        <button
+                                            className="s-btn s-btn__hovero w-100 text-left d-flex align-items-center"
+                                            onClick={this.handleSignout}
+                                        >
+                                            <img width="18" src={signoutIcon} alt="signout"/>
+                                            <span className="fs-body1 d-block">&nbsp;&nbsp;Signout this account</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li className="item-top">
                             <a href="#help">
@@ -162,4 +221,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default withRouter(Header);

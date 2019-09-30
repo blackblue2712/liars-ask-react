@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route } from "react-router-dom";
 import './style.css';
 import Header from './components/Header';
 import Footer from './components/Footer'
@@ -11,6 +10,7 @@ import UsersComponent from './users/UsersComponent';
 import AddUser from './users/AddUser';
 import Announcements from './announcements/Announcements';
 import AddAnnouncement from './announcements/AddAnnouncement';
+import PrivateRoute from '../PirvateRoute';
 
 const RouteAdmin = props => {
     return <>
@@ -18,13 +18,13 @@ const RouteAdmin = props => {
             <LeftSidenar />
             <Header />
             <div id="content">
-                <Route exact path="/admin" component={Content}></Route>
-                <Route exact path="/admin/tags" component={Tags}></Route>
-                <Route exact path="/admin/tags/new" component={AddTag}></Route>
-                <Route exact path="/admin/users" component={UsersComponent}></Route>
-                <Route exact path="/admin/users/new" component={AddUser}></Route>
-                <Route exact path="/admin/announcements" component={Announcements}></Route>
-                <Route exact path="/admin/announcements/new" component={AddAnnouncement}></Route>
+                <PrivateRoute exact path="/admin" component={Content}></PrivateRoute>
+                <PrivateRoute exact path="/admin/tags" component={Tags}></PrivateRoute>
+                <PrivateRoute exact path="/admin/tags/new" component={AddTag}></PrivateRoute>
+                <PrivateRoute exact path="/admin/users" component={UsersComponent}></PrivateRoute>
+                <PrivateRoute exact path="/admin/users/new" component={AddUser}></PrivateRoute>
+                <PrivateRoute exact path="/admin/announcements" component={Announcements}></PrivateRoute>
+                <PrivateRoute exact path="/admin/announcements/new" component={AddAnnouncement}></PrivateRoute>
             </div>
         </div>
 
