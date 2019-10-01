@@ -32,6 +32,7 @@ class UserDetail extends React.Component {
 
     render() {
         const userPayloadInfo = this.state.userPayload;
+        console.log(userPayloadInfo)
         return (
             <div id="content">
                 <Notify />

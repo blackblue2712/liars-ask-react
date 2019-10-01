@@ -1,19 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Mde from '../editor/Mde';
-// import { Link } from 'react-router-dom';
+import { postAddTag } from '../controllers/tagController';
+import { isAuthenticated } from '../controllers/userController';
+import Notify from '../components/Notify';
 
 
 const AddTag = props => {
+    const [showNotify, setShowNotify] = useState("");
 
     useEffect( () => {
         let editor = document.querySelector("textarea.mde-text ");
         editor.setAttribute("id", "tag-description")
         editor.setAttribute("name", "tag-description")
-    })
+    });
+
+    const handleAddTag = () => {
+        let name = document.getElementById("tag-name").value;
+        let description = "";
+        let editor = document.querySelector("textarea.mde-text ");
+        if(editor) {
+            description = editor.value;
+        }
+        
+        if(name) {
+            postAddTag({name, description}, isAuthenticated().token)
+            .then( res => {
+                setShowNotify(res.message);
+            })
+        } else {
+            setShowNotify("Enter tag name!");
+        }
+        
+    }
 
     return (
         <>
             <div className="main-head">
+                <Notify />
+                {showNotify !== "" &&  <Notify class="on" text={showNotify} clearMess={setShowNotify} />}
                 <div className="grid d-flex align-items-centers mb16">
                     <h1 className="fs-headline1 mr-auto">Add a new tag</h1>
                     {/* <Link to="/admin/tags/new" className="s-btn s-btn__outline s-btn__primary">Add new tag</Link> */}
@@ -59,7 +83,11 @@ const AddTag = props => {
                                 {/* TAGS EDITOR */}
                             </div>
                         </div>
-                        <button className="s-btn s-btn__outline s-btn__primary mt24">Save tag</button>
+                        <button
+                            className="s-btn s-btn__outline s-btn__primary mt24"
+                            onClick={handleAddTag}
+                        >
+                        Save tag</button>
                     </div>
                 </div>
             </div>

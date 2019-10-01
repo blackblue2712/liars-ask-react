@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SingleTag from '../components/SingleTag';
+import {getTags} from '../controllers/tagController';
 
 class Tags extends Component {
+    constructor() {
+        super();
+        this.state = {
+            tags: []
+        }
+    }
+
+    componentDidMount() {
+        getTags()
+        .then( res => {
+            this.setState( {tags: res.tags} )
+        })
+    }
+
     render() {
+        let tagsArray = this.state.tags
         return (
             <>
                 <div className="main-head">
@@ -28,182 +44,21 @@ class Tags extends Component {
 
                 <div id="tags-list">
                     <div id="tags-browser">
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
+                        
+                        {
+                            tagsArray.map( tag => {
+                                return (
+                                    <div className="grid-layout--cell tags-cell">
+                                        <SingleTag
+                                            tagName={tag.name}
+                                            tagDescription={tag.description}
+                                            tagCounter={0}
+                                        />
+                                    </div>
+                                ) 
+                            })
+                        }
                             
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
-                        <div className="grid-layout--cell tags-cell">
-                            <SingleTag
-                                tagName="javascript"
-                                tagDescription="JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language used for both client-side and server-side s…"
-                                tagCounter="1874006"
-                            />
-                            
-                        </div>
                     </div>
                 </div>
 

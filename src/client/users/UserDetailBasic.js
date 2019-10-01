@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { putUpdateInfo } from '../controllers/userController';
 import Notify from '../components/Notify';
+import Default from '../../images/default.png';
 
 const UserDetailBasic = (props) => {
     const userData = new FormData();
 
     const { email, fullname, _id } = props.userPayload;
+    const photoUser = props.userPayload.photo;
+    
     const [ffullname, setFullname]              = useState(fullname);
     const [currentPassword, setCurrentPassword] = useState("");
     const [photo, setPhoto] = useState(null);
@@ -45,7 +48,7 @@ const UserDetailBasic = (props) => {
             <div className="d-flex pb12 mb12 bdb-black">
                 <div className="mr24">
                     <button to="/users/1" className="s-btn btn-change-avatar ps-relative" onClick={() => document.getElementById("photo").click()}>
-                        <img className="bd50" id="user-photo" src="https://res.cloudinary.com/ddrw0yq95/image/upload/v1569644228/75926534_p0_lo7upq.jpg" alt="avatar"/>
+                        <img className="bd50" id="user-photo" src={photoUser || Default} alt="avatar"/>
                         <div className="choose-image d-none"></div>
                         <input
                             className="d-none" type="file" name="photo" id="photo"

@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import './Header.css';
 import brandLogo from '../../images/logo.png';
 import signoutIcon from '../../images/logout.svg'
+import Default from '../../images/default.png';
 import { isAuthenticated, getSignout } from '../controllers/userController';
 
 class Header extends Component {
@@ -16,6 +17,7 @@ class Header extends Component {
             toggleProducts: false,
             toggleUser: false,
             uid: null,
+            photo: ''
         }
 
         // this.handleToggleMenu = this.handleToggleMenu.bind(this);
@@ -23,7 +25,7 @@ class Header extends Component {
 
     componentDidMount () {
         if(isAuthenticated()) {
-            this.setState( {uid: isAuthenticated().user._id} );
+            this.setState( {uid: isAuthenticated().user._id, photo: isAuthenticated().user.photo} );
         }
     }
 
@@ -102,7 +104,7 @@ class Header extends Component {
     }
 
     render() {
-        const { uid } = this.state;
+        const { uid, photo } = this.state;
         return (
             <header id="header" className="ps-fixed w-100">
                 <div className="container d-flex align-items-center">
@@ -181,7 +183,7 @@ class Header extends Component {
                                 className="d-flex align-items-center bd50 cs-pointer"
                                 onClick={this.handleToggleUser}
                             >    
-                                <img className="bd50" width="40" height="40" src="https://res.cloudinary.com/ddrw0yq95/image/upload/v1569644228/75926534_p0_lo7upq.jpg" alt="avatar"/>
+                                <img className="bd50" width="40" height="40" src={photo || Default} alt="avatar"/>
                             </div>
                             <div id="user-popover" className="s-popover ps-absolute">
                                 <div className="s-popover--arrow"></div>
