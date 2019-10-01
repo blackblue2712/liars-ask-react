@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { putUpdateInfo } from '../controllers/userController';
+import Notify from '../components/Notify';
 
 const UserDetailBasic = (props) => {
 
@@ -7,10 +8,12 @@ const UserDetailBasic = (props) => {
     const [ffullname, setFullname]              = useState(fullname);
     const [currentPassword, setCurrentPassword] = useState("");
 
+    const [showNotify, setShowNotify] = useState("");
+
     const handleUpdateInfo = () => {
         putUpdateInfo({_id, ffullname, currentPassword})
         .then( res => {
-            console.log(res);
+            setShowNotify(res.message);
         })
     }
 
@@ -18,8 +21,11 @@ const UserDetailBasic = (props) => {
         setFullname(fullname);
     },  [props.userPayload.email]);
 
+    
     return (
+        
         <div className="userInfoEditting bs-md">
+            {showNotify !== "" &&  <Notify class="on" text={showNotify} clearMess={setShowNotify} />}
             <div className="d-flex pb12 mb12 bdb-black">
                 <div className="mr24">
                     <button to="/users/1" className="s-btn btn-change-avatar">

@@ -3,11 +3,13 @@ import Mde from '../editor/Mde';
 import { putUpdateStory } from '../controllers/userController';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../editor/CodeBlock';
+import Notify from '../components/Notify';
 
 const UserDetailStory = (props) => {
 
     const { quotes, bio, _id } = props.userPayload;
     const [fquotes, setQuotes] = useState(quotes);
+    const [showNotify, setShowNotify] = useState("");
 
     const handleChangeStory = () => {
         let editor = document.querySelector("textarea.mde-text ");
@@ -18,7 +20,7 @@ const UserDetailStory = (props) => {
             let bioUpdate = editor.value;
             putUpdateStory({bioUpdate, fquotes, _id})
             .then( res => {
-                console.log(res);
+                setShowNotify(res.message);
             })
         }
     }
@@ -33,6 +35,7 @@ const UserDetailStory = (props) => {
 
     return (
         <div className="bio bs-md p20">
+            {showNotify !== "" &&  <Notify class="on" text={showNotify} clearMess={setShowNotify} />}
             <div className="post-title ps-relative mb4">
                 <label htmlFor="quotes" className="s-label mb4">
                     Your quotes

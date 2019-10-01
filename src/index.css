@@ -706,3 +706,55 @@ input[type=checkbox]:checked:after {
 .cs-pointer {
   cursor: pointer;
 }
+
+.notify {
+  max-width: 288px;
+  max-height: 48px;
+  min-height: 48px;
+  padding: 8px 24px;
+  background-color: #323232;
+  color: #f1f1f1;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  border-radius: 2px;
+  position: fixed;
+  z-index: 999999;
+  opacity: .9;
+  bottom: 36px;
+  left: 36px;
+  display: none;
+}
+.notify--body {
+  line-height: 34px;
+}
+
+.notify.on {
+  bottom: 36px;
+  left: 36px;
+  display: block;
+  animation: notifyUp .2s linear;
+}
+.notify.off {
+  animation: notifyDown .2s linear;
+}
+.notify.none {
+  display: none;
+}
+
+@keyframes notifyUp {
+  0% {
+    bottom: 0
+  }
+  100% {
+    bottom: 36px;
+  }
+}
+
+@keyframes notifyDown {
+  0% {
+    bottom: 36
+  }
+  100% {
+    bottom: 0;
+    display: none;
+  }
+}

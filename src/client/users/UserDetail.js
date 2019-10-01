@@ -1,7 +1,8 @@
 import React from 'react';
 import UserDetailBasic from './UserDetailBasic';
 import UserDetailStory from './UserDetailStory';
-import { postLoggedUser } from '../controllers/userController'
+import { postLoggedUser } from '../controllers/userController';
+import Notify from '../components/Notify';
 
 
 class UserDetail extends React.Component {
@@ -30,10 +31,10 @@ class UserDetail extends React.Component {
     }
 
     render() {
-        console.log("RENDER")
         const userPayloadInfo = this.state.userPayload;
         return (
             <div id="content">
+                
                 <div className="main-head">
     
                     <div className="subheader d-flex align-items-center w-100 mt24">
