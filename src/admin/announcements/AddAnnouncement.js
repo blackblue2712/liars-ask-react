@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Mde from '../editor/Mde';
 import Tags from '../components/Tags' ;
-// import { Link } from 'react-router-dom';
+import { postAnnouncement } from '../controllers/announcementController';
+import { isAuthenticated } from '../controllers/userController';
+import Notify from '../components/Notify';
 
 
 const AddAnnouncements = props => {
-
+    const [tagDom, setTagDom] = useState("");
+    const [showNotify, setShowNotify] = useState("");
+    
     useEffect( () => {
         let editor = document.querySelector("textarea.mde-text ");
         editor.setAttribute("id", "announ-content")
@@ -13,12 +17,73 @@ const AddAnnouncements = props => {
 
         let tagsIncludedSize = document.querySelector(".tags-included").offsetWidth;
         document.querySelector("#tageditor-replacing-tagnames--input").style.paddingLeft = tagsIncludedSize + 10 + "px";
-    })
 
-    let randomstring = Math.floor(Math.random() * 10 + 1)  + Math.random().toString(36).slice(-7);
+        document.querySelector("#tageditor-replacing-tagnames--input").addEventListener("keyup", handleChangeTag, false);
+        return () => {
+            document.querySelector("#tageditor-replacing-tagnames--input").removeEventListener("keyup", handleChangeTag, false);
+        }
+        
+    });
+
+    const handlePostAcm =  () => {
+        let id = isAuthenticated().user._id;
+        let token = isAuthenticated().token;
+        let editor = document.querySelector("textarea.mde-text ");
+        let body = "";
+        if(editor) {
+            body = editor.value;
+        } else {
+            alert("Please turn to write mode")
+        }
+        let title = document.getElementById("title").value;
+        let isImportant = document.getElementById("is-important").checked;
+        // tags
+        let tagsname = document.getElementById("tagsname").value;
+        let tagsnameArray = tagsname.split(" ")
+        tagsnameArray = tagsnameArray.filter( t => t !== "");
+
+        if(title && body) {
+            postAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
+            .then( res => {
+                setShowNotify(res.message);
+            })
+        }
+    }
+
+    // close tag
+    const closeTag = (text) => {
+        let thisTagElement = document.querySelector(`.data-${text}`);
+        if(thisTagElement) {
+            thisTagElement.classList.remove(`.data-${text}`);
+            thisTagElement.style.display = "none";
+        }
+        
+        let tagsname = document.getElementById("tagsname");
+        let tagsnameArray = tagsname.value.split(" ").filter( t => t !== text);
+        tagsname.value = tagsnameArray.join(" ");
+        setTagDom(tagsname.value);
+        
+    }
+
+    const handleChangeTag = (e) => {
+        
+        if(e.keyCode === 32) {
+            let tagsname = document.getElementById("tagsname");
+            let tagreplace = document.getElementById("tageditor-replacing-tagnames--input")
+            tagsname.value = tagsname.value + e.target.value;
+            setTagDom(tagsname.value);
+            tagreplace.value = "";
+
+            
+        }
+    }
+
+    // console.log(document.getElementById("tagsname").value)
     return (
         <>
             <div className="main-head">
+                <Notify />  
+                {showNotify !== "" &&  <Notify class="on" text={showNotify} clearMess={setShowNotify} />}
                 <div className="grid d-flex align-items-centers mb16">
                     <h1 className="fs-headline1 mr-auto">New announcement</h1>
                     {/* <Link to="/admin/tags/new" className="s-btn s-btn__outline s-btn__primary">Add new tag</Link> */}
@@ -38,16 +103,6 @@ const AddAnnouncements = props => {
                         <div className="ps-relative mb16">
                             <input id="title" name="title" type="text" className="s-input w-100" placeholder="Enter title here"/>
                         </div>
-
-                        {/* <div className="post-title ps-relative mb16">
-                            <label htmlFor="password" className="s-label mb4">
-                                Password
-                                <p className="s-desscription mt4">Password auto generate</p>
-                            </label>
-                        </div>
-                        <div className="ps-relative mb16">
-                            <input id="password" name="password" type="text" className="s-input w-100" value={randomstring} disabled/>
-                        </div> */}
                         
                         <div className="post-editor mb16">
                             <div className="ps-relative">
@@ -73,22 +128,27 @@ const AddAnnouncements = props => {
                                 </div>
                                 {/* TAGS EDITOR */}
                                 <div className="ps-relative pt24" id="tag-editor">
-                                    <label htmlFor="tagnames" className="s-label mb16 d-block">
+                                    <label htmlFor="tagsname" className="s-label mb16 d-block">
                                         Tags
                                         <p className="s-desscription mt4">Add tags to describe what your announcement is about</p>
                                     </label>
                                     <div className="ps-relative mb16">
                                         <input 
-                                            id="tagnames" name="tagnames" type="text" className="s-input w-100 d-none" placeholder="e.g. (javascript xml react)"
-                                            value="css scss less"    
+                                            id="tagsname" name="tagsname" type="text" className="s-input w-100 d-none" placeholder="e.g. (javascript xml react)"    
                                         />
                                         <div className="tags-editor ps-relative" >
                                             <span className="tags-included ps-absolute">
-                                                <Tags name="css" close={true}/>
+                                                
+                                                {
+                                                    tagDom.split(" ").map( (tag, index) => {
+                                                        return tag !== "" && <Tags key={index} id={"data-" + tag} closeTag={() => closeTag(tag)} name={tag} close={true}/>
+                                                    })
+                                                }
                                             </span>
                                         <input
-                                            type="text" className=" s-input w-100" placeholder="e.g. (javascript xml react)"
+                                            type="text" className="s-input w-100" placeholder="e.g. (javascript xml react)"
                                             id="tageditor-replacing-tagnames--input"
+                                            onChange={(e) => handleChangeTag(e.target.value, e.keyCode)}
                                         />
                                         </div>
                                     </div>
@@ -106,7 +166,10 @@ const AddAnnouncements = props => {
                             <input id="is-important" name="is-important" type="checkbox" className="" />
                         </div>
 
-                        <button className="s-btn s-btn__outline s-btn__primary mt24">Post this</button>
+                        <button
+                            className="s-btn s-btn__outline s-btn__primary mt24"
+                            onClick={handlePostAcm}
+                        >Post this</button>
                     </div>
                 </div>
             </div>
