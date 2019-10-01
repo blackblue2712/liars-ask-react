@@ -3,15 +3,21 @@ import { putUpdateInfo } from '../controllers/userController';
 import Notify from '../components/Notify';
 
 const UserDetailBasic = (props) => {
+    const userData = new FormData();
 
     const { email, fullname, _id } = props.userPayload;
     const [ffullname, setFullname]              = useState(fullname);
     const [currentPassword, setCurrentPassword] = useState("");
+    const [photo, setPhoto] = useState(null);
 
     const [showNotify, setShowNotify] = useState("");
 
     const handleUpdateInfo = () => {
-        putUpdateInfo({_id, ffullname, currentPassword})
+        userData.set("id", _id);
+        userData.set("fullname", ffullname);
+        userData.set("currentPassword", currentPassword);
+        userData.set("photo", photo);
+        putUpdateInfo(userData)
         .then( res => {
             setShowNotify(res.message);
         })
@@ -21,6 +27,16 @@ const UserDetailBasic = (props) => {
         setFullname(fullname);
     },  [props.userPayload.email]);
 
+    const previewPhoto = (event) => {
+        let reader = new FileReader();
+        reader.onload = function () {
+            let inputAvatar = document.getElementById('user-photo');
+            inputAvatar.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+        setPhoto(event.target.files[0]);
+    }
+
     
     return (
         
@@ -28,8 +44,13 @@ const UserDetailBasic = (props) => {
             {showNotify !== "" &&  <Notify class="on" text={showNotify} clearMess={setShowNotify} />}
             <div className="d-flex pb12 mb12 bdb-black">
                 <div className="mr24">
-                    <button to="/users/1" className="s-btn btn-change-avatar">
-                        <img className="bd50" src="https://res.cloudinary.com/ddrw0yq95/image/upload/v1569644228/75926534_p0_lo7upq.jpg" alt="avatar"/>
+                    <button to="/users/1" className="s-btn btn-change-avatar ps-relative" onClick={() => document.getElementById("photo").click()}>
+                        <img className="bd50" id="user-photo" src="https://res.cloudinary.com/ddrw0yq95/image/upload/v1569644228/75926534_p0_lo7upq.jpg" alt="avatar"/>
+                        <div className="choose-image d-none"></div>
+                        <input
+                            className="d-none" type="file" name="photo" id="photo"
+                            onChange={previewPhoto}
+                        />
                     </button>
                 </div>
                 <div className="w-100">

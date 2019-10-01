@@ -104,17 +104,71 @@
 }
 
 .btn-change-avatar {
-    width: 140px;
-    height: 140px;
-    padding: 0;   
+    width: 142px;
+    height: 142px;
+    padding: 0;
+    transition: .4s;
 }
 .btn-change-avatar img{
     width: 140px;
     height: 140px;
     margin: 0;
-
+    border: 2px solid #07C;
+    border-radius: 50%;
 }
 
 .profile-user--about {
     font-size: 12px;
+}
+
+.btn-change-avatar:hover .choose-image {
+    display: block !important;
+}
+.btn-change-avatar:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #0C0D0E;
+    opacity: .4;
+}
+.btn-change-avatar:hover::after {
+    content: "CHANGE AVATAR";
+    position: absolute;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    z-index: 1000;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    top: calc(50% - 7px);
+    left: 12%;
+}
+
+.choose-image {
+    width: 18px;
+    height: 18px;
+    padding: 10px;
+    box-sizing: unset;
+    position: absolute;
+    top: -2px;
+    right: 2px;
+    background-color: #DCDDDE;
+    border-radius: 50%;
+    z-index: 999999
+}
+.choose-image::after {
+    content: "";
+    background-image: url(/static/media/choose-image.d5c25e76.svg);
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import UserDetailBasic from './UserDetailBasic';
 import UserDetailStory from './UserDetailStory';
-import { postLoggedUser } from '../controllers/userController';
+import { getLoggedUser } from '../controllers/userController';
 import Notify from '../components/Notify';
 
 
@@ -17,7 +17,7 @@ class UserDetail extends React.Component {
         const token = this.props.userPayload.token;
         const _id = this.props.match.params.userId;
 
-        postLoggedUser(_id, token)
+        getLoggedUser(_id, token)
         .then( res => {
             if(!res.email) {
                 // Route to 404
@@ -34,7 +34,7 @@ class UserDetail extends React.Component {
         const userPayloadInfo = this.state.userPayload;
         return (
             <div id="content">
-                
+                <Notify />
                 <div className="main-head">
     
                     <div className="subheader d-flex align-items-center w-100 mt24">

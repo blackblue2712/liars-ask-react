@@ -1,14 +1,13 @@
 
-export const postLoggedUser = (id, token) => {
+export const getLoggedUser = (id, token) => {
     
     return fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
-        method: "POST",
+        method: "GET",
         headers: {
             Accept: "Application/json",
             "Content-Type": "Application/json",
             Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({id, token})
+        }
     })
     .then( res => {
         return res.json();
@@ -82,13 +81,13 @@ export const putUpdateStory = (userInfo) => {
 }
 
 export const putUpdateInfo = (userInfo) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/users/info/${userInfo._id}`, {
+    console.log(userInfo.get("photo"))
+    return fetch(`${process.env.REACT_APP_API_URL}/users/info/${userInfo.get("id")}`, {
         method: "PUT",
         headers: {
-            Accept: "Application/json",
-            "Content-Type": "Application/json"
+            Accept: "Application/json"
         },
-        body: JSON.stringify(userInfo)
+        body: userInfo
     })
     .then( res => {
         return res.json();
