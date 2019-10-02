@@ -10,6 +10,7 @@ import UsersComponent from './users/UsersComponent';
 import AddUser from './users/AddUser';
 import Announcements from './announcements/Announcements';
 import AddAnnouncement from './announcements/AddAnnouncement';
+import EditAcm from './announcements/EditAcm';
 import PrivateRouteAdmin from './PrivateRouteAdmin';
 
 const RouteAdmin = props => {
@@ -25,6 +26,7 @@ const RouteAdmin = props => {
                 <PrivateRouteAdmin exact path="/admin/users/new" component={AddUser}></PrivateRouteAdmin>
                 <PrivateRouteAdmin exact path="/admin/announcements" component={Announcements}></PrivateRouteAdmin>
                 <PrivateRouteAdmin exact path="/admin/announcements/new" component={AddAnnouncement}></PrivateRouteAdmin>
+                <PrivateRouteAdmin exact path="/admin/announcements/edit/:acmId" component={EditAcm}></PrivateRouteAdmin>
             </div>
         </div>
 

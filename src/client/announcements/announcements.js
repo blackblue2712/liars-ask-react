@@ -44,7 +44,6 @@ class Announcement extends React.Component {
 
     render() {
         const { message, acms } = this.state;
-        console.log(acms)
         return (
             <div id="content">
                 <div id="mainbar">

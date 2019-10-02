@@ -32,7 +32,9 @@ class SingleAcm extends React.Component {
                     </div>
 
                     <div className="bg-white bar-sm bs-md p16">
-                        <ReactMarkdown source={acm.body} renderers={{ code: CodeBlock }} />
+                        <pre>
+                            <ReactMarkdown source={acm.body} renderers={{ code: CodeBlock }} />
+                        </pre>
                     </div>
 
                     <div className="clear-fix"></div>
