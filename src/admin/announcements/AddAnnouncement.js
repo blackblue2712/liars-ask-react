@@ -52,17 +52,10 @@ const AddAnnouncements = props => {
 
     // close tag
     const closeTag = (text) => {
-        let thisTagElement = document.querySelector(`.data-${text}`);
-        if(thisTagElement) {
-            thisTagElement.classList.remove(`.data-${text}`);
-            thisTagElement.style.display = "none";
-        }
-        
         let tagsname = document.getElementById("tagsname");
         let tagsnameArray = tagsname.value.split(" ").filter( t => t !== text);
         tagsname.value = tagsnameArray.join(" ");
         setTagDom(tagsname.value);
-        
     }
 
     const handleChangeTag = (e) => {
@@ -78,7 +71,6 @@ const AddAnnouncements = props => {
         }
     }
 
-    // console.log(document.getElementById("tagsname").value)
     return (
         <>
             <div className="main-head">
@@ -141,6 +133,7 @@ const AddAnnouncements = props => {
                                                 
                                                 {
                                                     tagDom.split(" ").map( (tag, index) => {
+                                                        console.log(tag);
                                                         return tag !== "" && <Tags key={index} id={"data-" + tag} closeTag={() => closeTag(tag)} name={tag} close={true}/>
                                                     })
                                                 }
