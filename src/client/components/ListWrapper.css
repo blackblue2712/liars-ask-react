@@ -6,6 +6,12 @@
     padding: 12px 8px;
     border-bottom: 1px solid #eff0f1;
     width: 100%;
+    max-height: 105px;
+    overflow: hidden;
+    position: relative;
+}
+.item-list.true {
+    background-color: rgba(0,119,204,0.05);
 }
 
 .item-list .cp {
@@ -86,4 +92,18 @@
     color: #9199a1;
     line-height: 21px;
     float: right;
+}
+
+.list-body--text {
+    font-size: 13px;
+    color: #2d343a;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.important-message {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 0;
+    top: 2px;
 }

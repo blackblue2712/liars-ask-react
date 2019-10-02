@@ -11,6 +11,8 @@ import QuestionsComponent from './questions/QuestionsComponent';
 import Asks from './asks/Asks';
 import Example from './asks/Example';
 import UserDetail from './users/UserDetail';
+import Announcement from './announcements/announcements';
+import SingleAcm from './announcements/SingleAcm';
 import PrivateRoute from '../PirvateRoute';
 
 const RouteClient = props => {
@@ -27,6 +29,9 @@ const RouteClient = props => {
             <PrivateRoute exact path="/questions" component={QuestionsComponent} />
             <PrivateRoute exact path="/questions/ask" component={Asks} />
             <PrivateRoute exact path="/questions/ask/example" component={Example} />
+
+            <PrivateRoute exact path="/announcements" component={Announcement} />
+            <PrivateRoute exact path="/announcements/:acmId" component={SingleAcm} />
 
             {/* <Route component={Footer} /> */}
         </div>

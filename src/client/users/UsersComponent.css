@@ -164,7 +164,7 @@
 }
 .choose-image::after {
     content: "";
-    background-image: url(/static/media/choose-image.d5c25e76.svg);
+    background-image: url("../../images/choose-image.svg");
     width: 18px;
     height: 18px;
     position: absolute;
