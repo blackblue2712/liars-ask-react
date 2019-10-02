@@ -3,6 +3,9 @@ import Tags from '../components/Tags';
 import Important from '../../images/important.png';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
+import CloseAcm from '../../images/close-acm.png';
+import { isAuthenticated } from '../controllers/userController';
+import { deleteAcm } from '../controllers/announcementController';
 
 class ListItem extends Component {
 
@@ -10,14 +13,26 @@ class ListItem extends Component {
         return nextProps != this.props;
     }
 
+    handleDeleteAcm = id => {
+        let flag = window.confirm("Are you sure?");
+        if(flag) {
+
+            deleteAcm(id, isAuthenticated().token)
+            .then( res => {
+                document.getElementsByClassName(`${id}`)[0].remove();
+            })
+        }
+    }
+
     render() {
         const { title, body, isImportant, tags, id } = this.props;
         return (
-            <div className={`item-list narrow d-flex ${isImportant}`}>
+            <div className={`item-list narrow d-flex ${isImportant} ${id}`}>
                 {
                     isImportant && <img className="important-message" src={Important} alt="important message"/>
                 }
                 <div className="cp d-flex">
+                <img className="img-close-acm" title="delete this announcement" src={CloseAcm} alt="close-acm" onClick={() => this.handleDeleteAcm(id)}/>
                     <div className="votes">
                         <div className="mini-counts">
                             <span title="0 votes">0</span>

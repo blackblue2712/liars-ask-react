@@ -35,6 +35,23 @@ export const putEditAnnouncement = (announInfo, token) => {
     })
 }
 
+export const deleteAcm = (id, token) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/announcements/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("ERROR DELETE ANNOUNCEMENT");
+    })
+}
+
 export const  getAnnouncements = () => {
     return fetch(`${process.env.REACT_APP_API_URL}/announcements`, {
         method: "GET",

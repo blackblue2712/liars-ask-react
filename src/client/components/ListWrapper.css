@@ -107,3 +107,11 @@
     right: 0;
     top: 2px;
 }
+
+.img-close-acm {
+    position: absolute;
+    top: 68px;
+    width: 24px;
+    left: 60px;
+    cursor: pointer;
+}
