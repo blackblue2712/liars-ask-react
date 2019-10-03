@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserInfo from './UserInfo';
 import { getUsers } from '../../controllers/userController';
+
 import DefaultImage from '../../images/default.png';
 
 class TagsComponent extends Component {
@@ -19,7 +20,6 @@ class TagsComponent extends Component {
 
     render() {
         const { users } = this.state;
-        
         return (
             <>
                 <div className="main-head">
