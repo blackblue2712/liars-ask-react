@@ -112,3 +112,19 @@ export const getSignout = () => {
         console.log("GET SIGN OUT");
     })
 }
+
+export const getUsers = () => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users`, {
+        method: "GET",
+        headers: {
+            Accpet: "Application/json",
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("ERROR GET USERS");
+    })
+}
