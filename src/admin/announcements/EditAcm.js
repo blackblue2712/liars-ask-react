@@ -27,25 +27,25 @@ class EditAcm extends React.Component {
         let body = "";
         if(editor) {
             body = editor.value;
+            let title = this.state.title;
+            let isImportant = document.getElementById("is-important").checked;
+            // tags
+            let tagsname = document.getElementById("tagsname").value;
+            let tagsnameArray = tagsname.split(" ")
+            tagsnameArray = tagsnameArray.filter( t => t !== "");
+
+            if(title) {
+                if(body === "") {
+                    body = undefined;
+                }
+                putEditAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
+                .then( res => {
+                    console.log(res);
+                    this.setState( {message: res.message} );
+                })
+            }
         } else {
             alert("Please turn to write mode")
-        }
-        let title = this.state.title;
-        let isImportant = document.getElementById("is-important").checked;
-        // tags
-        let tagsname = document.getElementById("tagsname").value;
-        let tagsnameArray = tagsname.split(" ")
-        tagsnameArray = tagsnameArray.filter( t => t !== "");
-
-        if(title) {
-            if(body === "") {
-                body = undefined;
-            }
-            putEditAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
-            .then( res => {
-                console.log(res);
-                this.setState( {message: res.message} );
-            })
         }
     }
 

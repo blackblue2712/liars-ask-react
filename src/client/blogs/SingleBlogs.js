@@ -11,7 +11,7 @@ const SingleBlog = (props) => {
 
         getSingleBlog(props.match.params.blogId)
         .then( res => {
-            setBlog(res)
+            if(res) setBlog(res)
         })
 
     }, [blog._id])

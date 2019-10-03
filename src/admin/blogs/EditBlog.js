@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSingleBlog } from '../../controllers/blogController';
+import { getSingleBlog, putEditBlog } from '../../controllers/blogController';
 import Mde from '../editor/Mde';
 import Tags from '../components/Tags';
 import { isAuthenticated } from '../../controllers/userController';
@@ -18,34 +18,34 @@ class EditAcm extends React.Component {
         }
     }
 
-    // handlePostAcm = () => {
-    //     let id = this.state.id;
-    //     let token = isAuthenticated().token;
-    //     let editor = document.querySelector("textarea.mde-text ");
-    //     let body = "";
-    //     if(editor) {
-    //         body = editor.value;
-    //     } else {
-    //         alert("Please turn to write mode")
-    //     }
-    //     let title = this.state.title;
-    //     let isImportant = document.getElementById("is-important").checked;
-    //     // tags
-    //     let tagsname = document.getElementById("tagsname").value;
-    //     let tagsnameArray = tagsname.split(" ")
-    //     tagsnameArray = tagsnameArray.filter( t => t !== "");
+    handleEditBlog = () => {
+        let id = this.state.id;
+        let token = isAuthenticated().token;
+        let editor = document.querySelector("textarea.mde-text ");
+        let body = "";
+        if(editor) {
+            body = editor.value;
+            let title = this.state.title;
+            // tags
+            let tagsname = document.getElementById("tagsname").value;
+            let tagsnameArray = tagsname.split(" ")
+            tagsnameArray = tagsnameArray.filter( t => t !== "");
 
-    //     if(title) {
-    //         if(body === "") {
-    //             body = undefined;
-    //         }
-    //         putEditAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
-    //         .then( res => {
-    //             console.log(res);
-    //             this.setState( {message: res.message} );
-    //         })
-    //     }
-    // }
+            if(title) {
+                if(body === "") {
+                    body = undefined;
+                }
+                putEditBlog({title, body, tagsnameArray, id}, token)
+                .then( res => {
+                    console.log(res);
+                    this.setState( {message: res.message} );
+                })
+            }
+        } else {
+            alert("Please turn to write mode")
+        }
+        
+    }
 
     closeTag = (text) => {
         let tagsname = document.getElementById("tagsname");
@@ -76,8 +76,11 @@ class EditAcm extends React.Component {
         // fetching data
         getSingleBlog(this.props.match.params.blogId)
         .then( res => {
-            this.setState( { title: res.title, body: res.body, id: res._id, tagDom: res.anonymousTags.join(" ")} );
-            document.getElementById("tagsname").value = this.state.tagDom;
+            if(res) {
+                this.setState( { title: res.title, body: res.body, id: res._id, tagDom: res.anonymousTags.join(" ")} );
+                document.getElementById("tagsname").value = this.state.tagDom;
+            }
+            
         })
         // 
         let editor = document.querySelector("textarea.mde-text ");
@@ -173,7 +176,7 @@ class EditAcm extends React.Component {
     
                             <button
                                 className="s-btn s-btn__outline s-btn__primary mt24"
-                                // onClick={}
+                                onClick={this.handleEditBlog}
                             >Save this</button>
                         </div>
                     </div>
