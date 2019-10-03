@@ -4,7 +4,6 @@ import Mde from '../editor/Mde';
 import Tags from '../components/Tags';
 import { isAuthenticated } from '../../controllers/userController';
 import Notify from '../components/Notify';
-// import ReactMarkdown from 'react-markdown';
 
 class EditAcm extends React.Component {
     constructor() {
