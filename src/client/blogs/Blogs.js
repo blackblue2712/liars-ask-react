@@ -22,7 +22,7 @@ class Blogs extends React.Component {
         const { blogs } = this.state;
         console.log(blogs)
         return (
-            <>
+            <div id="content">
                 <div className="main-head">
                     {/* <Notify />  
                     {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />} */}
@@ -34,7 +34,7 @@ class Blogs extends React.Component {
                 </div>
                 <ListWrapper data={blogs}/>
                 <div className="clear-fix"></div>
-            </>
+            </div>
         )
     }
 }

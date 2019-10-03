@@ -23,7 +23,7 @@ class SingleAcm extends React.Component {
         const { acm } = this.state
         return (
             <div id="content">
-                <div id="mainbar" style={{width: "100%"}}>
+                <div id="mainbar">
                     <div className="main-head">
                         <div className="grid d-flex align-items-centers mb16">
                             <h1 className="fs-headline1 mr-auto">{acm.title}</h1>
@@ -31,10 +31,8 @@ class SingleAcm extends React.Component {
                         <p className="mb24 f13 fw350"></p>
                     </div>
 
-                    <div className="bg-white bar-sm bs-md p16">
-                        <pre>
-                            <ReactMarkdown source={acm.body} renderers={{ code: CodeBlock }} />
-                        </pre>
+                    <div className="bg-white bar-sm bs-md p16 md-content">
+                        <ReactMarkdown source={acm.body} renderers={{ code: CodeBlock }} />
                     </div>
 
                     <div className="clear-fix"></div>

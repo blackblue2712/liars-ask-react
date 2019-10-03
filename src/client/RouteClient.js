@@ -13,6 +13,9 @@ import Example from './asks/Example';
 import UserDetail from './users/UserDetail';
 import Announcement from './announcements/announcements';
 import SingleAcm from './announcements/SingleAcm';
+import Blogs from './blogs/Blogs';
+import SingleBlog from './blogs/SingleBlogs';
+
 import PrivateRoute from '../PirvateRoute';
 
 const RouteClient = props => {
@@ -32,6 +35,8 @@ const RouteClient = props => {
 
             <PrivateRoute exact path="/announcements" component={Announcement} />
             <PrivateRoute exact path="/announcements/:acmId" component={SingleAcm} />
+            <PrivateRoute exact path="/blogs" component={Blogs} />
+            <PrivateRoute exact path="/blogs/:blogId" component={SingleBlog} />
 
             {/* <Route component={Footer} /> */}
         </div>

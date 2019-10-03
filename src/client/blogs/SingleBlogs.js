@@ -1,0 +1,61 @@
+import React, {useState, useEffect} from 'react';
+import { getSingleBlog } from '../../controllers/blogController';
+import ReactMarkdown from 'react-markdown';
+import CodeBlock from '../editor/CodeBlock';
+import Tags from '../components/Tags'
+
+const SingleBlog = (props) => {
+    let [blog, setBlog] = useState({});
+
+    useEffect( () => {
+
+        getSingleBlog(props.match.params.blogId)
+        .then( res => {
+            setBlog(res)
+        })
+
+    }, [blog._id])
+
+    console.log(blog)
+    return (
+        <div id="content">
+            <div id="mainbar">
+                <div className="main-head">
+                    <div className="grid d-flex align-items-centers mb16">
+                        <h1 className="fs-headline1 mr-auto">{blog.title}</h1>
+                    </div>
+                    <p className="mb24 f13 fw350"></p>
+                </div>
+
+                <div className="bg-white bar-sm bs-md p16 md-content">
+                    
+                    <ReactMarkdown source={blog.body} renderers={{ code: CodeBlock }} />
+                    
+                    {
+                        blog.anonymousTags && blog.anonymousTags.map( (tag,i) => {
+                            return <Tags key={i} name={tag}/>
+                        })
+                    }
+                </div>
+                
+                <div className="clear-fix"></div>
+                <div className="nearfooter" style={{padding: "40px 0px"}}>
+                    <p>
+                        Looking for more? Browse 
+                        <a style={{ color: "#3af" }} href="#a"> the complete list of questions</a>
+                        , or
+                        <a style={{ color: "#3af" }} href="#a"> popular tags </a>
+                        .Help us answer 
+                        <a style={{ color: "#3af" }} href="#a"> unanswered questions</a>
+                        .
+                    </p>
+                </div>
+            </div>
+            
+            
+            <div className="clear-fix"></div>
+        </div>
+    )
+}
+
+export default SingleBlog;

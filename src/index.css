@@ -72,8 +72,9 @@ pre blockquote {
   border-left: 3px solid #b5b5ff;
   padding: 2px 10px;
 }
-pre img {
-  width: 100%
+pre img, .md-content img {
+  max-width: 876px;
+  width: 100%;
 }
 a {
   text-decoration: none;

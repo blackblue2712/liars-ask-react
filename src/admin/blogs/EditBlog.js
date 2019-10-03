@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSingleAnnouncement, putEditAnnouncement } from '../../controllers/announcementController';
+import { getSingleBlog } from '../../controllers/blogController';
 import Mde from '../editor/Mde';
 import Tags from '../components/Tags';
 import { isAuthenticated } from '../../controllers/userController';
@@ -10,44 +10,42 @@ class EditAcm extends React.Component {
     constructor() {
         super();
         this.state = {
-            acm: {},
             title: "",
             body: "",
             id: "",
-            isImportant: false,
             tagDom: "",
             message: "",
         }
     }
 
-    handlePostAcm = () => {
-        let id = this.state.id;
-        let token = isAuthenticated().token;
-        let editor = document.querySelector("textarea.mde-text ");
-        let body = "";
-        if(editor) {
-            body = editor.value;
-        } else {
-            alert("Please turn to write mode")
-        }
-        let title = this.state.title;
-        let isImportant = document.getElementById("is-important").checked;
-        // tags
-        let tagsname = document.getElementById("tagsname").value;
-        let tagsnameArray = tagsname.split(" ")
-        tagsnameArray = tagsnameArray.filter( t => t !== "");
+    // handlePostAcm = () => {
+    //     let id = this.state.id;
+    //     let token = isAuthenticated().token;
+    //     let editor = document.querySelector("textarea.mde-text ");
+    //     let body = "";
+    //     if(editor) {
+    //         body = editor.value;
+    //     } else {
+    //         alert("Please turn to write mode")
+    //     }
+    //     let title = this.state.title;
+    //     let isImportant = document.getElementById("is-important").checked;
+    //     // tags
+    //     let tagsname = document.getElementById("tagsname").value;
+    //     let tagsnameArray = tagsname.split(" ")
+    //     tagsnameArray = tagsnameArray.filter( t => t !== "");
 
-        if(title) {
-            if(body === "") {
-                body = undefined;
-            }
-            putEditAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
-            .then( res => {
-                console.log(res);
-                this.setState( {message: res.message} );
-            })
-        }
-    }
+    //     if(title) {
+    //         if(body === "") {
+    //             body = undefined;
+    //         }
+    //         putEditAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
+    //         .then( res => {
+    //             console.log(res);
+    //             this.setState( {message: res.message} );
+    //         })
+    //     }
+    // }
 
     closeTag = (text) => {
         let tagsname = document.getElementById("tagsname");
@@ -76,13 +74,10 @@ class EditAcm extends React.Component {
 
     componentDidMount() {
         // fetching data
-        getSingleAnnouncement(this.props.match.params.acmId)
+        getSingleBlog(this.props.match.params.blogId)
         .then( res => {
-            this.setState( {acm: res, title: res.title, body: res.body, id: res._id, isImportant: res.isImportant, tagDom: res.anonymousTags.join(" ")} );
+            this.setState( { title: res.title, body: res.body, id: res._id, tagDom: res.anonymousTags.join(" ")} );
             document.getElementById("tagsname").value = this.state.tagDom;
-            if(res.isImportant) {
-                document.getElementById("is-important").checked = true;
-            }
         })
         // 
         let editor = document.querySelector("textarea.mde-text ");
@@ -176,19 +171,9 @@ class EditAcm extends React.Component {
                                 </div>
                             </div>
     
-                            <div className="post-title ps-relative mb16">
-                                <label htmlFor="is-important" className="s-label mb4">
-                                    Is important
-                                    <p className="s-desscription mt4">Is this announcement important? Check it</p>
-                                </label>
-                            </div>
-                            <div className="ps-relative mb16">
-                                <input id="is-important" name="is-important" type="checkbox" className="" />
-                            </div>
-    
                             <button
                                 className="s-btn s-btn__outline s-btn__primary mt24"
-                                onClick={this.handlePostAcm}
+                                // onClick={}
                             >Save this</button>
                         </div>
                     </div>

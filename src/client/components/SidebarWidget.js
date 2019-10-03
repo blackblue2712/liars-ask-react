@@ -15,9 +15,12 @@ const SidebarWidget = props => {
     return (
         <>
             {
-                blogs.map( blog => {
-                    return <SidebarWidgetItem classIcon=""
+                blogs.map( (blog, i) => {
+                    return <SidebarWidgetItem
+                        key={i}
+                        classIcon=""
                         widgetContent={blog.title}
+                        id={blog._id}
                     />
                 })
             }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SidebarWidgetItem extends Component {
     render() {
@@ -7,7 +8,7 @@ class SidebarWidgetItem extends Component {
                     <div className="d-flex align-items-center">
                         <div className={`widget-favicon ${this.props.classIcon}`}></div>
                         <div className="widget-content">
-                            <a href="#w">{this.props.widgetContent}</a>
+                            <Link to={`/blogs/${this.props.id}`}>{this.props.widgetContent}</Link>
                         </div>
                     </div>
                 </div>

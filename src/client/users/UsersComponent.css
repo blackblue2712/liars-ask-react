@@ -19,6 +19,7 @@
     color: #6a737c;
     margin-bottom: 2px;
     width: 100%;
+    margin: 0 !important;
 }
 
 .reputation-score {
@@ -174,6 +175,6 @@
 }
 
 .user-avatar {
-    width: 54px;
-    height: 54px;
+    width: 54px !important;
+    height: 54px !important;
 }
