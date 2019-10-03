@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { putUpdateInfo } from '../controllers/userController';
+import { putUpdateInfo } from '../../controllers/userController';
 import Notify from '../components/Notify';
 import Default from '../../images/default.png';
 

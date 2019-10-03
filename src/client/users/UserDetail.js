@@ -1,7 +1,7 @@
 import React from 'react';
 import UserDetailBasic from './UserDetailBasic';
 import UserDetailStory from './UserDetailStory';
-import { getLoggedUser } from '../controllers/userController';
+import { getLoggedUser } from '../../controllers/userController';
 import Notify from '../components/Notify';
 
 

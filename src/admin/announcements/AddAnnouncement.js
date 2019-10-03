@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Mde from '../editor/Mde';
 import Tags from '../components/Tags' ;
-import { postAnnouncement } from '../controllers/announcementController';
-import { isAuthenticated } from '../controllers/userController';
+import { postAnnouncement } from '../../controllers/announcementController';
+import { isAuthenticated } from '../../controllers/userController';
 import Notify from '../components/Notify';
 
 
@@ -32,21 +32,21 @@ const AddAnnouncements = props => {
         let body = "";
         if(editor) {
             body = editor.value;
+            let title = document.getElementById("title").value;
+            let isImportant = document.getElementById("is-important").checked;
+            // tags
+            let tagsname = document.getElementById("tagsname").value;
+            let tagsnameArray = tagsname.split(" ")
+            tagsnameArray = tagsnameArray.filter( t => t !== "");
+
+            if(title && body) {
+                postAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
+                .then( res => {
+                    setShowNotify(res.message);
+                })
+            }
         } else {
             alert("Please turn to write mode")
-        }
-        let title = document.getElementById("title").value;
-        let isImportant = document.getElementById("is-important").checked;
-        // tags
-        let tagsname = document.getElementById("tagsname").value;
-        let tagsnameArray = tagsname.split(" ")
-        tagsnameArray = tagsnameArray.filter( t => t !== "");
-
-        if(title && body) {
-            postAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
-            .then( res => {
-                setShowNotify(res.message);
-            })
         }
     }
 

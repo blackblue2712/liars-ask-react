@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './UsersComponent.css';
 import UserInfo from './UserInfo';
-import { getUsers } from '../controllers/userController';
+import { getUsers } from '../../controllers/userController';
 import DefaultImage from '../../images/default.png';
 
 class TagsComponent extends Component {

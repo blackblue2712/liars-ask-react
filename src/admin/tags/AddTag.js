@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Mde from '../editor/Mde';
-import { postAddTag } from '../controllers/tagController';
-import { isAuthenticated } from '../controllers/userController';
+import { postAddTag } from '../../controllers/tagController';
+import { isAuthenticated } from '../../controllers/userController';
 import Notify from '../components/Notify';
 
 

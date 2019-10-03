@@ -1,4 +1,3 @@
-
 export const getLoggedUser = (id, token) => {
     
     return fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
@@ -16,6 +15,7 @@ export const getLoggedUser = (id, token) => {
         console.log(`ERROR POST LOGGED USER ${err}`);
     });
 }
+
 
 export const postSignup = (userInfo) => {
     return fetch(`${process.env.REACT_APP_API_URL}/auth/signup`, {
@@ -81,13 +81,13 @@ export const putUpdateStory = (userInfo) => {
 }
 
 export const putUpdateInfo = (userInfo) => {
-    console.log(userInfo.get("photo"))
-    return fetch(`${process.env.REACT_APP_API_URL}/users/info/${userInfo.get("id")}`, {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/info/${userInfo._id}`, {
         method: "PUT",
         headers: {
-            Accept: "Application/json"
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
         },
-        body: userInfo
+        body: JSON.stringify(userInfo)
     })
     .then( res => {
         return res.json();
@@ -114,6 +114,7 @@ export const getSignout = () => {
 }
 
 export const getUsers = () => {
+    console.log(`${process.env.REACT_APP_API_URL}/users`)
     return fetch(`${process.env.REACT_APP_API_URL}/users`, {
         method: "GET",
         headers: {
@@ -128,3 +129,4 @@ export const getUsers = () => {
         console.log("ERROR GET USERS");
     })
 }
+

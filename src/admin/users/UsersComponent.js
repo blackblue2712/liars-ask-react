@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserInfo from './UserInfo';
-import { getUsers } from '../controllers/userController';
+import { getUsers } from '../../controllers/userController';
 import DefaultImage from '../../images/default.png';
 
 class TagsComponent extends Component {
@@ -15,12 +15,11 @@ class TagsComponent extends Component {
     async componentDidMount() {
         const users = await getUsers();
         this.setState( {users} );
-        
     }
 
     render() {
         const { users } = this.state;
-        console.log(users);
+        
         return (
             <>
                 <div className="main-head">
@@ -49,11 +48,11 @@ class TagsComponent extends Component {
                             users.map ( (user, i) => {
                                 return <UserInfo
                                     key={i}
-                                    username={user.email}
+                                    email={user.email}
                                     userLocation="Bratislava, Slovakia"
                                     userImage={user.photo || DefaultImage}
                                     userReputation="1,110"
-                                />        
+                                />   
                             })
                         }
                     </div>

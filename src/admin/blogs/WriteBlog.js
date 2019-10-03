@@ -1,52 +1,46 @@
 import React from 'react';
-import { getSingleAnnouncement, putEditAnnouncement } from '../../controllers/announcementController';
 import Mde from '../editor/Mde';
 import Tags from '../components/Tags';
 import { isAuthenticated } from '../../controllers/userController';
 import Notify from '../components/Notify';
-// import ReactMarkdown from 'react-markdown';
+import { postWriteBlog } from '../../controllers/blogController';
 
-class EditAcm extends React.Component {
+class WriteBlog extends React.Component {
+
     constructor() {
         super();
         this.state = {
-            acm: {},
             title: "",
             body: "",
-            id: "",
-            isImportant: false,
             tagDom: "",
             message: "",
         }
     }
 
-    handlePostAcm = () => {
-        let id = this.state.id;
+    handleWriteBlog = () => {
         let token = isAuthenticated().token;
+        let owner = isAuthenticated().user._id;
         let editor = document.querySelector("textarea.mde-text ");
         let body = "";
         if(editor) {
             body = editor.value;
+            let title = document.getElementById("title").value;
+            // tags
+            let tagsname = document.getElementById("tagsname").value;
+            let tagsnameArray = tagsname.split(" ")
+            tagsnameArray = tagsnameArray.filter( t => t !== "");
+
+            if(title) {
+                postWriteBlog({title, body, tagsnameArray, owner}, token)
+                .then( res => {
+                    console.log(res);
+                    this.setState( {message: res.message} );
+                })
+            }
         } else {
             alert("Please turn to write mode")
         }
-        let title = this.state.title;
-        let isImportant = document.getElementById("is-important").checked;
-        // tags
-        let tagsname = document.getElementById("tagsname").value;
-        let tagsnameArray = tagsname.split(" ")
-        tagsnameArray = tagsnameArray.filter( t => t !== "");
-
-        if(title) {
-            if(body === "") {
-                body = undefined;
-            }
-            putEditAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
-            .then( res => {
-                console.log(res);
-                this.setState( {message: res.message} );
-            })
-        }
+        
     }
 
     closeTag = (text) => {
@@ -66,26 +60,15 @@ class EditAcm extends React.Component {
         }
     }
 
-    handleChangeValue = (text) => {
-        this.setState( {title: text} );
-    }
-
     clearMess = () => {
         this.setState( {message: ""} );
     }
 
     componentDidMount() {
-        // fetching data
-        getSingleAnnouncement(this.props.match.params.acmId)
-        .then( res => {
-            this.setState( {acm: res, title: res.title, body: res.body, id: res._id, isImportant: res.isImportant, tagDom: res.anonymousTags.join(" ")} );
-            document.getElementById("tagsname").value = this.state.tagDom;
-            document.getElementById("is-important").checked = true;
-        })
         // 
         let editor = document.querySelector("textarea.mde-text ");
-        editor.setAttribute("id", "announ-content")
-        editor.setAttribute("name", "announ-content")
+        editor.setAttribute("id", "blog-content")
+        editor.setAttribute("name", "blog-content")
 
         document.querySelector("#tageditor-replacing-tagnames--input").addEventListener("keyup", this.handleChangeTag, false);
     }
@@ -97,9 +80,9 @@ class EditAcm extends React.Component {
         document.querySelector("#tageditor-replacing-tagnames--input").removeEventListener("keyup", this.handleChangeTag, false);
     }
 
+
     render() {
-        const { tagDom, message, title, body } = this.state;
-        console.log(tagDom)
+        const { tagDom, message } = this.state;
         return (
             <>
                 <div id="mainbar" style={{width: "100%"}}>
@@ -114,20 +97,15 @@ class EditAcm extends React.Component {
                                 </label>
                             </div>
                             <div className="ps-relative mb16">
-                                <input id="title" name="title" type="text" className="s-input w-100"
-                                    value={title}
-                                    onChange={ (e) => this.handleChangeValue(e.target.value) }
-                                />
+                                <input id="title" name="title" type="text" className="s-input w-100" placeholder="Enter title here"/>
                             </div>
                             
                             <div className="post-editor mb16">
                                 <div className="ps-relative">
-                                    <label htmlFor="announ-content" className="s-label mb16 d-block">
+                                    <label htmlFor="blog-content" className="s-label mb16 d-block">
                                         Body
                                         <p className="s-desscription mt4">Announcement body (all of the information about the announcement)</p>
                                     </label>
-                                    {/* <ReactMarkdown source={body}/> */}
-                                    <pre>{body}</pre>
                                     <Mde />
                                     {/* CAPTOPN */}
                                     <div className="d-flex align-items-center pb12 fc-light fs-caption mt16 mb24">
@@ -173,21 +151,11 @@ class EditAcm extends React.Component {
                                     </div>
                                 </div>
                             </div>
-    
-                            <div className="post-title ps-relative mb16">
-                                <label htmlFor="is-important" className="s-label mb4">
-                                    Is important
-                                    <p className="s-desscription mt4">Is this announcement important? Check it</p>
-                                </label>
-                            </div>
-                            <div className="ps-relative mb16">
-                                <input id="is-important" name="is-important" type="checkbox" className="" />
-                            </div>
-    
+
                             <button
                                 className="s-btn s-btn__outline s-btn__primary mt24"
-                                onClick={this.handlePostAcm}
-                            >Save this</button>
+                                onClick={this.handleWriteBlog}
+                            >Post this</button>
                         </div>
                     </div>
                 </div>
@@ -197,4 +165,4 @@ class EditAcm extends React.Component {
     }
 }
 
-export default EditAcm;
+export default WriteBlog;

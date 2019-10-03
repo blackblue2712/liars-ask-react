@@ -4,7 +4,7 @@ import './Header.css';
 import brandLogo from '../../images/logo.png';
 import signoutIcon from '../../images/logout.svg'
 import Default from '../../images/default.png';
-import { isAuthenticated, getSignout } from '../controllers/userController';
+import { isAuthenticated, getSignout } from '../../controllers/userController';
 
 class Header extends Component {
 

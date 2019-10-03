@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Mde from '../editor/Mde';
-import { putUpdateStory } from '../controllers/userController';
+import { putUpdateStory } from '../../controllers/userController';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../editor/CodeBlock';
 import Notify from '../components/Notify';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isAuthenticated } from './controllers/userController';
+import { isAuthenticated } from '../controllers/userController';
 
 const PrivateRouteAdmin = ({ component: Component, ...rest }) => {
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSingleAnnouncement } from '../controllers/announcementController';
+import { getSingleAnnouncement } from '../../controllers/announcementController';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../editor/CodeBlock';
 class SingleAcm extends React.Component {

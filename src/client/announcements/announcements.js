@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
-import { getAnnouncements } from '../controllers/announcementController';
+import { getAnnouncements } from '../../controllers/announcementController';
 import Notify from '../components/Notify';
 import ListWrapper from './ListWrapper';
 // const [acms, setAcms] = useState([]);

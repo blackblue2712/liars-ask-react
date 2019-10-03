@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SingleTag from '../components/SingleTag';
-import {getTags} from '../controllers/tagController';
+import {getTags} from '../../controllers/tagController';
 
 class Tags extends Component {
     constructor() {

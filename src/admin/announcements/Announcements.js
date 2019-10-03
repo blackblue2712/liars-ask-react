@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getAnnouncements } from '../controllers/announcementController';
+import { getAnnouncements } from '../../controllers/announcementController';
 import ListWrapper from './ListWrapper';
 import Notify from '../components/Notify';
 

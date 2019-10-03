@@ -4,8 +4,8 @@ import Important from '../../images/important.png';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import CloseAcm from '../../images/close-acm.png';
-import { isAuthenticated } from '../controllers/userController';
-import { deleteAcm } from '../controllers/announcementController';
+import { isAuthenticated } from '../../controllers/userController';
+import { deleteAcm } from '../../controllers/announcementController';
 
 class ListItem extends Component {
 

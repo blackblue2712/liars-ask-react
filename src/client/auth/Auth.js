@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { postSignup, postSignin, authenticate, isAuthenticated } from '../controllers/userController';
+import { postSignup, postSignin, authenticate, isAuthenticated } from '../../controllers/userController';
 import { withRouter } from 'react-router-dom';
 import './style.css';
 

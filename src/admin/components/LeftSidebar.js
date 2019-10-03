@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import './LeftSidebar.css';
 
 class LeftSidebar extends Component {
 
@@ -53,6 +52,9 @@ class LeftSidebar extends Component {
                                     </li>
                                     <li id="announcements" className="canactive">
                                         <Link className="nav-links--link" to="/admin/announcements">Announcements</Link>
+                                    </li>
+                                    <li id="blogs" className="canactive">
+                                        <Link className="nav-links--link" to="/admin/blogs">Blogs</Link>
                                     </li>
                                     <li>
                                         <ul>
