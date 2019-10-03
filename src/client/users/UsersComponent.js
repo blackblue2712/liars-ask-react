@@ -1,9 +1,27 @@
 import React, { Component } from 'react';
 import './UsersComponent.css';
 import UserInfo from './UserInfo';
+import { getUsers } from '../controllers/userController';
+import DefaultImage from '../../images/default.png';
 
 class TagsComponent extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            users: []
+        }
+    }
+
+    async componentDidMount() {
+        const users = await getUsers();
+        this.setState( {users} );
+        
+    }
+
     render() {
+        const { users } = this.state;
+        console.log(users);
         return (
             <div id="content">
                 <div className="main-head">
@@ -28,126 +46,17 @@ class TagsComponent extends Component {
 
                 <div id="tags-list">
                     <div id="tags-browser">
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
-                        <UserInfo
-                            username={Math.random().toString(36).substring(7)}
-                            userLocation="Bratislava, Slovakia"
-                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                            userReputation="1,110"
-                        />
+                        {
+                            users.map ( (user, i) => {
+                                return <UserInfo
+                                    key={i}
+                                    username={user.email}
+                                    userLocation="Bratislava, Slovakia"
+                                    userImage={user.photo || DefaultImage}
+                                    userReputation="1,110"
+                                />        
+                            })
+                        }
                     </div>
                 </div>
                 
