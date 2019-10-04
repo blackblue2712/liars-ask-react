@@ -7,7 +7,7 @@ import Content from './components/Content';
 import Footer from './components/Footer';
 import TagsComponent from './tags/TagsComponent';
 import UsersComponent from './users/UsersComponent';
-import QuestionsComponent from './questions/QuestionsComponent';
+import Questions from './questions/Questions';
 import Asks from './asks/Asks';
 import Example from './asks/Example';
 import UserDetail from './users/UserDetail';
@@ -15,6 +15,7 @@ import Announcement from './announcements/announcements';
 import SingleAcm from './announcements/SingleAcm';
 import Blogs from './blogs/Blogs';
 import SingleBlog from './blogs/SingleBlogs';
+import SinglePost from './questions/SingleQuestion'
 
 import PrivateRoute from '../PirvateRoute';
 
@@ -25,12 +26,13 @@ const RouteClient = props => {
             style={{marginTop: "50px"}}
         >
             <LeftSidebar />
-            <PrivateRoute exact path="/" component={Content} />
+            <PrivateRoute exact path="/" component={Questions} />
             <PrivateRoute exact path="/tags" component={TagsComponent} />
             <PrivateRoute exact path="/users" component={UsersComponent} />
             <PrivateRoute exact path="/users/:userId" component={UserDetail} />
-            <PrivateRoute exact path="/questions" component={QuestionsComponent} />
+            <PrivateRoute exact path="/questions" component={Questions} />
             <PrivateRoute exact path="/questions/ask" component={Asks} />
+            <PrivateRoute exact path="/questions/ask/:quesId" component={SinglePost} />
             <PrivateRoute exact path="/questions/ask/example" component={Example} />
 
             <PrivateRoute exact path="/announcements" component={Announcement} />

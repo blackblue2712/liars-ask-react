@@ -16,3 +16,35 @@ export const postAsk = (askInfo, token) => {
         return {message: "ERROR POST ASK"}
     });
 }
+
+export const getQuestions = () => {
+    return fetch(`${process.env.REACT_APP_API_URL}/asks/questions`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        },
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return {message: "ERROR GET QUESTIONS"}
+    });
+}
+
+export const getSingleQuestion = (id) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/asks/questions/${id}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        },
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return {message: "ERROR GET SINGLE QUESTION"}
+    });
+}

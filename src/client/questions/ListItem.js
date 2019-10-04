@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import Tags from './Tags';
+import Tags from '../components/Tags';
+import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 class ListItem extends Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps != this.props;
+    }
+
     render() {
+        const { title, body, tags, id } = this.props;
         return (
-            <div className="item-list narrow d-flex align-items-center">
+            <div className={`item-list narrow d-flex`}>
                 <div className="cp d-flex">
                     <div className="votes">
                         <div className="mini-counts">
@@ -27,14 +35,22 @@ class ListItem extends Component {
                 </div>
                 <div className="list-sumary w-100">
                     <h3>
-                        <a href="#q" className="hyper-link">How to convert one-dimensional lstm into three-dimensional one</a>
+                        <Link to={`/questions/ask/${id}`} className="hyper-link">{title}</Link>
                     </h3>
-                    <Tags name="flutter" close={false}/>
-                    <Tags name="dart" close={false}/>
-                    <Tags name="go lang" close={false}/>
-                    <div className="started ml-auto" dir="ltr">
-                        <a href="#relativetime">asked 44 min ago</a>
+                    <div className="list-body--text mb4" style={{}}>
+                        {/* <ReactMarkdown
+                            source={body.length > 100 ? body.slice(0, 100) + "..." : body}
+                        /> */}
+                        {body.length > 200 ? body.slice(0, 200) + "..." : body}
                     </div>
+                    {
+                        tags && tags.map( (t, i) => {
+                            return <Tags key={i} name={t}/>
+                        })
+                    }
+                    {/* <div className="started ml-auto" dir="ltr">
+                        <a href="#relativetime">asked 44 min ago</a>
+                    </div> */}
                     <div className="clear-fix"></div>
                 </div>
             </div>
