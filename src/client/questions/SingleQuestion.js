@@ -1,31 +1,12 @@
 import React, { Component } from 'react';
 import './QuestionsComponent.css';
 import Post from './Post';
-import Code from 'react-code-prettify';
-import UserInfo from '../users/UserInfo';
 import Sidebar from '../components/Sidebar';
 import AskAQuestion from '../components/AskAQuestion';
-import Mde from '../editor/Mde';
 import { getSingleQuestion } from '../../controllers/askController';
+import AnswerItem from './AnswerItem';
+import YourAnswer from './YourAnswer';
 
-// const codeString2 = `
-// #overlay {
-//     position: absolute;
-//     left: 0;
-//     top: 0;
-//     right: 0;
-//     bottom: 0;
-
-//     background:black;
-//     background:rgba(0,0,0,0.8);
-
-//     filter:blur(4px);
-//     -o-filter:blur(4px);
-//     -ms-filter:blur(4px);
-//     -moz-filter:blur(4px);
-//     -webkit-filter:blur(4px);
-// }
-// `
 class QuestionsComponent extends Component {
     constructor() {
         super();
@@ -36,6 +17,7 @@ class QuestionsComponent extends Component {
 
     async componentDidMount() {
         const data = await getSingleQuestion(this.props.match.params.quesId);
+        console.log(data)
         if(!data.message) {
             this.setState( {ques: data} );
         }
@@ -85,53 +67,16 @@ class QuestionsComponent extends Component {
                             <h2>7 Answers</h2>
                             
                         </div>
-
-                        <div className="answer mt16 mb16">
-                            <div className="post-layout d-flex">
-                                <div className="votecell post-layout--left mr24">
-                                    <div className="js-voting">
-                                        <button className="js-vote--up">
-                                            <svg aria-hidden="true" className="svg-icon m0 iconArrowUpLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 26h32L18 10 2 26z"></path></svg>
-                                        </button>
-                                        <div className="vote-count">{499}</div>
-                                        <button className="js-vote--down">
-                                            <svg aria-hidden="true" className="svg-icon m0 iconArrowDownLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26 2 10z"></path></svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="votecell post-layout--right">
-                                    <div className="post-text">
-                                        <p>
-                                            For a more simple and up to date answer:
-                                        </p>
-                                        <Code
-                                            codeString={`backdrop-filter: blur(6px);`} 
-                                            language="css" 
-                                        />
-                                        <p>Note <a href="https://caniuse.com/#feat=css-backdrop-filter" rel="nofollow noreferrer">browser support</a> is not perfect but in most cases a blur would be non essential.</p>
-                                    </div>
-                                    <div className="d-flex justify-content-end">
-                                        <UserInfo
-                                            username={Math.random().toString(36).substring(7)}
-                                            userLocation="Bratislava, Slovakia"
-                                            userImage={`https://api.adorable.io/avatars/55/${Date.now() + Math.random(1 * 10)}`}
-                                            userReputation="1,110"
-                                        />
-                                    </div>
-                                
-                                </div>
-                            </div>
+                        <div id="list-answers">
+                            <AnswerItem />
                         </div>
 
+                        {/* YOUR ANSWER */}
+                        <YourAnswer />
+                        
                     </div>
 
-                    <div id="youranswer">
-                        <div className="answers-header">
-                            <h2 className="mb24">Your answer</h2>
-                            <Mde />
-                            <button className="s-btn s-btn__outline s-btn__primary mt24">Post your answer</button>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <Sidebar />
