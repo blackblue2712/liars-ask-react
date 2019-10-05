@@ -80,14 +80,14 @@ export const putUpdateStory = (userInfo) => {
     })
 }
 
-export const putUpdateInfo = (userInfo) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/users/info/${userInfo._id}`, {
+export const putUpdateInfo = (userInfo, token) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/info/${userInfo.get("id")}`, {
         method: "PUT",
         headers: {
             Accept: "Application/json",
-            "Content-Type": "Application/json"
+            Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(userInfo)
+        body: userInfo
     })
     .then( res => {
         return res.json();

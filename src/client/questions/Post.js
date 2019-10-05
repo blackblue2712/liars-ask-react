@@ -35,7 +35,7 @@ class Post extends Component {
                     </div>
                 </div>
                 <div className="votecell post-layout--right">
-                    <div className="post-text">
+                    <div className="post-text md-content">
                         <ReactMarkdown source={ques.body} renderers={{ code: CodeBlock }} />
                     </div>
                     {

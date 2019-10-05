@@ -46,3 +46,9 @@
     border-top: 1px solid #e4e6e8;
     padding: 20px 0px;
 }
+.fs-count-answer {
+    padding: 3px 3px;
+    border-left: 3px solid #ffafaf;
+    font-weight: 400;
+    font-size: 24px;
+}

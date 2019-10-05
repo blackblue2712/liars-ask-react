@@ -31,11 +31,12 @@ class YourAnswer extends React.Component {
                     let photo = isAuthenticated().user.photo;
                     this.props.addAnswer({
                         body,
-                        votes: 0,
+                        votes: [],
                         owner: {
                             _id: userId,
                             email,
-                            photo
+                            photo,
+                            votes: []
                         }
                     })
                 }

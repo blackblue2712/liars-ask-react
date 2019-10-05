@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { putUpdateInfo } from '../../controllers/userController';
 import Notify from '../components/Notify';
 import Default from '../../images/default.png';
+import { isAuthenticated } from '../../controllers/userController';
 
 const UserDetailBasic = (props) => {
     const userData = new FormData();
@@ -20,9 +21,12 @@ const UserDetailBasic = (props) => {
         userData.set("fullname", ffullname);
         userData.set("currentPassword", currentPassword);
         userData.set("photo", photo);
-        putUpdateInfo(userData)
+        putUpdateInfo(userData, isAuthenticated().token)
         .then( res => {
             setShowNotify(res.message);
+        })
+        .catch( err => {
+            setShowNotify("Error occur");
         })
     }
 

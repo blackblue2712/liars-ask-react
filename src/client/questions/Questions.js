@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ListWrapper from './ListWrapper';
 import { getQuestions } from '../../controllers/askController';
+import AskAQuestion from '../components/AskAQuestion';
 
 class Questions extends React.Component {
     constructor() {
@@ -27,10 +27,10 @@ class Questions extends React.Component {
                     {/* <Notify />  
                     {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />} */}
                     <div className="grid d-flex align-items-centers mb16">
-                        <h1 className="fs-headline1 mr-auto">Blogs</h1>
-                        <Link to="/asks/new" className="s-btn s-btn__outline s-btn__primary">Ask a question</Link>
+                        <h1 className="fs-headline1 mr-auto">Top Questions</h1>
+                        <AskAQuestion />
                     </div>
-                    <p className="mb24 f13 fw350">Write blog about whatever you want to share with everyone &lt;3</p>
+                    <p className="mb24 f13 fw350"></p>
                 </div>
                 <ListWrapper data={questions}/>
                 <div className="clear-fix"></div>

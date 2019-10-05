@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Default from '../../images/default.png'
 
 const UserInfo = props => {
     return (
         <div className="grid-layout--cell tags-cell">
             <div className="user-gavatar48">
                 <Link to={`/users/${props.userId}`}>
-                    <img className="user-avatar" loading="lazy" src={props.userImage} alt="none"/>
+                    <img className="user-avatar" loading="lazy" src={props.userImage || Default} alt="none"/>
                 </Link>
             </div>
             <div className="user-detail d-flex">

@@ -67,7 +67,7 @@ class QuestionsComponent extends Component {
                     
                     <div id="answers" className="mt24">
                         <div className="answers-header">
-                            <h2>7 Answers</h2>
+                            <h2 className="fs-count-answer">{answersArr.length} Answers</h2>
                             
                         </div>
                         <div id="list-answers">
