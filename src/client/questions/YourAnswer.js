@@ -4,8 +4,7 @@ import { isAuthenticated } from '../../controllers/userController';
 import { withRouter } from 'react-router-dom';
 import { postAnswer } from '../../controllers/askController' ;
 import Notify from '../components/Notify';
-import ReactMarkdown from 'react-markdown';
-import CodeBlock from '../editor/CodeBlock';
+
 
 class YourAnswer extends React.Component {
     constructor() {
@@ -28,6 +27,17 @@ class YourAnswer extends React.Component {
                 this.setState( {message: res.message} );
                 if(res.message === "Your answer added") {
                     editor.value = "";
+                    let email = isAuthenticated().user.email;
+                    let photo = isAuthenticated().user.photo;
+                    this.props.addAnswer({
+                        body,
+                        votes: 0,
+                        owner: {
+                            _id: userId,
+                            email,
+                            photo
+                        }
+                    })
                 }
             })
 

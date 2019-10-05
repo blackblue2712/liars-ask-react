@@ -11,21 +11,24 @@ class QuestionsComponent extends Component {
     constructor() {
         super();
         this.state = {
-            ques: {}
+            ques: {},
+            answersArr: []
         }
     }
 
     async componentDidMount() {
         const data = await getSingleQuestion(this.props.match.params.quesId);
-        console.log(data)
         if(!data.message) {
-            this.setState( {ques: data} );
+            this.setState( {ques: data, answersArr: data.answers} );
         }
     }
 
+    handleAddAnswer = (ans) => {
+        this.setState( {answersArr: [...this.state.answersArr, ans]} );
+    }
+
     render() {
-        let { ques } = this.state;
-        console.log(ques)
+        let { ques, answersArr } = this.state;
         return (
             <div id="content">
                 <div id="mainbar">
@@ -68,11 +71,15 @@ class QuestionsComponent extends Component {
                             
                         </div>
                         <div id="list-answers">
-                            <AnswerItem />
+                            {
+                                answersArr.map( (ans, i) => {
+                                    return <AnswerItem data={ans} key={i}/>
+                                })
+                            }
                         </div>
 
                         {/* YOUR ANSWER */}
-                        <YourAnswer />
+                        <YourAnswer addAnswer={this.handleAddAnswer} />
                         
                     </div>
 

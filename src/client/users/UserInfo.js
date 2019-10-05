@@ -1,17 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const UserInfo = props => {
     return (
         <div className="grid-layout--cell tags-cell">
             <div className="user-gavatar48">
-                <a href="/users/123">
+                <Link to={`/users/${props.userId}`}>
                     <img className="user-avatar" loading="lazy" src={props.userImage} alt="none"/>
-                </a>
+                </Link>
             </div>
             <div className="user-detail d-flex">
                 <div>
-                    <a href="/user/123">{props.username}</a>
-                    <span className="user-location">{props.userLocation}</span>
+                    <Link to={`/users/${props.userId}`}>{props.username}</Link>
+                    <span className="user-location">{props.userFullname}</span>
                     <div className="-flair">
                         <span className="reputation-score" title="reputation this week: 1,110 total reputation: 413,462" dir="ltr">{props.userReputation}</span>
                     </div>
