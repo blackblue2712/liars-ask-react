@@ -44,9 +44,6 @@ class ImagesGallery extends React.Component {
             this.setState( {images: [data.images]} );
         }
 
-
-
-        console.log(this.state.images)
     }
 
     render() {
@@ -74,13 +71,13 @@ class ImagesGallery extends React.Component {
                     <div className="mini-list">
                         {/* LIST ITEM */}
                         {
-                            images.map( arr => {
+                            images.map( (arr, i) => {
                                 return (
-                                    <div className="image-card">
+                                    <div className="grid-column" key={i}>
                                         {
-                                            arr.map( img => {
+                                            arr.map( (img, i) => {
                                                 return (
-                                                    <div className="image-card">
+                                                    <div className="image-card" key={i}>
                                                         <img className="w-220" src={img} alt="imgs-gallery"/>
                                                         <div className="image-url">
                                                             <span>{img}</span>

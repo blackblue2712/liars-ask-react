@@ -25,7 +25,8 @@ const ModalPopup = props => {
     const saveImg = () => {
         let userId = isAuthenticated().user._id;
         let token = isAuthenticated().token;
-
+        let btn = document.getElementById("wrap-btn-loading");
+        btn.classList.add("btn-loading");
         postUploadImage(formData, userId, token)
         .then( res => {
             if(res.imageURL) {
@@ -33,9 +34,11 @@ const ModalPopup = props => {
                 props.handleUploadedImage(res.imageURL);
                 setShowNotify(res.message)
             }
+            btn.classList.add("btn-loading");
         })
         .catch( err => {
             setShowNotify("Error occur");
+            btn.classList.add("btn-loading");
         })
     }
 
@@ -71,10 +74,14 @@ const ModalPopup = props => {
                         </div>
                     </div>
                     <div className="s-modal--footer">
-                        <button
-                            className="s-btn s-btn__outline s-btn__primary mt24 mr24"
-                            onClick={saveImg}
-                        >Save img</button>
+                        <div id="wrap-btn-loading">
+                            <button
+                                className="s-btn s-btn__outline s-btn__primary mt24 mr24"
+                                id="save-photo"
+                                onClick={saveImg}
+                            >Save img</button>
+                        </div>
+                        
                     </div>
                     
                     <button className="s-modal--close s-btn js-modal-close ps-absolute" onClick={closeDialog}>
