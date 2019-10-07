@@ -786,3 +786,10 @@ input[type=checkbox]:checked:after {
 .iconArrowUpLg.active {
   fill: #3093e2;
 }
+
+.w-240 {
+  width: 240px;
+}
+.w-220 {
+  width: 220px;
+}

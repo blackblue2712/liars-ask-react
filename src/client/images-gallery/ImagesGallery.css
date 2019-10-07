@@ -1,0 +1,46 @@
+.image-card {
+    max-width: 240px;
+    margin-bottom: 12px;
+    padding: 6px;
+    box-shadow: 0 4px 8px rgba(59,64,69,0.2) !important;
+    box-sizing: content-box;
+    float: left;
+    overflow: hidden;
+    
+}
+
+.image-url {
+    max-width: 240px;
+    word-break: break-all;
+    
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 350;
+    transition: .4s;
+}
+
+.grid-column {
+    max-width: 240px;
+    float: left;
+    margin-right: 12px;;
+}
+
+.image-card img {
+    transition: .4s
+}
+.image-card img:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.image-card img:hover + .image-url {
+    transform: translateY(20px)
+}
+/* .image-card .image-url:hover {
+    
+} */
+
+.choose-images {
+    
+    text-align: center;
+    
+}

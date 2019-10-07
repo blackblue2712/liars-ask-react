@@ -60,6 +60,9 @@ class LeftSidebar extends Component {
                                     <li id="blogs" className="canactive">
                                         <Link className="nav-links--link" to="/blogs">Blogs</Link>
                                     </li>
+                                    <li id="images-gallery" className="canactive">
+                                        <Link className="nav-links--link" to="/images-gallery">Images gallery</Link>
+                                    </li>
                                     <li>
                                         <ul>
                                             <li>

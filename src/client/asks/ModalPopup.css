@@ -21,7 +21,7 @@
     opacity: 1;
     box-shadow: 0 4px 12px rgba(36,39,41,0.2);
     
-    animation: showModal .6s linear;
+    animation: showModal .3s linear;
     transition: opacity 200ms cubic-bezier(.165, .84, .44, 1) 0s,z-index 0s 100ms,visibility 0s 100ms,transform 100ms cubic-bezier(.165, .84, .44, 1) 0s,transform 100ms cubic-bezier(.165, .84, .44, 1) 0s;
 
 }
@@ -62,3 +62,16 @@
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 }
+
+
+/* @keyframes showModal2 {
+    0% {
+        transform: scale(1 ,1);
+    }
+    1% {
+        transform: scale(0 ,0);
+    }
+    100% {
+        transform: scale(1 ,1);
+    }
+} */
