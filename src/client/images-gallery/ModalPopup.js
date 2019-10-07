@@ -30,6 +30,7 @@ const ModalPopup = props => {
         .then( res => {
             if(res.imageURL) {
                 closeDialog();
+                props.handleUploadedImage(res.imageURL);
                 setShowNotify(res.message)
             }
         })
@@ -75,7 +76,7 @@ const ModalPopup = props => {
                             onClick={saveImg}
                         >Save img</button>
                     </div>
-                    <img className="ps-absolute r12 b0" width="53" height="65" src="https://cdn.sstatic.net/Img/ask/robot-raising-hand.gif?v=369c8833cde4" alt="robo-raising" />
+                    
                     <button className="s-modal--close s-btn js-modal-close ps-absolute" onClick={closeDialog}>
                         <svg aria-hidden="true" className="svg-icon iconClearSm" width="14" height="14" viewBox="0 0 14 14"><path d="M12 3.41L10.59 2 7 5.59 3.41 2 2 3.41 5.59 7 2 10.59 3.41 12 7 8.41 10.59 12 12 10.59 8.41 7 12 3.41z"></path></svg>
                     </button>

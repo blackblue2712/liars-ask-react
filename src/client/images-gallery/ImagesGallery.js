@@ -1,21 +1,56 @@
 import React from 'react';
 import "./ImagesGallery.css";
 import ModalPopup from './ModalPopup';
+import  { getUploadImages } from '../../controllers/galleryController';
+import { isAuthenticated } from '../../controllers/userController';
 
 class ImagesGallery extends React.Component {
     constructor() {
         super();
         this.state = {
-            questions: []
+            images: []
         }
     }
 
-    componentDidMount() {
+    handleUploadedImage = (url) => {
+        this.setState( {images: [[url,...this.arrImgs1], this.arrImgs2, this.arrImgs3, this.arrImgs4]} )
+    }
+
+    async componentDidMount() {
+        let usreId = isAuthenticated().user._id;
+        let data = await getUploadImages(usreId);
         
+        this.arrImgs1 = [];
+        this.arrImgs2 = [];
+        this.arrImgs3 = [];
+        this.arrImgs4 = [];
+
+        // try 4 for loop
+        if(data.images && data.images.length > 4) {
+            for(let i = 0; i < data.images.length; i+=4) {
+                this.arrImgs1 = [...this.arrImgs1, data.images[i]];
+                if(data.images[i+1] !== undefined) {
+                    this.arrImgs2 = [...this.arrImgs2, data.images[i+1]];
+                    if(data.images[i+2] !== undefined) {
+                        this.arrImgs3 = [...this.arrImgs3, data.images[i+2]];
+                        if(data.images[i+3] !== undefined) {
+                            this.arrImgs4 = [...this.arrImgs4, data.images[i+3]];
+                        }
+                    }
+                }
+            }
+            this.setState( {images: [this.arrImgs1, this.arrImgs2, this.arrImgs3, this.arrImgs4]} );
+        } else if(data.images && data.images.length <= 4) {
+            this.setState( {images: [data.images]} );
+        }
+
+
+
+        console.log(this.state.images)
     }
 
     render() {
-
+        let { images } = this.state;
         return (
             <div id="content">
                 <div className="main-head">
@@ -35,89 +70,30 @@ class ImagesGallery extends React.Component {
 
                 {/* LIST WRAPPER  */}
                 <div id="images-gallery">
-                    <ModalPopup />
+                    <ModalPopup handleUploadedImage={this.handleUploadedImage} />
                     <div className="mini-list">
                         {/* LIST ITEM */}
-                        <div className="grid-column">
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1569931985/vs3ub8m4ixd6gbwadkgb.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1570283075/afwlhawsozvafzy8p0ru.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570283075/afwlhawsozvafzy8p0ru.jpg</span>
-                                </div>
-                            </div>
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1569931985/vs3ub8m4ixd6gbwadkgb.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="grid-column">
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1569931985/vs3ub8m4ixd6gbwadkgb.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="grid-column">
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1570283075/afwlhawsozvafzy8p0ru.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570283075/afwlhawsozvafzy8p0ru.jpg</span>
-                                </div>
-                            </div>
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="grid-column">
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                            <div className="image-card">
-                                <img className="w-220" src="https://res.cloudinary.com/dged6fqkf/image/upload/v1569931985/vs3ub8m4ixd6gbwadkgb.jpg" alt="img1"/>
-                                <div className="image-url">
-                                    <span>https://res.cloudinary.com/dged6fqkf/image/upload/v1570282919/wep4gepazhg9msjrh3yg.jpg</span>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            images.map( arr => {
+                                return (
+                                    <div className="image-card">
+                                        {
+                                            arr.map( img => {
+                                                return (
+                                                    <div className="image-card">
+                                                        <img className="w-220" src={img} alt="imgs-gallery"/>
+                                                        <div className="image-url">
+                                                            <span>{img}</span>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                )
+                            })
+                        }
+
                     </div>
                 </div>
 

@@ -44,3 +44,9 @@
     text-align: center;
     
 }
+
+@media screen and (max-width: 1292px) {
+    .image-card:nth-child(3) {
+        clear: left;
+    }
+  }
