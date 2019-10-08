@@ -49,6 +49,24 @@ export const getSingleQuestion = (id) => {
     });
 }
 
+export const getYourQuestions = (userId) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/asks/your-questions?userId=${String(userId)}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        },
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return {message: "ERROR GET YOUR QUESTIONS " + err}
+    });
+}
+
+
+
 export const postAnswer = (answerInfo, token) => {
     return fetch(`${process.env.REACT_APP_API_URL}/asks/answer/new`, {
         method: "POST",

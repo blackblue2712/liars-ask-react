@@ -12,8 +12,8 @@ const ListWrapper = props => {
         <div id="list-wrapper">
             <div className="mini-list">
                 {
-                    questions && questions.map( (blog, i) => {
-                        return <ListItem key={i} title={blog.title} body={blog.body} tags={blog.anonymousTags} id={blog._id} /> 
+                    questions && questions.map( (ques, i) => {
+                        return <ListItem key={i} title={ques.title} body={ques.body} tags={ques.anonymousTags} id={ques._id} answers={ques.answers.length} /> 
                     })
                 }
             </div>

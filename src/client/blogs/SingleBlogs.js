@@ -16,7 +16,7 @@ const SingleBlog = (props) => {
 
     }, [blog._id])
 
-    console.log(blog)
+    // console.log(blog)
     return (
         <div id="content">
             <div id="mainbar">

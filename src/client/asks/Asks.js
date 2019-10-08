@@ -22,27 +22,39 @@ class Asks extends React.Component {
     }
 
     handleAsk = () => {
-        let token = isAuthenticated().token;
-        let owner = isAuthenticated().user._id;
-        let editor = document.querySelector("textarea.mde-text ");
-        let body = "";
-        if(editor) {
-            body = editor.value;
-            let title = document.getElementById("title").value;
-            // tags
-            let tagsname = document.getElementById("tagsname").value;
-            let tagsnameArray = tagsname.split(" ")
-            tagsnameArray = tagsnameArray.filter( t => t !== "");
-
-            if(title) {
-                postAsk({title, body, tagsnameArray, owner}, token)
-                .then( res => {
-                    console.log(res);
-                    this.setState( {message: res.message} );
-                })
+        let btnLoading = document.getElementById("wrap-btn-loading");
+        try {
+            btnLoading.classList.add("btn-loading");
+            let token = isAuthenticated().token;
+            let owner = isAuthenticated().user._id;
+            let editor = document.querySelector("textarea.mde-text ");
+            let body = "";
+            
+            if(editor) {
+                body = editor.value;
+                let title = document.getElementById("title").value;
+                // tags
+                let tagsname = document.getElementById("tagsname").value;
+                let tagsnameArray = tagsname.split(" ")
+                tagsnameArray = tagsnameArray.filter( t => t !== "");
+    
+                if(title) {
+                    postAsk({title, body, tagsnameArray, owner}, token)
+                    .then( res => {
+                        this.setState( {message: res.message} );
+                    })
+                    .catch( err => {
+                        this.setState( {message: "Error post"} );
+                    })
+                }
+            } else {
+                alert("Please turn to write mode");
             }
-        } else {
-            alert("Please turn to write mode")
+            btnLoading.classList.remove("btn-loading");
+        } catch (err) {
+            console.log(err);
+            btnLoading.classList.remove("btn-loading");
+            this.setState( {message: "Error occur (console)"} );
         }
         
     }
@@ -160,11 +172,12 @@ class Asks extends React.Component {
                                 </div>
                             </div>
                         </div>
-    
-                        <button
-                            className="s-btn s-btn__outline s-btn__primary mt24"
-                            onClick={this.handleAsk}
-                        >Post this</button>
+                        <div id="wrap-btn-loading" className="ps-relative d-inline-block mt24">
+                            <button
+                                className="s-btn s-btn__outline s-btn__primary"
+                                onClick={this.handleAsk}
+                            >Post this</button>
+                        </div>
                     </div>
                 </div>
                     

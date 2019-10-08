@@ -7,7 +7,7 @@ import Copy from '../../images/copy.png';
 import Copy1 from '../../images/copy1.png';
 import Close from '../../images/close.png';
 import Notify from '../components/Notify';
-
+import ImgCloud from '../../images/cloud1.png';
 import { putDeleteUploadedImage } from '../../controllers/galleryController';
 
 class ImagesGallery extends React.Component {
@@ -52,7 +52,8 @@ class ImagesGallery extends React.Component {
             }
             this.setState( {images: [this.arrImgs1, this.arrImgs2, this.arrImgs3, this.arrImgs4]} );
         } else if(data.images && data.images.length <= 4) {
-            this.setState( {images: [data.images]} );
+            this.arrImgs1 = data.images
+            this.setState( {images: [this.arrImgs1]} );
         }
 
     }
@@ -104,9 +105,11 @@ class ImagesGallery extends React.Component {
                     <div className="grid d-flex align-items-centers mb16">
                         <h1 className="fs-headline1 mr-auto">Images Gallery</h1>
                         <button
-                            className="s-btn s-btn__outline s-btn__primary s-btn__primary"
+                            className="s-btn s-btn__outline s-btn__primary s-btn__primary d-flex align-items-center"
                             onClick={() => document.getElementsByClassName("js-welcom-modal")[0].style.display = "block"}
-                        >+ Upload photo</button>
+                        >
+                            <img src={ImgCloud} width="18" alt="upload" />&nbsp;Upload photo
+                        </button>
                     </div>
                     <p className="mb24 f13 fw350">
                         <hr/>
@@ -131,7 +134,7 @@ class ImagesGallery extends React.Component {
                                                             className="s-btn s-btn__outline s-btn__hovero bd-none p-absolute btn-copy d-none"
                                                             onClick={() => this.handleCopyText(img)}
                                                         >
-                                                            <img src={Copy1} width={45} alt="img-copy" id={img}/>
+                                                            <img src={Copy1} width={30} alt="img-copy" id={img}/>
                                                         </button>
                                                         <button
                                                             className="s-btn s-btn__outline s-btn__hovero bd-none p-absolute btn-close d-none"

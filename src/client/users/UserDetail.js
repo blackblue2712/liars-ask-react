@@ -1,38 +1,41 @@
 import React from 'react';
 import UserDetailBasic from './UserDetailBasic';
 import UserDetailStory from './UserDetailStory';
-import { getLoggedUser } from '../../controllers/userController';
+import { getLoggedUser, isAuthenticated } from '../../controllers/userController';
+import { getYourQuestions } from '../../controllers/askController';
 import Notify from '../components/Notify';
+import { Link } from 'react-router-dom';
 
 
 class UserDetail extends React.Component {
     constructor() {
         super();
         this.state = {
-            userPayload: {} 
+            userPayload: {},
+            questions: []
         }
     }
 
-    componentDidMount() {
-        const token = this.props.userPayload.token;
-        const _id = this.props.match.params.userId;
-
-        getLoggedUser(_id, token)
-        .then( res => {
-            if(!res.email) {
-                // Route to 404
-                alert("404 user")
-            } else {
-                this.setState( (prevState, props) => {
-                    return { userPayload: res }
-                })
-            }
-        })
+    async componentDidMount() {
+        try {
+            const token = this.props.userPayload.token;
+            const _id = this.props.match.params.userId;
+            let userId = isAuthenticated().user._id;
+    
+            // get info user logged
+            let userInfo = await getLoggedUser(_id, token);
+            // get your questions
+            let yourQuestions = await getYourQuestions(userId);
+            this.setState( {userPayload: userInfo, questions: yourQuestions} );
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     render() {
         const userPayloadInfo = this.state.userPayload;
-        console.log(userPayloadInfo)
+        const quesitons = this.state.questions;
+        console.log(quesitons);
         return (
             <div id="content">
                 <Notify />
@@ -41,7 +44,7 @@ class UserDetail extends React.Component {
                     <div className="subheader d-flex align-items-center w-100 mt24">
                         <div id="tabs" className="d-flex align-items-center w-100">
                             <a href="#u" >Activity</a>
-                            <a href="#u" >Developer Story</a>
+                            <a href="#u" >Your questions</a>
                             <a href="#u" className="youarehere">Edit profile and setting</a>
                             <a href="#u" >Profile</a>
                         </div>
@@ -144,6 +147,24 @@ class UserDetail extends React.Component {
                                     </label>
                                     &nbsp; <p className="ml-auto">DARK MODE</p>
                                     </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+
+                        <div className="profile-user--about mb16 mt36 bs-md p20">
+                            <h3 className="mb24">YOUR QUESTIONS</h3>
+                            <ul>
+                                <li className="mb12">
+                                    {
+                                        quesitons.map( (q, i) => {
+                                            return (
+                                                <p>
+                                                    <Link to={`/questions/ask/${q._id}`}>{q.title}</Link>
+                                                </p>
+                                            )
+                                        })
+                                    }
                                 </li>
                                 
                             </ul>

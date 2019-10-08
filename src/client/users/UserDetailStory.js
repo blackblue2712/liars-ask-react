@@ -12,16 +12,28 @@ const UserDetailStory = (props) => {
     const [showNotify, setShowNotify] = useState("");
 
     const handleChangeStory = () => {
+        let btnLoading = document.getElementById("wrap-btn-loading");
         let editor = document.querySelector("textarea.mde-text ");
-
-        if(!editor) {
-            alert("Please out preview mode");
-        } else {
-            let bioUpdate = editor.value;
-            putUpdateStory({bioUpdate, fquotes, _id})
-            .then( res => {
-                setShowNotify(res.message);
-            })
+        btnLoading.classList.add("btn-loading");
+        try {
+            if(!editor) {
+                alert("Please out preview mode");
+            } else {
+                let bioUpdate = editor.value;
+                putUpdateStory({bioUpdate, fquotes, _id})
+                .then( res => {
+                    setShowNotify(res.message);
+                    btnLoading.classList.remove("btn-loading");
+                })
+                .catch(err => {
+                    setShowNotify("Error occur in promise");
+                    btnLoading.classList.remove("btn-loading");
+                })
+            }
+        } catch (err) {
+            console.log(err);
+            setShowNotify("Error occur (console)");
+            btnLoading.classList.remove("btn-loading");
         }
     }
 
@@ -63,11 +75,13 @@ const UserDetailStory = (props) => {
                 <Mde />
             </div>
             <div className="d-flex w-100">
-                <button
-                    type="button" className="s-btn btn-sm btn-outlined colorGreen"
-                    onClick={handleChangeStory}
-                >Save
-                </button>
+                <div id="wrap-btn-loading2" className="ps-relative">
+                    <button
+                        type="button" className="s-btn btn-sm btn-outlined colorGreen"
+                        onClick={handleChangeStory}
+                    >Save
+                    </button>
+                </div>
             </div>
         </div>
     )

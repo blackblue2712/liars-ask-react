@@ -20,7 +20,6 @@ class Blogs extends React.Component {
 
     render() {
         const { blogs } = this.state;
-        console.log(blogs)
         return (
             <div id="content">
                 <div className="main-head">

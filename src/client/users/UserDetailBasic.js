@@ -17,17 +17,28 @@ const UserDetailBasic = (props) => {
     const [showNotify, setShowNotify] = useState("");
 
     const handleUpdateInfo = () => {
-        userData.set("id", _id);
-        userData.set("fullname", ffullname);
-        userData.set("currentPassword", currentPassword);
-        userData.set("photo", photo);
-        putUpdateInfo(userData, isAuthenticated().token)
-        .then( res => {
-            setShowNotify(res.message);
-        })
-        .catch( err => {
-            setShowNotify("Error occur");
-        })
+        let bntLoading = document.getElementById("wrap-btn-loading");
+        bntLoading.classList.add("btn-loading");
+        try {
+            userData.set("id", _id);
+            userData.set("fullname", ffullname);
+            userData.set("currentPassword", currentPassword);
+            userData.set("photo", photo);
+            putUpdateInfo(userData, isAuthenticated().token)
+            .then( res => {
+                setShowNotify(res.message);
+                bntLoading.classList.remove("btn-loading");
+            })
+            .catch( err => {
+                setShowNotify("Error occur");
+                bntLoading.classList.remove("btn-loading");
+            })
+            
+        } catch (err) {
+            console.log(err);
+            setShowNotify("Error occur (console)");
+            bntLoading.classList.remove("btn-loading");
+        }
     }
 
     useEffect( () => {
@@ -102,10 +113,12 @@ const UserDetailBasic = (props) => {
             <div className="d-flex w-100">
                 <button type="button" className="s-btn btn-sm btn-outlined colorRed">Delete Account</button>
                 <button type="button" className="s-btn btn-sm ml-auto btn-cancel">Cancel</button>
-                <button
-                    type="button" className="s-btn btn-sm btn-outlined colorGreen"
-                    onClick={handleUpdateInfo}
-                >Save</button>
+                <div id="wrap-btn-loading" className="ps-relative">
+                    <button
+                        type="button" className="s-btn btn-sm btn-outlined colorGreen"
+                        onClick={handleUpdateInfo}
+                    >Save</button>
+                </div>
             </div>
         </div>
     )

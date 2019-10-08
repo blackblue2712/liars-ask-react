@@ -836,3 +836,7 @@ input[type=checkbox]:checked:after {
   right: 0px;
   z-index: 999;
 }
+
+.votecell.post-layout--right {
+  width: calc(100% - 24px - 48px);
+}

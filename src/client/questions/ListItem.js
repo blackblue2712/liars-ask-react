@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tags from '../components/Tags';
-import ReactMarkdown from 'react-markdown';
+
 import { Link } from 'react-router-dom';
 
 class ListItem extends Component {
@@ -10,7 +10,7 @@ class ListItem extends Component {
     }
 
     render() {
-        const { title, body, tags, id } = this.props;
+        const { title, body, tags, id, answers } = this.props;
         return (
             <div className={`item-list narrow d-flex`}>
                 <div className="cp d-flex">
@@ -22,7 +22,7 @@ class ListItem extends Component {
                     </div>
                     <div className="status">
                         <div className="mini-counts">
-                            <span title="0 votes">0</span>
+                            <span title="0 votes">{answers}</span>
                         </div>
                         <div>answers</div>
                     </div>
@@ -38,9 +38,7 @@ class ListItem extends Component {
                         <Link to={`/questions/ask/${id}`} className="hyper-link">{title}</Link>
                     </h3>
                     <div className="list-body--text mb4" style={{}}>
-                        {/* <ReactMarkdown
-                            source={body.length > 100 ? body.slice(0, 100) + "..." : body}
-                        /> */}
+                        
                         {body.length > 200 ? body.slice(0, 200) + "..." : body}
                     </div>
                     {
