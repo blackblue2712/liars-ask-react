@@ -42,7 +42,7 @@
     transform: scale(1.2, 1.2);
     opacity: .8;
 }
-.image-card:hover .btn-copy {
+.image-card:hover .btn-copy, .image-card:hover .btn-close {
     display: block !important;
 }
 .image-card:hover .image-url {

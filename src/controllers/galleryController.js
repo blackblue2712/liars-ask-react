@@ -31,3 +31,21 @@ export const getUploadImages = (userId) => {
         return { message: "ERROR GET UPLOAD IMAGES" };
     });
 }
+
+export const putDeleteUploadedImage = (userId, imgInfo, token) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/images-gallery/delete/${userId}`, {
+        method: "PUT",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": 'Application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(imgInfo)
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return { message: "ERROR PUT DELETE UPLOADED IMAGE" };
+    });
+}

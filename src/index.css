@@ -829,3 +829,10 @@ input[type=checkbox]:checked:after {
   z-index: 999;
   /* display: none; */
 }
+
+.btn-close {
+  position: absolute !important;
+  top: 0px;
+  right: 0px;
+  z-index: 999;
+}

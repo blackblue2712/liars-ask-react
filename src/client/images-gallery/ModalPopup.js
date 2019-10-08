@@ -34,11 +34,11 @@ const ModalPopup = props => {
                 props.handleUploadedImage(res.imageURL);
                 setShowNotify(res.message)
             }
-            btn.classList.add("btn-loading");
+            btn.classList.remove("btn-loading");
         })
         .catch( err => {
             setShowNotify("Error occur");
-            btn.classList.add("btn-loading");
+            btn.classList.remove("btn-loading");
         })
     }
 

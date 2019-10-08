@@ -5,13 +5,22 @@ import  { getUploadImages } from '../../controllers/galleryController';
 import { isAuthenticated } from '../../controllers/userController';
 import Copy from '../../images/copy.png';
 import Copy1 from '../../images/copy1.png';
+import Close from '../../images/close.png';
+import Notify from '../components/Notify';
+
+import { putDeleteUploadedImage } from '../../controllers/galleryController';
 
 class ImagesGallery extends React.Component {
     constructor() {
         super();
         this.state = {
-            images: []
+            images: [],
+            message: ""
         }
+    }
+
+    clearMess = () => {
+        this.setState( {message: ""} );
     }
 
     handleUploadedImage = (url) => {
@@ -59,13 +68,39 @@ class ImagesGallery extends React.Component {
             });
     }
 
+    handleDeleteUploadedImage = (img, i) => {
+        let flag = window.confirm("Are you sure to delete this photo?");
+        if(flag) {
+            try {
+                let userId = isAuthenticated().user._id;
+                let token = isAuthenticated().token;
+                let photoName = img.split("/")[img.split("/").length - 1].split(".")[0];
+                
+                let wrap = document.querySelector(".card-count-" + i);
+                wrap.classList.add("btn-loading");
+                putDeleteUploadedImage(userId, {img, photoName}, token)
+                .then( res => {
+                    if(res.message === "Photo deleted") {
+                        wrap.remove();
+                    }
+                    this.setState( {message: res.message} );
+                })
+            } catch(err) {
+                console.log(err);
+                let wrap = document.querySelector(".card-count-" + i);
+                wrap.classList.remove("btn-loading");
+                this.setState( {message: "Error occur (console)"} );
+            }
+        }
+    }
+
     render() {
-        let { images } = this.state;
+        let { images, message } = this.state;
         return (
             <div id="content">
                 <div className="main-head">
-                    {/* <Notify />  
-                    {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />} */}
+                    <Notify />  
+                    {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />}
                     <div className="grid d-flex align-items-centers mb16">
                         <h1 className="fs-headline1 mr-auto">Images Gallery</h1>
                         <button
@@ -89,13 +124,20 @@ class ImagesGallery extends React.Component {
                                     <div className="grid-column" key={i}>
                                         {
                                             arr.map( (img, i) => {
+                                                let r = Math.random().toString(36).substring(7);
                                                 return (
-                                                    <div className="image-card ps-relative" key={i}>
+                                                    <div className={`image-card ps-relative card-count-${r}`} key={i}>
                                                         <button
                                                             className="s-btn s-btn__outline s-btn__hovero bd-none p-absolute btn-copy d-none"
                                                             onClick={() => this.handleCopyText(img)}
                                                         >
                                                             <img src={Copy1} width={45} alt="img-copy" id={img}/>
+                                                        </button>
+                                                        <button
+                                                            className="s-btn s-btn__outline s-btn__hovero bd-none p-absolute btn-close d-none"
+                                                            onClick={() => this.handleDeleteUploadedImage(img, r)}
+                                                        >
+                                                            <img src={Close} width={30} alt="img-delete" title="delete this photo"/>
                                                         </button>
                                                         <img width="220" className="w-220 single-image" src={img} alt="imgs-gallery" loading="lazy"/>
                                                         <div className="image-url">
