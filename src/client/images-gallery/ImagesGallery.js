@@ -3,6 +3,8 @@ import "./ImagesGallery.css";
 import ModalPopup from './ModalPopup';
 import  { getUploadImages } from '../../controllers/galleryController';
 import { isAuthenticated } from '../../controllers/userController';
+import Copy from '../../images/copy.png';
+import Copy1 from '../../images/copy1.png';
 
 class ImagesGallery extends React.Component {
     constructor() {
@@ -46,6 +48,17 @@ class ImagesGallery extends React.Component {
 
     }
 
+    handleCopyText = (text) => {
+        navigator
+            .clipboard
+            .writeText(text)
+            .then(function() {
+                document.getElementById(text).src = Copy;
+            }, function(err) {
+                
+            });
+    }
+
     render() {
         let { images } = this.state;
         return (
@@ -77,8 +90,14 @@ class ImagesGallery extends React.Component {
                                         {
                                             arr.map( (img, i) => {
                                                 return (
-                                                    <div className="image-card" key={i}>
-                                                        <img className="w-220" src={img} alt="imgs-gallery"/>
+                                                    <div className="image-card ps-relative" key={i}>
+                                                        <button
+                                                            className="s-btn s-btn__outline s-btn__hovero bd-none p-absolute btn-copy d-none"
+                                                            onClick={() => this.handleCopyText(img)}
+                                                        >
+                                                            <img src={Copy1} width={45} alt="img-copy" id={img}/>
+                                                        </button>
+                                                        <img width="220" className="w-220 single-image" src={img} alt="imgs-gallery" loading="lazy"/>
                                                         <div className="image-url">
                                                             <span>{img}</span>
                                                         </div>

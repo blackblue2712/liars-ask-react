@@ -430,9 +430,9 @@ code {
   .subheader {
     width: 500px !important;
   }
-  #footer {
+  /* #footer {
     width: 500px;
-  }
+  } */
   #sidebar {
     width: 500px !important;
   }
@@ -819,4 +819,13 @@ input[type=checkbox]:checked:after {
   z-index: 99999;
   background-color: #2591da;
   opacity: .6;
+}
+
+.btn-copy {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  /* display: none; */
 }

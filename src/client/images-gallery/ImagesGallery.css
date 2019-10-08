@@ -25,11 +25,25 @@
     margin-right: 12px;;
 }
 
-.image-card img, .image-card .image-url{
+.image-card img {
+    -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+}
+
+.image-card img.single-image, .image-card .image-url{
     transition: .4s
 }
-.image-card:hover img {
+.image-card:hover img.single-image {
     transform: scale(1.2, 1.2);
+    opacity: .8;
+}
+.image-card:hover .btn-copy {
+    display: block !important;
 }
 .image-card:hover .image-url {
     font-weight: 400;
@@ -39,7 +53,6 @@
     opacity: .5;
     box-sizing: border-box;
     padding: 4px;
-    
 }
 .choose-images {
     
@@ -60,7 +73,7 @@
     .image-card {
         max-width: 320px;
     }
-    .image-card img {
+    .image-card img.single-image {
         width: 320px;
     }
     .image-url {
