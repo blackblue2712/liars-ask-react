@@ -14,17 +14,9 @@ class MainRouter extends React.Component {
                 </>
             </Switch>
         } else if (isAdminPage === "admin"){
-            return <Switch>
-                <>
-                    <RouteAdmin />
-                </>
-            </Switch>
+            return <RouteAdmin />
         } else {
-            return <Switch>
-                <>
-                    <RouteClient />
-                </>
-            </Switch>
+            return <RouteClient />
         }
     }
 }

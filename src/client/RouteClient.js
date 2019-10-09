@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Route, Switch } from "react-router-dom";
 import './style.css';
 import Header from './components/Header';
 import LeftSidebar from './components/LeftSidebar';
@@ -20,6 +20,7 @@ import EditBlog from './blogs/EditBlog';
 import SinglePost from './questions/SingleQuestion'
 import ImagesGallery from './images-gallery/ImagesGallery';
 import PrivateRoute from '../PirvateRoute';
+import NotFound from './components/NotFound';
 
 const RouteClient = props => {
     return <>
@@ -28,23 +29,27 @@ const RouteClient = props => {
             style={{marginTop: "50px"}}
         >
             <LeftSidebar />
-            <PrivateRoute exact path="/" component={Questions} />
-            <PrivateRoute exact path="/tags" component={TagsComponent} />
-            <PrivateRoute exact path="/users" component={UsersComponent} />
-            <PrivateRoute exact path="/users/:userId" component={UserDetail} />
-            <PrivateRoute exact path="/questions" component={Questions} />
-            <PrivateRoute exact path="/questions/ask" component={Asks} />
-            <PrivateRoute exact path="/questions/ask/example/howtowrite" component={Example} />
-            <PrivateRoute exact path="/questions/ask/:quesId" component={SinglePost} />
+            <Switch>
+                <PrivateRoute exact path="/" component={Questions} />
+                <PrivateRoute exact path="/tags" component={TagsComponent} />
+                <PrivateRoute exact path="/users" component={UsersComponent} />
+                <PrivateRoute exact path="/users/:userId" component={UserDetail} />
+                <PrivateRoute exact path="/questions" component={Questions} />
+                <PrivateRoute exact path="/questions/ask" component={Asks} />
+                <PrivateRoute exact path="/questions/ask/example/howtowrite" component={Example} />
+                <PrivateRoute exact path="/questions/ask/:quesId" component={SinglePost} />
 
-            <PrivateRoute exact path="/announcements" component={Announcement} />
-            <PrivateRoute exact path="/announcements/:acmId" component={SingleAcm} />
-            <PrivateRoute exact path="/blogs" component={Blogs} />
-            <PrivateRoute exact path="/blogs/write/new" component={WriteBlog} />
-            <PrivateRoute exact path="/blogs/:blogId" component={SingleBlog} />
-            <PrivateRoute exact path="/blogs/edit/:blogId" component={EditBlog} />
-            <PrivateRoute exact path="/images-gallery" component={ImagesGallery} />
+                <PrivateRoute exact path="/announcements" component={Announcement} />
+                <PrivateRoute exact path="/announcements/:acmId" component={SingleAcm} />
+                <PrivateRoute exact path="/blogs" component={Blogs} />
+                <PrivateRoute exact path="/blogs/write/new" component={WriteBlog} />
+                <PrivateRoute exact path="/blogs/:blogId" component={SingleBlog} />
+                <PrivateRoute exact path="/blogs/edit/:blogId" component={EditBlog} />
+                <PrivateRoute exact path="/images-gallery" component={ImagesGallery} />
 
+                <PrivateRoute component={NotFound} to="/404"/>
+                <PrivateRoute component={NotFound} />
+            </Switch>
             {/* <Route component={Footer} /> */}
         </div>
         <Footer />

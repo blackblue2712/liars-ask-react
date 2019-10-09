@@ -20,6 +20,8 @@ class QuestionsComponent extends Component {
         const data = await getSingleQuestion(this.props.match.params.quesId);
         if(!data.message) {
             this.setState( {ques: data, answersArr: data.answers} );
+        } else {
+            this.props.history.push("/404");
         }
     }
 

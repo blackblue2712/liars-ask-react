@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Tags from '../components/Tags';
 import Important from '../../images/important.png';
-import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import CloseAcm from '../../images/close-acm.png';
 import { isAuthenticated } from '../../controllers/userController';
@@ -57,9 +56,9 @@ class ListItem extends Component {
                         <Link to={`/admin/announcements/edit/${id}`} className="hyper-link">{title}</Link>
                     </h3>
                     <div className="list-body--text mb4">
-                        <ReactMarkdown
-                            source={body.length > 200 ? body.slice(0, 200) + "..." : body}
-                        />
+                        {
+                            body.length > 200 ? body.slice(0, 200) + "..." : body
+                        }
                     </div>
                     {
                         tags && tags.map( (t, i) => {

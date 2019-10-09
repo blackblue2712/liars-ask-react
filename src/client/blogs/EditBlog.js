@@ -77,20 +77,26 @@ class EditAcm extends React.Component {
 
     componentDidMount() {
         // fetching data
-        getSingleBlog(this.props.match.params.blogId)
-        .then( res => {
-            if(res) {
-                this.setState( { title: res.title, body: res.body, id: res._id, tagDom: res.anonymousTags.join(" ")} );
-                document.getElementById("tagsname").value = this.state.tagDom;
-            }
-            
-        })
-        // 
-        let editor = document.querySelector("textarea.mde-text ");
-        editor.setAttribute("id", "announ-content")
-        editor.setAttribute("name", "announ-content")
-
-        document.querySelector("#tageditor-replacing-tagnames--input").addEventListener("keyup", this.handleChangeTag, false);
+        try {
+            getSingleBlog(this.props.match.params.blogId)
+            .then( res => {
+                if(res.message) {
+                    this.props.history.push("/404");
+                } else {
+                    this.setState( { title: res.title, body: res.body, id: res._id, tagDom: res.anonymousTags.join(" ")} );
+                    document.getElementById("tagsname").value = this.state.tagDom;
+                }
+                
+            })
+            // 
+            let editor = document.querySelector("textarea.mde-text ");
+            editor.setAttribute("id", "announ-content")
+            editor.setAttribute("name", "announ-content")
+    
+            document.querySelector("#tageditor-replacing-tagnames--input").addEventListener("keyup", this.handleChangeTag, false);
+        } catch (err) {
+            alert("Blog not found")
+        }
     }
     componentDidUpdate() {
         let tagsIncludedSize = document.querySelector(".tags-included").offsetWidth;
@@ -102,7 +108,6 @@ class EditAcm extends React.Component {
 
     render() {
         const { tagDom, message, title, body } = this.state;
-        console.log(tagDom)
         return (
             <div id="content">
                 <div id="mainbar" style={{width: "100%"}}>

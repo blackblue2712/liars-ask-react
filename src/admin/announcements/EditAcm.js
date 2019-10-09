@@ -78,10 +78,14 @@ class EditAcm extends React.Component {
         // fetching data
         getSingleAnnouncement(this.props.match.params.acmId)
         .then( res => {
-            this.setState( {acm: res, title: res.title, body: res.body, id: res._id, isImportant: res.isImportant, tagDom: res.anonymousTags.join(" ")} );
-            document.getElementById("tagsname").value = this.state.tagDom;
-            if(res.isImportant) {
-                document.getElementById("is-important").checked = true;
+            if(!res.message) {
+                this.setState( {acm: res, title: res.title, body: res.body, id: res._id, isImportant: res.isImportant, tagDom: res.anonymousTags.join(" ")} );
+                document.getElementById("tagsname").value = this.state.tagDom;
+                if(res.isImportant) {
+                    document.getElementById("is-important").checked = true;
+                }
+            } else {
+                this.props.history.push("/404");
             }
         })
         // 

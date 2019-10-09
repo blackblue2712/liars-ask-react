@@ -13,6 +13,8 @@ import AddAnnouncement from './announcements/AddAnnouncement';
 import EditAcm from './announcements/EditAcm';
 import Blogs from './blogs/Blogs';
 import PrivateRouteAdmin from './PrivateRouteAdmin';
+import { Switch } from 'react-router-dom';
+import NotFound from '../client/components/NotFound';
 
 const RouteAdmin = props => {
     return <>
@@ -20,17 +22,19 @@ const RouteAdmin = props => {
             <LeftSidenar />
             <Header />
             <div id="content">
-                <PrivateRouteAdmin exact path="/admin" component={Content}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/tags" component={Tags}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/tags/new" component={AddTag}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/users" component={UsersComponent}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/users/new" component={AddUser}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/announcements" component={Announcements}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/announcements/new" component={AddAnnouncement}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/announcements/edit/:acmId" component={EditAcm}></PrivateRouteAdmin>
+                <Switch>
+                    <PrivateRouteAdmin exact path="/admin" component={Content}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin exact path="/admin/tags" component={Tags}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin exact path="/admin/tags/new" component={AddTag}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin exact path="/admin/users" component={UsersComponent}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin exact path="/admin/users/new" component={AddUser}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin exact path="/admin/announcements" component={Announcements}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin exact path="/admin/announcements/new" component={AddAnnouncement}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin exact path="/admin/announcements/edit/:acmId" component={EditAcm}></PrivateRouteAdmin>
 
-                <PrivateRouteAdmin exact path="/admin/blogs" component={Blogs}></PrivateRouteAdmin>
-                
+                    <PrivateRouteAdmin exact path="/admin/blogs" component={Blogs}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin component={NotFound} />
+                </Switch>
             </div>
         </div>
 
