@@ -3,6 +3,7 @@ import { getSingleBlog } from '../../controllers/blogController';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../editor/CodeBlock';
 import Tags from '../components/Tags'
+import SidebarWidget from '../components/SidebarWidget';
 
 const SingleBlog = (props) => {
     let [blog, setBlog] = useState({});
@@ -27,7 +28,7 @@ const SingleBlog = (props) => {
                     <p className="mb24 f13 fw350"></p>
                 </div>
 
-                <div className="bg-white bar-sm bs-md p16 md-content">
+                <div className="bg-white bar-sm bs-md p16 md-content w-100" style={{float: "left"}}>
                     
                     <ReactMarkdown source={blog.body} renderers={{ code: CodeBlock }} />
                     
@@ -37,21 +38,29 @@ const SingleBlog = (props) => {
                         })
                     }
                 </div>
-                
-                <div className="clear-fix"></div>
-                <div className="nearfooter" style={{padding: "40px 0px"}}>
-                    <p>
-                        Looking for more? Browse 
-                        <a style={{ color: "#3af" }} href="#a"> the complete list of questions</a>
-                        , or
-                        <a style={{ color: "#3af" }} href="#a"> popular tags </a>
-                        .Help us answer 
-                        <a style={{ color: "#3af" }} href="#a"> unanswered questions</a>
-                        .
-                    </p>
+
+            </div>
+            <div id="sidebar">
+                <div className="s-sidebarwidget s-sidebarwidget__yellow mb16">
+                    <div className="s-sidebarwidget--header d-flex align-items-center">
+                        <span className="s-sidebarwidget--title">Blog</span>
+                    </div>
+                    <SidebarWidget />
                 </div>
             </div>
             
+            <div className="clear-fix"></div>
+            <div className="nearfooter" style={{padding: "40px 0px"}}>
+                <p>
+                    Looking for more? Browse 
+                    <a style={{ color: "#3af" }} href="#a"> the complete list of questions</a>
+                    , or
+                    <a style={{ color: "#3af" }} href="#a"> popular tags </a>
+                    .Help us answer 
+                    <a style={{ color: "#3af" }} href="#a"> unanswered questions</a>
+                    .
+                </p>
+            </div>
             
             <div className="clear-fix"></div>
         </div>

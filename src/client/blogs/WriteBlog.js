@@ -18,27 +18,32 @@ class WriteBlog extends React.Component {
     }
 
     handleWriteBlog = () => {
-        let token = isAuthenticated().token;
-        let owner = isAuthenticated().user._id;
-        let editor = document.querySelector("textarea.mde-text ");
-        let body = "";
-        if(editor) {
-            body = editor.value;
-            let title = document.getElementById("title").value;
-            // tags
-            let tagsname = document.getElementById("tagsname").value;
-            let tagsnameArray = tagsname.split(" ")
-            tagsnameArray = tagsnameArray.filter( t => t !== "");
-
-            if(title) {
-                postWriteBlog({title, body, tagsnameArray, owner}, token)
-                .then( res => {
-                    console.log(res);
-                    this.setState( {message: res.message} );
-                })
+        try {
+            let token = isAuthenticated().token;
+            let owner = isAuthenticated().user._id;
+            let editor = document.querySelector("textarea.mde-text ");
+            let body = "";
+            if(editor) {
+                body = editor.value;
+                let title = document.getElementById("title").value;
+                // tags
+                let tagsname = document.getElementById("tagsname").value;
+                let tagsnameArray = tagsname.split(" ")
+                tagsnameArray = tagsnameArray.filter( t => t !== "");
+    
+                if(title) {
+                    postWriteBlog({title, body, tagsnameArray, owner}, token)
+                    .then( res => {
+                        this.setState( {message: res.message} );
+                    })
+                }
+            } else {
+                alert("Please turn to write mode")
             }
-        } else {
-            alert("Please turn to write mode")
+
+        } catch (err) {
+            this.setState( {message: "Error try catch"} );
+            console.log(err);
         }
         
     }
@@ -84,7 +89,7 @@ class WriteBlog extends React.Component {
     render() {
         const { tagDom, message } = this.state;
         return (
-            <>
+            <div id="content">
                 <div id="mainbar" style={{width: "100%"}}>
                     <Notify />  
                     {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />}
@@ -151,16 +156,17 @@ class WriteBlog extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
-                            <button
-                                className="s-btn s-btn__outline s-btn__primary mt24"
-                                onClick={this.handleWriteBlog}
-                            >Post this</button>
+                            <div id="wrap-btn-loading" className="ps-relative">
+                                <button
+                                    className="s-btn s-btn__outline s-btn__primary mt24"
+                                    onClick={this.handleWriteBlog}
+                                >Post this</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="clear-fix"></div>
-            </>
+            </div>
         )
     }
 }

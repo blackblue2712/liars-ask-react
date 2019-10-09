@@ -184,7 +184,7 @@ class UserDetail extends React.Component {
                                         blogs.map( (blog, i) => {
                                             return (
                                                 <p key={i}>
-                                                    <Link className="text-54b8ff" to={`/blogs/${blog._id}`}>{blog.title}</Link>
+                                                    <Link className="text-54b8ff" to={`/blogs/edit/${blog._id}`}>{blog.title}</Link>
                                                 </p>
                                             )
                                         })

@@ -106,7 +106,7 @@ class Asks extends React.Component {
                     <div className="main-head">
                         <div className="grid d-flex align-items-center mb16">
                             <h1 className="fs-headline1 mr-auto">Ask a public question</h1>
-                            <Link className="s-btn s-btn__outline s-btn__primary s-btn__primary" to="/questions/ask/example">See example</Link>
+                            <Link className="s-btn s-btn__outline s-btn__primary s-btn__primary" to="/questions/ask/example/howtowrite">See example</Link>
                         </div>
                     </div>
                     <div id="question-form">

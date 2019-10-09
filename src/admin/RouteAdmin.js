@@ -12,8 +12,6 @@ import Announcements from './announcements/Announcements';
 import AddAnnouncement from './announcements/AddAnnouncement';
 import EditAcm from './announcements/EditAcm';
 import Blogs from './blogs/Blogs';
-import WriteBlog from './blogs/WriteBlog';
-import EditBlog from './blogs/EditBlog';
 import PrivateRouteAdmin from './PrivateRouteAdmin';
 
 const RouteAdmin = props => {
@@ -32,8 +30,7 @@ const RouteAdmin = props => {
                 <PrivateRouteAdmin exact path="/admin/announcements/edit/:acmId" component={EditAcm}></PrivateRouteAdmin>
 
                 <PrivateRouteAdmin exact path="/admin/blogs" component={Blogs}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/blogs/new" component={WriteBlog}></PrivateRouteAdmin>
-                <PrivateRouteAdmin exact path="/admin/blogs/edit/:blogId" component={EditBlog}></PrivateRouteAdmin>
+                
             </div>
         </div>
 

@@ -18,30 +18,34 @@ class EditAcm extends React.Component {
     }
 
     handleEditBlog = () => {
-        let id = this.state.id;
-        let token = isAuthenticated().token;
-        let editor = document.querySelector("textarea.mde-text ");
-        let body = "";
-        if(editor) {
-            body = editor.value;
-            let title = this.state.title;
-            // tags
-            let tagsname = document.getElementById("tagsname").value;
-            let tagsnameArray = tagsname.split(" ")
-            tagsnameArray = tagsnameArray.filter( t => t !== "");
+        try {
+            let id = this.state.id;
+            let token = isAuthenticated().token;
+            let editor = document.querySelector("textarea.mde-text ");
+            let body = "";
+            if(editor) {
+                body = editor.value;
+                let title = this.state.title;
+                // tags
+                let tagsname = document.getElementById("tagsname").value;
+                let tagsnameArray = tagsname.split(" ")
+                tagsnameArray = tagsnameArray.filter( t => t !== "");
 
-            if(title) {
-                if(body === "") {
-                    body = undefined;
+                if(title) {
+                    if(body === "") {
+                        body = undefined;
+                    }
+                    putEditBlog({title, body, tagsnameArray, id}, token)
+                    .then( res => {
+                        console.log(res);
+                        this.setState( {message: res.message} );
+                    })
                 }
-                putEditBlog({title, body, tagsnameArray, id}, token)
-                .then( res => {
-                    console.log(res);
-                    this.setState( {message: res.message} );
-                })
+            } else {
+                alert("Please turn to write mode")
             }
-        } else {
-            alert("Please turn to write mode")
+        } catch (err) {
+            this.setState( {message: "Error catched"} );
         }
         
     }
@@ -100,7 +104,7 @@ class EditAcm extends React.Component {
         const { tagDom, message, title, body } = this.state;
         console.log(tagDom)
         return (
-            <>
+            <div id="content">
                 <div id="mainbar" style={{width: "100%"}}>
                     <Notify />  
                     {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />}
@@ -181,7 +185,7 @@ class EditAcm extends React.Component {
                     </div>
                 </div>
                 <div className="clear-fix"></div>
-            </>
+            </div>
         )
     }
 }
