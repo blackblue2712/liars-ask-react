@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Route, Switch } from "react-router-dom";
+import { withRouter, Switch } from "react-router-dom";
 import './style.css';
 import Header from './components/Header';
 import LeftSidebar from './components/LeftSidebar';
