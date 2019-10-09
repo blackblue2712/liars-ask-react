@@ -49,6 +49,22 @@ export const getAllBlogs = () => {
     })
 }
 
+export const getYourBlogs = (userId) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/blogs/your-blogs?userId=${userId}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return {message: "ERROR GET YOUR BLOGS"}
+    })
+}
+
 
 export const getSingleBlog = (id) => {
     return fetch(`${process.env.REACT_APP_API_URL}/blogs/${id}`, {

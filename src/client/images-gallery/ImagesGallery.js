@@ -97,6 +97,7 @@ class ImagesGallery extends React.Component {
 
     render() {
         let { images, message } = this.state;
+        
         return (
             <div id="content">
                 <div className="main-head">

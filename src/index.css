@@ -840,3 +840,11 @@ input[type=checkbox]:checked:after {
 .votecell.post-layout--right {
   width: calc(100% - 24px - 48px);
 }
+
+.text-54b8ff {
+  color: #54b8ff;
+}
+
+.text-54b8ff:hover {
+  color: var(--primary-color);
+}

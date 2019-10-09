@@ -3,6 +3,7 @@ import UserDetailBasic from './UserDetailBasic';
 import UserDetailStory from './UserDetailStory';
 import { getLoggedUser, isAuthenticated } from '../../controllers/userController';
 import { getYourQuestions } from '../../controllers/askController';
+import { getYourBlogs } from '../../controllers/blogController';
 import Notify from '../components/Notify';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +13,8 @@ class UserDetail extends React.Component {
         super();
         this.state = {
             userPayload: {},
-            questions: []
+            questions: [],
+            blogs: []
         }
     }
 
@@ -26,7 +28,10 @@ class UserDetail extends React.Component {
             let userInfo = await getLoggedUser(_id, token);
             // get your questions
             let yourQuestions = await getYourQuestions(userId);
-            this.setState( {userPayload: userInfo, questions: yourQuestions} );
+            // get your blogs
+            let yourBlogs = await getYourBlogs(userId);
+
+            this.setState( {userPayload: userInfo, questions: yourQuestions, blogs: yourBlogs} );
         } catch (err) {
             console.log(err);
         }
@@ -34,8 +39,7 @@ class UserDetail extends React.Component {
 
     render() {
         const userPayloadInfo = this.state.userPayload;
-        const quesitons = this.state.questions;
-        console.log(quesitons);
+        const {questions, blogs} = this.state;
         return (
             <div id="content">
                 <Notify />
@@ -157,10 +161,30 @@ class UserDetail extends React.Component {
                             <ul>
                                 <li className="mb12">
                                     {
-                                        quesitons.map( (q, i) => {
+                                        questions.map( (q, i) => {
                                             return (
-                                                <p>
-                                                    <Link to={`/questions/ask/${q._id}`}>{q.title}</Link>
+                                                <p key={i}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#626262" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2zm1 17h-2v-2h2v2zm2.067-7.746l-.895.918C13.448 12.895 13 13.5 13 15h-2v-.5c0-1.104.448-2.104 1.171-2.828l1.243-1.258A2 2 0 1 0 10 9H8a4 4 0 0 1 8 0c0 .88-.357 1.677-.933 2.254z"/></svg>
+                                                    &nbsp;
+                                                    <Link className="text-54b8ff" to={`/questions/ask/${q._id}`}>{q.title}</Link>
+                                                </p>
+                                            )
+                                        })
+                                    }
+                                </li>
+                                
+                            </ul>
+                        </div>
+
+                        <div className="profile-user--about mb16 mt36 bs-md p20">
+                            <h3 className="mb24">YOUR BLOGS</h3>
+                            <ul>
+                                <li className="mb12">
+                                    {
+                                        blogs.map( (blog, i) => {
+                                            return (
+                                                <p key={i}>
+                                                    <Link className="text-54b8ff" to={`/blogs/${blog._id}`}>{blog.title}</Link>
                                                 </p>
                                             )
                                         })
