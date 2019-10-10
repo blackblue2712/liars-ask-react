@@ -11,7 +11,6 @@ import AddUser from './users/AddUser';
 import Announcements from './announcements/Announcements';
 import AddAnnouncement from './announcements/AddAnnouncement';
 import EditAcm from './announcements/EditAcm';
-import Blogs from './blogs/Blogs';
 import PrivateRouteAdmin from './PrivateRouteAdmin';
 import { Switch } from 'react-router-dom';
 import NotFound from '../client/components/NotFound';
@@ -31,8 +30,7 @@ const RouteAdmin = props => {
                     <PrivateRouteAdmin exact path="/admin/announcements" component={Announcements}></PrivateRouteAdmin>
                     <PrivateRouteAdmin exact path="/admin/announcements/new" component={AddAnnouncement}></PrivateRouteAdmin>
                     <PrivateRouteAdmin exact path="/admin/announcements/edit/:acmId" component={EditAcm}></PrivateRouteAdmin>
-
-                    <PrivateRouteAdmin exact path="/admin/blogs" component={Blogs}></PrivateRouteAdmin>
+                    
                     <PrivateRouteAdmin component={NotFound} />
                 </Switch>
             </div>

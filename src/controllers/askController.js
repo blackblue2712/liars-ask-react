@@ -100,3 +100,21 @@ export const getAnswers = (quesId) => {
         return {message: "ERROR GET ANSWERS"}
     });
 }
+
+export const putEditQuestion = (quesInfo, token) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/asks/questions/edit/${quesInfo.id}`, {
+        method: "PUT",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(quesInfo)
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return {message: "ERROR PUT UPDATE"}
+    });
+}

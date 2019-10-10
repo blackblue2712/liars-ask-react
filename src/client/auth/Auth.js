@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { postSignup, postSignin, authenticate, isAuthenticated } from '../../controllers/userController';
+import { forgotPassword } from '../../controllers/authController';
 import { withRouter } from 'react-router-dom';
 import './style.css';
 
@@ -14,11 +15,18 @@ const handleChangeUI = (next) => {
     return () => {
         let eres = document.querySelector("#form-reg");
         let esig = document.querySelector("#form-sig");
+        let efor = document.querySelector("#form-for");
         if(next === "reg") {
             eres.classList.remove("d-none");
             esig.classList.add("d-none");
-        } else {
+            efor.classList.add("d-none");
+        } else if(next === "sig") {
             esig.classList.remove("d-none");
+            eres.classList.add("d-none");
+            efor.classList.add("d-none");
+        } else {
+            efor.classList.remove("d-none");
+            esig.classList.add("d-none");
             eres.classList.add("d-none");
         }
     }
@@ -60,10 +68,23 @@ const Auth = (props) => {
                     alert(res.message)
                 } else {
                     //
-                    handleChangeUI()();
+                    handleChangeUI()("sig");
                 }
             })
         }
+    }
+
+    const handleSubmitForgot = async (email) => {
+        window.event.preventDefault();
+        let btnLoading = document.getElementById("wrap-forgot-btn");
+        btnLoading.classList.add("btn-loading");
+        let res = await forgotPassword(email);
+
+        if(res.message) {
+            alert(res.message);
+        }
+
+        btnLoading.classList.remove("btn-loading");
     }
 
     const [email, setEmail] = useState("");
@@ -72,6 +93,8 @@ const Auth = (props) => {
     const [r_email, r_setEmail] = useState("");
     const [r_password, r_setPassword] = useState("");
     const [r_passwordAg, r_setPasswordAg] = useState("");
+
+    const [femail, setForgotEmail] = useState("");
 
     return ( <div id="wrap-auth">
             <div className="box on" id="form-sig">
@@ -101,14 +124,61 @@ const Auth = (props) => {
                             style={{
                                 position: "relative",
                                 zIndex: "9999",
-                                color: "blue"
+                                color: "black"
                             }}
                             onClick={handleChangeUI("reg")}
                             href="#c"
-                        >Register a new accoun</a>
+                        >Register a new account</a>
+                    </div>
+                    <div id="forgot-password" className="mt24">
+                        <a
+                            className="s-btn s-btn__outline s-btn__hovero bd-none ml-auto"
+                            style={{
+                                position: "relative",
+                                zIndex: "9999",
+                                color: "black",
+                                paddingLeft: 0
+                            }}
+                            onClick={handleChangeUI("for")}
+                            href="#c"
+                        >Forgot password?</a>
                     </div>
                 </form>
             </div>
+
+
+            <div className="box d-none on" id="form-for">
+                <h2>Fortgot password</h2>
+                <form >
+                    <div className="inputBox">
+                        <input
+                            type="text" name="forgotEmail" required="" 
+                            onChange={ (e) => setForgotEmail(e.target.value) }
+                        />
+                        <label htmlFor="email">Email</label>
+                    </div>
+                    <div className="d-flex align-items-center">
+                        <div id="wrap-forgot-btn" className="ps-relative">
+                            <input
+                                type="submit" name="" value="Submit"
+                                onClick={ () => handleSubmitForgot(femail)}
+                            />
+                        </div>
+                        <a
+                            className="s-btn s-btn__outline s-btn__hovero bd-none ml-auto"
+                            style={{
+                                position: "relative",
+                                zIndex: "9999",
+                                color: "black"
+                            }}
+                            onClick={handleChangeUI("sig")}
+                            href="#c"
+                        >Login</a>
+                    </div>
+                </form>
+            </div>
+
+
             <div className="box d-none on" id="form-reg">
                 <h2>Register</h2>
                 <form action="/auth" method="POST">
@@ -143,7 +213,7 @@ const Auth = (props) => {
                             style={{
                                 position: "relative",
                                 zIndex: "9999",
-                                color: "blue"
+                                color: "black"
                             }}
                             onClick={handleChangeUI("sig")}
                             href="#c"

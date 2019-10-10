@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 export default () => {
     return (
         <div id="notfound">
-            <p>404</p>
-            <Link to="/">Go back home</Link>
+            <p>404 | Request Not Found</p>
+            <Link to="/">Go back</Link>
         </div>
     )
 }

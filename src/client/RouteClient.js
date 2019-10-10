@@ -9,6 +9,7 @@ import TagsComponent from './tags/TagsComponent';
 import UsersComponent from './users/UsersComponent';
 import Questions from './questions/Questions';
 import Asks from './asks/Asks';
+import EditQuestion from './asks/EditQuestion';
 import Example from './asks/Example';
 import UserDetail from './users/UserDetail';
 import Announcement from './announcements/announcements';
@@ -38,6 +39,7 @@ const RouteClient = props => {
                 <PrivateRoute exact path="/questions/ask" component={Asks} />
                 <PrivateRoute exact path="/questions/ask/example/howtowrite" component={Example} />
                 <PrivateRoute exact path="/questions/ask/:quesId" component={SinglePost} />
+                <PrivateRoute exact path="/questions/ask/edit/:quesId" component={EditQuestion} />
 
                 <PrivateRoute exact path="/announcements" component={Announcement} />
                 <PrivateRoute exact path="/announcements/:acmId" component={SingleAcm} />

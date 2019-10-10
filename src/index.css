@@ -847,6 +847,7 @@ input[type=checkbox]:checked:after {
 
 .text-54b8ff:hover {
   color: var(--primary-color);
+  
 }
 
 #notfound {
@@ -861,12 +862,14 @@ input[type=checkbox]:checked:after {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 60px;
+  font-size: 40px;
   flex-direction: column;
+  font-family: monospace;
 }
 
 #notfound a{
-  font-size: 40px
+  font-size: 30px;
+  color: #7bacd0;
 }
 
 #content {
@@ -881,4 +884,5 @@ input[type=checkbox]:checked:after {
   padding: 24px;
   margin-left: 164px;
   min-height: 640px;
+  
 }
