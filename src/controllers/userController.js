@@ -1,11 +1,26 @@
 export const getLoggedUser = (id, token) => {
-    
-    return fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/profile/${id}`, {
         method: "GET",
         headers: {
             Accept: "Application/json",
             "Content-Type": "Application/json",
             Authorization: `Bearer ${token}`
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log(`ERROR POST LOGGED USER ${err}`);
+    });
+}
+
+export const getUserById = (id) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json",
         }
     })
     .then( res => {
@@ -117,7 +132,7 @@ export const getUsers = () => {
     return fetch(`${process.env.REACT_APP_API_URL}/users`, {
         method: "GET",
         headers: {
-            Accpet: "Application/json",
+            Accept: "Application/json",
             "Content-Type": "Application/json"
         }
     })
@@ -126,5 +141,23 @@ export const getUsers = () => {
     })
     .catch( err => {
         console.log("ERROR GET USERS");
+    })
+}
+
+export const followUser = (followId) => {
+    console.log(followId)
+    return fetch(`${process.env.REACT_APP_API_URL}/users/follow/${followId.followedId}`, {
+        method: "PUT",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        },
+        body: JSON.stringify(followId)
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("PUT UPDATE STORY");
     })
 }

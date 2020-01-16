@@ -189,7 +189,7 @@ class Header extends Component {
                                 <div className="s-popover--arrow"></div>
                                 <ul className="list-rest s-anchors">
                                     <li>
-                                        <Link to={`/users/${uid}`}>
+                                        <Link to={`/users/profile/${uid}`}>
                                             <span className="fs-body1 d-block">Your profile</span>
                                         </Link>
                                     </li>

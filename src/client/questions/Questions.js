@@ -20,7 +20,6 @@ class Questions extends React.Component {
 
     render() {
         const { questions } = this.state;
-        // console.log(questions)
         return (
             <div id="content">
                 <div className="main-head">

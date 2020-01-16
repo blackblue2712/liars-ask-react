@@ -27,19 +27,25 @@ const ModalPopup = props => {
         let token = isAuthenticated().token;
         let btn = document.getElementById("wrap-btn-loading");
         btn.classList.add("btn-loading");
-        postUploadImage(formData, userId, token)
-        .then( res => {
-            if(res.imageURL) {
-                closeDialog();
-                props.handleUploadedImage(res.imageURL);
-                setShowNotify(res.message)
-            }
+        if(formData.get("photo")) {
+            postUploadImage(formData, userId, token)
+            .then( res => {
+                if(res.imageURL) {
+                    closeDialog();
+                    props.handleUploadedImage(res.imageURL);
+                    setShowNotify(res.message)
+                }
+                btn.classList.remove("btn-loading");
+            })
+            .catch( err => {
+                setShowNotify("Error occur");
+                btn.classList.remove("btn-loading");
+            })
+        } else {
+            alert("Choose file upload!");
             btn.classList.remove("btn-loading");
-        })
-        .catch( err => {
-            setShowNotify("Error occur");
-            btn.classList.remove("btn-loading");
-        })
+        }
+        
     }
 
     useEffect( () => {
