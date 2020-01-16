@@ -14,7 +14,9 @@ class UserDetail extends React.Component {
         this.state = {
             userPayload: {},
             questions: [],
-            blogs: []
+            blogs: [],
+            flwing: [],
+            flwers: []
         }
     }
 
@@ -26,16 +28,16 @@ class UserDetail extends React.Component {
     
             // get info user logged
             let userInfo = await getLoggedUser(_id, token);
-            console.log(userInfo)
             if(Number(userInfo.message) === 404) {
                 this.props.history.push("/404");
             }
+
             // get your questions
             let yourQuestions = await getYourQuestions(userId);
             // get your blogs
             let yourBlogs = await getYourBlogs(userId);
 
-            this.setState( {userPayload: userInfo, questions: yourQuestions, blogs: yourBlogs} );
+            this.setState( {userPayload: userInfo, flwing: userInfo.following, flwers: userInfo.followers, questions: yourQuestions, blogs: yourBlogs} );
         } catch (err) {
             console.log(err);
         }
@@ -43,7 +45,9 @@ class UserDetail extends React.Component {
 
     render() {
         const userPayloadInfo = this.state.userPayload;
-        const {questions, blogs} = this.state;
+        const {questions, blogs, flwing, flwers} = this.state;
+        console.log(flwing)
+
         return (
             <div id="content">
                 <Notify />
@@ -189,6 +193,42 @@ class UserDetail extends React.Component {
                                             return (
                                                 <p key={i}>
                                                     <Link className="text-54b8ff" to={`/blogs/edit/${blog._id}`}>{blog.title}</Link>
+                                                </p>
+                                            )
+                                        })
+                                    }
+                                </li>
+                                
+                            </ul>
+                        </div>
+
+                        <div className="profile-user--about mb16 mt36 bs-md p20">
+                            <h3 className="mb24">FOLLOWING</h3>
+                            <ul>
+                                <li className="mb12">
+                                    {
+                                        flwing.map( (fl, i) => {
+                                            return (
+                                                <p key={i}>
+                                                    <Link className="text-54b8ff" to={`/users/${fl._id}`}>{fl.fullname || fl.email}</Link>
+                                                </p>
+                                            )
+                                        })
+                                    }
+                                </li>
+                                
+                            </ul>
+                        </div>
+
+                        <div className="profile-user--about mb16 mt36 bs-md p20">
+                            <h3 className="mb24">FOLLOWERS</h3>
+                            <ul>
+                                <li className="mb12">
+                                    {
+                                        flwers.map( (fl, i) => {
+                                            return (
+                                                <p key={i}>
+                                                    <Link className="text-54b8ff" to={`/users/${fl._id}`}>{fl.fullname || fl.email}</Link>
                                                 </p>
                                             )
                                         })

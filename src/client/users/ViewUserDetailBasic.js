@@ -12,7 +12,7 @@ class ViewUserDetailBasic extends React.Component {
             email: "",
             fullname: "",
             photo: "",
-            followers: [],
+            followerIds: [],
             isFollowed: "Follow",
             color: "colorGreen"
         }
@@ -23,14 +23,13 @@ class ViewUserDetailBasic extends React.Component {
         const { email, fullname, photo, followers, _id } = props.userPayload;
         const followingId = isAuthenticated().user._id;
 
-        const flag = followers.indexOf(followingId);
+        const followerIds = [];
+        followers.map( fl => followerIds.push(fl._id));
+
+        const flag = followerIds.indexOf(followingId);
         const isFollowed =  flag === -1 ? "Follow" : "UnFollow";
         const color = flag === -1 ? "colorGreen" : "colorRed";
-        this.setState( {email, fullname, photo, followers, _id, isFollowed, color} );
-    }
-
-    componentDidMount() {
-        
+        this.setState( {email, fullname, photo, followerIds, _id, isFollowed, color} );
     }
 
     handleFollowUser = () => {
