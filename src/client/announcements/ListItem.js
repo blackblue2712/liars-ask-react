@@ -10,7 +10,7 @@ class ListItem extends Component {
     }
 
     render() {
-        const { title, body, isImportant, tags, id } = this.props;
+        const { title, body, isImportant, tags, id, owner } = this.props;
         return (
             <div className={`item-list narrow d-flex ${isImportant}`}>
                 {
@@ -38,7 +38,7 @@ class ListItem extends Component {
                 </div>
                 <div className="list-sumary w-100">
                     <h3>
-                        <Link to={`/announcements/${id}`} className="hyper-link">{title}</Link>
+                        <Link to={`/announcements/${id}?ow=${owner}`} className="hyper-link">{title}</Link>
                     </h3>
                     <div className="list-body--text mb4">
                         {

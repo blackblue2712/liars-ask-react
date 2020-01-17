@@ -2,6 +2,7 @@ import React from 'react';
 import { getSingleAnnouncement } from '../../controllers/announcementController';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../editor/CodeBlock';
+import { isAuthenticated } from '../../controllers/userController';
 class SingleAcm extends React.Component {
     constructor() {
         super();
@@ -11,8 +12,14 @@ class SingleAcm extends React.Component {
     }
 
     componentDidMount() {
+
         const id = this.props.match.params.acmId;
-        getSingleAnnouncement(id)
+        const idOwner = this.props.location.search.substr(4); // last time
+
+        // Check acm owner
+
+
+        getSingleAnnouncement(id, isAuthenticated().user._id)
         .then( res => {
             if(!res.message) {
                 this.setState( {acm: res} );
@@ -27,7 +34,7 @@ class SingleAcm extends React.Component {
         const { acm } = this.state
         return (
             <div id="content">
-                <div id="mainbar">
+                <div id="mainbar" className="w-100">
                     <div className="main-head">
                         <div className="grid d-flex align-items-centers mb16">
                             <h1 className="fs-headline1 mr-auto">{acm.title}</h1>

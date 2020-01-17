@@ -66,10 +66,10 @@ class LeftSidebar extends Component {
                                     <li>
                                         <ul>
                                             <li>
-                                                <a href="#question" className="nav-links--link -link__with-icon -link__with-icon-custom">
+                                                <Link to="/teams" className="nav-links--link -link__with-icon -link__with-icon-custom">
                                                     <svg viewBox="0 0 10 18" className="svg-4 svg-icon iconGlobe" width="18" height="18"><path d="M2,5 C2,8 8,8 8,5" /></svg>
                                                     <span className="-link--chanel-name">TEAMS</span>
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                         

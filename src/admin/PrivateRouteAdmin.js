@@ -13,7 +13,7 @@ const PrivateRouteAdmin = ({ component: Component, ...rest }) => {
             if(check.message === "admin") {
                 setOpen(true);
             } else if(check.message === "Permission deny") {
-                window.location = "/404";
+                window.location = "/";
             }
         }
         fetchData();

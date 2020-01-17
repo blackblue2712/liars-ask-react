@@ -45,6 +45,7 @@ html
 }
 * {
   box-sizing: border-box;
+  overflow-wrap: break-word;
 }
 
 body {
@@ -885,4 +886,9 @@ input[type=checkbox]:checked:after {
   margin-left: 164px;
   min-height: 640px;
   
+}
+
+.list-body--text {
+  max-height: 35px;
+  overflow: hidden;
 }

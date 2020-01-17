@@ -27,6 +27,7 @@ const AddAnnouncements = props => {
 
     const handlePostAcm =  () => {
         let id = isAuthenticated().user._id;
+        let name = isAuthenticated().user.fullname || isAuthenticated().user.fullname;
         let token = isAuthenticated().token;
         let editor = document.querySelector("textarea.mde-text ");
         let body = "";
@@ -40,7 +41,7 @@ const AddAnnouncements = props => {
             tagsnameArray = tagsnameArray.filter( t => t !== "");
 
             if(title && body) {
-                postAnnouncement({title, body, isImportant, tagsnameArray, id}, token)
+                postAnnouncement({title, body, isImportant, tagsnameArray, id, name}, token)
                 .then( res => {
                     setShowNotify(res.message);
                 })

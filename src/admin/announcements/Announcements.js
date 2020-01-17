@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getAnnouncements } from '../../controllers/announcementController';
+import { getAllAnnouncements } from '../../controllers/announcementController';
 import ListWrapper from './ListWrapper';
 import Notify from '../components/Notify';
 
@@ -18,7 +18,7 @@ class Announcements extends Component {
     }
 
     componentDidMount() {
-        getAnnouncements()
+        getAllAnnouncements()
         .then( res => {
             if(res.payload) {
                 this.setState( {acms: res.payload, message: res.message} );

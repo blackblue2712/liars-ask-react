@@ -52,7 +52,23 @@ export const deleteAcm = (id, token) => {
     })
 }
 
-export const  getAnnouncements = () => {
+export const  getAnnouncements = (userId) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/announcements/your-acm/${userId}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("ERROR GET ANNOUNCEMENTS");
+    })
+}
+
+export const  getAllAnnouncements = () => {
     return fetch(`${process.env.REACT_APP_API_URL}/announcements`, {
         method: "GET",
         headers: {
@@ -68,8 +84,8 @@ export const  getAnnouncements = () => {
     })
 }
 
-export const getSingleAnnouncement = (id) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/announcements/${id}`, {
+export const getSingleAnnouncement = (id, userId) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/announcements/${id}?uid=${userId}`, {
         method: "GET",
         headers: {
             Accept: "Application/json",

@@ -1,24 +1,32 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import ListItem from './ListItem';
 
-const ListWrapper = props => {
-    const [acms, setAcms] = useState([]);
 
-    useEffect( () => {
-        setAcms(props.data);
-    }, [props.data]);
+class ListWrapper extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            acms: []
+        }
+    }
 
-    return (
-        <div id="list-wrapper">
-            <div className="mini-list">
-                {
-                    acms && acms.map( (acm, i) => {
-                        return <ListItem key={i} title={acm.title} body={acm.body} tags={acm.anonymousTags} isImportant={acm.isImportant} id={acm._id} /> 
-                    })
-                }
+    componentWillReceiveProps(props) {
+        this.setState({acms: props.data})
+    }
+
+    render() {
+        const { acms } = this.state;
+        return (
+            <div id="list-wrapper">
+                <div className="mini-list">
+                    {
+                        acms && acms.map( (acm, i) => {
+                            return <ListItem key={i} title={acm.title} body={acm.body} tags={acm.anonymousTags} isImportant={acm.isImportant} id={acm._id} owner={acm.owner} /> 
+                        })
+                    }
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
-
 export default ListWrapper;

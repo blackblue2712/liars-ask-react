@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar';
 import { getAnnouncements } from '../../controllers/announcementController';
 import Notify from '../components/Notify';
 import ListWrapper from './ListWrapper';
+import { isAuthenticated } from '../../controllers/userController';
 // const [acms, setAcms] = useState([]);
 // const [showNotify, setShowNotify] = useState("");
 
@@ -28,7 +29,7 @@ class Announcement extends React.Component {
     }
 
     componentDidMount() {
-        getAnnouncements()
+        getAnnouncements(isAuthenticated().user._id)
         .then( res => {
             if(res.payload) {
                 this.setState( {acms: res.payload, message: res.message} );
