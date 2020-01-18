@@ -49,6 +49,22 @@ export const getSingleQuestion = (id) => {
     });
 }
 
+export const getSingleQuestionToEdit = (id, uid) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/asks/questions/edit/${id}?uid=${uid}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        },
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return {message: "ERROR GET SINGLE QUESTION TO EDIT"}
+    });
+}
+
 export const getYourQuestions = (userId) => {
     return fetch(`${process.env.REACT_APP_API_URL}/asks/your-questions?userId=${String(userId)}`, {
         method: "GET",

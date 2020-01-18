@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSingleBlog, putEditBlog } from '../../controllers/blogController';
+import { getSingleBlogToEdit, putEditBlog } from '../../controllers/blogController';
 import Mde from '../editor/Mde';
 import Tags from '../components/Tags';
 import { isAuthenticated } from '../../controllers/userController';
@@ -78,7 +78,7 @@ class EditAcm extends React.Component {
     componentDidMount() {
         // fetching data
         try {
-            getSingleBlog(this.props.match.params.blogId)
+            getSingleBlogToEdit(this.props.match.params.blogId, isAuthenticated().user._id)
             .then( res => {
                 if(res.message) {
                     this.props.history.push("/404");

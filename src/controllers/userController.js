@@ -1,3 +1,19 @@
+export const getUsers = (uid) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/list/${uid}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("ERROR GET USERS");
+    })
+}
+
 export const getLoggedUser = (id, token) => {
     return fetch(`${process.env.REACT_APP_API_URL}/users/profile/${id}`, {
         method: "GET",
@@ -128,21 +144,7 @@ export const getSignout = () => {
     })
 }
 
-export const getUsers = () => {
-    return fetch(`${process.env.REACT_APP_API_URL}/users`, {
-        method: "GET",
-        headers: {
-            Accept: "Application/json",
-            "Content-Type": "Application/json"
-        }
-    })
-    .then( res => {
-        return res.json();
-    })
-    .catch( err => {
-        console.log("ERROR GET USERS");
-    })
-}
+
 
 export const followUser = (followId) => {
     console.log(followId)

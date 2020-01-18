@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSingleQuestion, putEditQuestion } from '../../controllers/askController';
+import { getSingleQuestionToEdit, putEditQuestion } from '../../controllers/askController';
 import Mde from '../editor/Mde';
 import Tags from '../components/Tags';
 import { isAuthenticated } from '../../controllers/userController';
@@ -78,7 +78,7 @@ class EditQuestion extends React.Component {
     componentDidMount() {
         // fetching data
         try {
-            getSingleQuestion(this.props.match.params.quesId)
+            getSingleQuestionToEdit(this.props.match.params.quesId, isAuthenticated().user._id)
             .then( res => {
                 if(res.message) {
                     this.props.history.push("/404");

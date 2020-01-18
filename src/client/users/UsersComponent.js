@@ -3,6 +3,7 @@ import './UsersComponent.css';
 import UserInfo from './UserInfo';
 import { getUsers } from '../../controllers/userController';
 import DefaultImage from '../../images/default.png';
+import { isAuthenticated } from '../../controllers/userController';
 
 class TagsComponent extends Component {
 
@@ -14,7 +15,7 @@ class TagsComponent extends Component {
     }
 
     async componentDidMount() {
-        const users = await getUsers();
+        const users = await getUsers(isAuthenticated().user._id);
         this.setState( {users} );
         
     }
@@ -53,7 +54,7 @@ class TagsComponent extends Component {
                                     username={user.email}
                                     userLocation="Bratislava, Slovakia"
                                     userImage={user.photo || DefaultImage}
-                                    userReputation="1,110"
+                                    userReputation={user.followers.length}
                                     id={user._id}
                                 />        
                             })

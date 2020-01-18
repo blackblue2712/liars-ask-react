@@ -82,6 +82,22 @@ export const getSingleBlog = (id) => {
     })
 }
 
+export const getSingleBlogToEdit =(id, uid) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/blogs/edit/${id}?uid=${uid}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return {message: "ERROR GET SINGLE BLOG TO EDIT"}
+    })
+}
+
 export const putEditBlog = (blogInfo, token) => {
     return fetch(`${process.env.REACT_APP_API_URL}/blogs/edit/${blogInfo.id}`, {
         method: "PUT",

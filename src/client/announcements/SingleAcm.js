@@ -15,9 +15,7 @@ class SingleAcm extends React.Component {
 
         const id = this.props.match.params.acmId;
         const idOwner = this.props.location.search.substr(4); // last time
-
         // Check acm owner
-
 
         getSingleAnnouncement(id, isAuthenticated().user._id)
         .then( res => {
