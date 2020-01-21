@@ -22,8 +22,18 @@
     margin: 0 !important;
 }
 
+.user-roles {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #15ad58;
+    font-size: 14px;
+    font-family: sans-serif;
+    padding: 3px 0;
+} 
+
 .reputation-score {
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 12px;
     margin-right: 2px;
     color: #6a737c;
@@ -32,7 +42,7 @@
 .user-tags {
     clear: both;
     font-size: 12px;
-    margin-left: 64px;
+    margin-left: 58px;
 }
 .user-tags a {
     color: #6a737c;

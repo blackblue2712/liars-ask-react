@@ -178,8 +178,8 @@ export const followUser = (followId) => {
     })
 }
 
-export const findUser = (name, type) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/users/find?name=${name}&type=${type}`, {
+export const findUser = (name, uid) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/find?name=${name}&&uid=${uid}`, {
         method: "GET",
         headers: {
             Accept: "Application/json",
@@ -207,5 +207,23 @@ export const getPrivileges = () => {
     })
     .catch( err => {
         console.log("GET PRIVILEGES");
+    })
+}
+
+export const putChangePrivileges = (uid, pid, token) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/privileges`, {
+        method: "PUT",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({uid, pid})
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("PUT CHANGE PRIVILEGES");
     })
 }

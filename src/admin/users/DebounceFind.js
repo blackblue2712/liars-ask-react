@@ -6,8 +6,8 @@ function useDebounce(text, props, delay) {
   
     useEffect(() => {
       const handler = setTimeout(() => {
-        // setDebounced(text);
-        props.handleSearchUser(text);
+          // setDebounced(text);
+          props.handleSearchUser(text);
       }, delay);
   
       return () => {

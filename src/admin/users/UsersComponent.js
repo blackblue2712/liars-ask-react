@@ -3,6 +3,7 @@ import UserInfo from './UserInfo';
 import DebounceFind from './DebounceFind';
 import { findUser, getPrivileges, isAuthenticated, adminGetUsers } from "../../controllers/userController"
 
+
 class TagsComponent extends Component {
 
     constructor() {
@@ -10,25 +11,30 @@ class TagsComponent extends Component {
         this.state = {
             users: [],
             pris: [],
+            message: ""
         }
     }
 
     componentDidMount() {
-        let uid = isAuthenticated().user._id;
         Promise.all([
-            adminGetUsers(uid),
-            getPrivileges()
+            getPrivileges(),
+            // adminGetUsers(uid)
         ])
         .then( res => {
-            this.setState( {users: res[0], pris: res[1]} );
+            this.setState( {pris: res[0]} );
         })
         .catch( err => {
-            alert("can not get user ors privileges");
+            alert("can not get privileges");
         })
+
+        // let users = await adminGetUsers(uid);
+        // let pris = await getPrivileges();
+        // this.setState( {users, pris} );
     }
 
     handleSearchUser = (text) => {
-        findUser(text, "email")
+        let uid = isAuthenticated().user._id;
+        findUser(text, uid)
         .then( res => {
             if(!res.message) {
                 this.setState( {users: res} )
@@ -39,8 +45,7 @@ class TagsComponent extends Component {
 
 
     render() {
-        const { users, pris } = this.state;
-        console.log(users,pris)
+        const { users, pris, message } = this.state;
         return (
             <>
                 <div className="main-head">

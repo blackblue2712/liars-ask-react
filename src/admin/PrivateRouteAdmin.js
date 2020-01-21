@@ -10,9 +10,13 @@ const PrivateRouteAdmin = ({ component: Component, ...rest }) => {
     useEffect( () => {
         async function fetchData () {
             let check = await isAdmin(isAuthenticated().token);
+            console.log(check)
             if(check.message === "admin") {
                 setOpen(true);
-            } else if(check.message === "Permission deny") {
+            // } else if(check.message === "Permission deny") {
+            //     window.location = "/";
+            //
+            }else {
                 window.location = "/";
             }
         }
