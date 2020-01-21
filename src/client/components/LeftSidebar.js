@@ -76,6 +76,9 @@ class LeftSidebar extends Component {
                                     </li>
                                 </ul>
                             </li>
+                            <li id="upgrade-account" className="canactive">
+                                <Link className="nav-links--link" to="/upgrade-account">Upgrade account</Link>
+                            </li>
                         </ul>
                     </nav>
                 </div>

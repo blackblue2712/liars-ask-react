@@ -6,6 +6,7 @@ import { getYourQuestions } from '../../controllers/askController';
 import { getYourBlogs } from '../../controllers/blogController';
 import Notify from '../components/Notify';
 import { Link } from 'react-router-dom';
+import AddAnnouncement from '../announcements/AddAnnouncement';
 
 
 class UserDetail extends React.Component {
@@ -16,7 +17,8 @@ class UserDetail extends React.Component {
             questions: [],
             blogs: [],
             flwing: [],
-            flwers: []
+            flwers: [],
+            activeTab: false
         }
     }
 
@@ -43,11 +45,22 @@ class UserDetail extends React.Component {
         }
     }
 
+    handleActiveTab = (type) => {
+        return e => {
+            let elm = document.querySelectorAll("#tabs > a");
+            let elmActive = document.getElementById(type);
+
+            Array.from(elm).map(el => el.classList.remove("youarehere"))
+
+            elmActive.classList.add("youarehere")
+
+            this.setState({activeTab: !this.state.activeTab})
+        }
+    }
+
     render() {
         const userPayloadInfo = this.state.userPayload;
-        const {questions, blogs, flwing, flwers} = this.state;
-        console.log(flwing)
-
+        const {questions, blogs, flwing, flwers, activeTab} = this.state;
         return (
             <div id="content">
                 <Notify />
@@ -57,28 +70,35 @@ class UserDetail extends React.Component {
                         <div id="tabs" className="d-flex align-items-center w-100">
                             <a href="#u" >Activity</a>
                             <a href="#u" >Your questions</a>
-                            <a href="#u" className="youarehere">Edit profile and setting</a>
-                            <a href="#u" >Profile</a>
+                            <a href="#u" id="ypf" className="youarehere" onClick={this.handleActiveTab("ypf")}>Edit profile and setting</a>
+                            {
+                                isAuthenticated().user.permission > 0 &&
+                                <a href="#announcements/new" id="wacm" onClick={this.handleActiveTab("wacm")} >Wrtie announcement</a>
+                            }
                         </div>
                         
                     </div>
-    
-                    <div id="mainbar" className="subtag mt36">
-                        <div id="tag-profile">
-                            <UserDetailBasic userPayload={userPayloadInfo}/>
-                        </div>
-    
-                        <div id="two-auth" className="bs-md mt36 mb36 p20">
-                            <h4>TWO-FACTOR AUTHENTICATION</h4>
-                            <div className="d-flex">
-                                <p className="text-description--small">You must verify your account before you can enable two-factor authentication</p>
-                                <img style={{width: "50%"}} className="oc7" src="https://discordapp.com/assets/cdea41ede63f61153e4a3c0531fa3873.svg" alt="two-auth"/>
+
+                    {
+                        activeTab === true && isAuthenticated().user.permission > 0 ? <AddAnnouncement /> : 
+                        <div id="mainbar" className="subtag mt36">
+                            <div id="tag-profile">
+                                <UserDetailBasic userPayload={userPayloadInfo}/>
                             </div>
+        
+                            <div id="two-auth" className="bs-md mt36 mb36 p20">
+                                <h4>TWO-FACTOR AUTHENTICATION</h4>
+                                <div className="d-flex">
+                                    <p className="text-description--small">You must verify your account before you can enable two-factor authentication</p>
+                                    <img style={{width: "50%"}} className="oc7" src="https://discordapp.com/assets/cdea41ede63f61153e4a3c0531fa3873.svg" alt="two-auth"/>
+                                </div>
+                            </div>
+        
+                            <UserDetailStory userPayload={userPayloadInfo}/>
                         </div>
+                    }
     
-                        <UserDetailStory userPayload={userPayloadInfo}/>
-    
-                    </div>
+                    
                     <div id="sidebar">
                         <div className="profile-user--about mb16 mt36 bs-md p20">
                         <h3 className="mb24">ABOUT</h3>

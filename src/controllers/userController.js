@@ -14,6 +14,22 @@ export const getUsers = (uid) => {
     })
 }
 
+export const adminGetUsers = (uid) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/admin/list/${uid}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("ERROR GET USERS");
+    })
+}
+
 export const getLoggedUser = (id, token) => {
     return fetch(`${process.env.REACT_APP_API_URL}/users/profile/${id}`, {
         method: "GET",
@@ -144,8 +160,6 @@ export const getSignout = () => {
     })
 }
 
-
-
 export const followUser = (followId) => {
     console.log(followId)
     return fetch(`${process.env.REACT_APP_API_URL}/users/follow/${followId.followedId}`, {
@@ -161,5 +175,37 @@ export const followUser = (followId) => {
     })
     .catch( err => {
         console.log("PUT UPDATE STORY");
+    })
+}
+
+export const findUser = (name, type) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/find?name=${name}&type=${type}`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("FIND USER");
+    })
+}
+
+export const getPrivileges = () => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/privileges`, {
+        method: "GET",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        console.log("GET PRIVILEGES");
     })
 }

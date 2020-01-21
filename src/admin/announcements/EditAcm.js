@@ -76,7 +76,7 @@ class EditAcm extends React.Component {
 
     componentDidMount() {
         // fetching data
-        getSingleAnnouncement(this.props.match.params.acmId)
+        getSingleAnnouncement(this.props.match.params.acmId, isAuthenticated().user._id)
         .then( res => {
             if(!res.message) {
                 this.setState( {acm: res, title: res.title, body: res.body, id: res._id, isImportant: res.isImportant, tagDom: res.anonymousTags.join(" ")} );

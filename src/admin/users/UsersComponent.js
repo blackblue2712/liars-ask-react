@@ -1,35 +1,56 @@
 import React, { Component } from 'react';
 import UserInfo from './UserInfo';
-import { getUsers } from '../../controllers/userController';
-
-import DefaultImage from '../../images/default.png';
+import DebounceFind from './DebounceFind';
+import { findUser, getPrivileges, isAuthenticated, adminGetUsers } from "../../controllers/userController"
 
 class TagsComponent extends Component {
 
     constructor() {
         super();
         this.state = {
-            users: []
+            users: [],
+            pris: [],
         }
     }
 
-    async componentDidMount() {
-        const users = await getUsers();
-        this.setState( {users} );
+    componentDidMount() {
+        let uid = isAuthenticated().user._id;
+        Promise.all([
+            adminGetUsers(uid),
+            getPrivileges()
+        ])
+        .then( res => {
+            this.setState( {users: res[0], pris: res[1]} );
+        })
+        .catch( err => {
+            alert("can not get user ors privileges");
+        })
     }
 
+    handleSearchUser = (text) => {
+        findUser(text, "email")
+        .then( res => {
+            if(!res.message) {
+                this.setState( {users: res} )
+            }
+        })
+    }
+
+
+
     render() {
-        const { users } = this.state;
+        const { users, pris } = this.state;
+        console.log(users,pris)
         return (
             <>
                 <div className="main-head">
                     <div className="grid d-flex align-items-centers mb16">
                         <h1 className="fs-headline1 mr-auto">Users</h1>
                     </div>
-                    <p className="mb24 f13 fw350">Find users for ... :)</p>
+                    <p className="mb24 f13 fw350">Find users for ...</p>
                     <div className="grid-ai grid-tags mb16 d-flex align-items-center">
                         <div className="ps-relative mr-auto">
-                            <input type="text" name="usersfilter" placeholder="Filter by user" maxLength="240" className="s-input s-input__search js-search-users" />
+                            <DebounceFind handleSearchUser={this.handleSearchUser} />
                             <svg aria-hidden="true" className="svg-icon s-input-icon s-input-icon__search iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"></path></svg>
                         </div>
                         <div className="s-btn-group">
@@ -45,16 +66,17 @@ class TagsComponent extends Component {
                 <div id="tags-list">
                     <div id="tags-browser">
                         {
-                            users.map ( (user, i) => {
-                                return <UserInfo
-                                    key={i}
-                                    email={user.email}
-                                    userLocation="Bratislava, Slovakia"
-                                    userImage={user.photo || DefaultImage}
-                                    userReputation="1,110"
-                                />   
-                            })
+                            users && users.length > 0 ? 
+                                users.map ( (user, i) => {
+                                    return <UserInfo
+                                        key={i}
+                                        userIf={user}
+                                        pris={pris}
+                                    />   
+                                })
+                            : "No user found"
                         }
+                        
                     </div>
                 </div>
             </>

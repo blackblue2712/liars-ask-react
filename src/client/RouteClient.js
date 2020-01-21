@@ -14,6 +14,7 @@ import Example from './asks/Example';
 import UserDetail from './users/UserDetail';
 import ViewUserDetail from './users/ViewUserDetail';
 import Announcement from './announcements/announcements';
+import AddAnnouncement from './announcements/AddAnnouncement';
 import SingleAcm from './announcements/SingleAcm';
 import Blogs from './blogs/Blogs';
 import SingleBlog from './blogs/SingleBlogs';
@@ -44,7 +45,9 @@ const RouteClient = props => {
                 <PrivateRoute exact path="/questions/ask/edit/:quesId" component={EditQuestion} />
 
                 <PrivateRoute exact path="/announcements" component={Announcement} />
+                <PrivateRoute exact path="/announcements/new" component={AddAnnouncement} />
                 <PrivateRoute exact path="/announcements/:acmId" component={SingleAcm} />
+
                 <PrivateRoute exact path="/blogs" component={Blogs} />
                 <PrivateRoute exact path="/blogs/write/new" component={WriteBlog} />
                 <PrivateRoute exact path="/blogs/:blogId" component={SingleBlog} />
