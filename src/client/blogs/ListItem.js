@@ -44,7 +44,7 @@ class ListItem extends Component {
                     </div>
                     {
                         tags && tags.map( (t, i) => {
-                            return <Tags key={i} name={t}/>
+                            return <Tags key={i} name={t.name}/>
                         })
                     }
                     {/* <div className="started ml-auto" dir="ltr">

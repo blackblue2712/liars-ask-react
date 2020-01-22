@@ -53,8 +53,8 @@ class SingleBlog extends React.Component {
                         <ReactMarkdown source={blog.body} renderers={{ code: CodeBlock }} />
                         
                         {
-                            blog.anonymousTags && blog.anonymousTags.map( (tag,i) => {
-                                return <Tags key={i} name={tag}/>
+                            blog.tags && blog.tags.map( (tag,i) => {
+                                return <Tags key={i} name={tag.name}/>
                             })
                         }
                     </div>

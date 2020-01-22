@@ -21,7 +21,7 @@ class ListWrapper extends React.Component {
                 <div className="mini-list">
                     {
                         acms && acms.map( (acm, i) => {
-                            return <ListItem key={i} title={acm.title} body={acm.body} tags={acm.anonymousTags} isImportant={acm.isImportant} id={acm._id} owner={acm.owner} /> 
+                            return <ListItem key={i} title={acm.title} body={acm.body} tags={acm.tags} isImportant={acm.isImportant} id={acm._id} owner={acm.owner} /> 
                         })
                     }
                 </div>

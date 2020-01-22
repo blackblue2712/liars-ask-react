@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Tags from '../components/Tags';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../editor/CodeBlock';
-import Code from 'react-code-prettify';
 class Post extends Component {
     constructor() {
         super();
@@ -39,8 +38,8 @@ class Post extends Component {
                         <ReactMarkdown source={ques.body} renderers={{ code: CodeBlock }} />
                     </div>
                     {
-                        ques.anonymousTags && ques.anonymousTags.map( (tag,i) => {
-                            return <Tags key={i} name={tag}/>
+                        ques.tags && ques.tags.map( (tag,i) => {
+                            return <Tags key={i} name={tag.name}/>
                         })
                     }
                 </div>

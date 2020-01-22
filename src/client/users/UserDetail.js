@@ -72,7 +72,7 @@ class UserDetail extends React.Component {
                             <a href="#u" >Your questions</a>
                             <a href="#u" id="ypf" className="youarehere" onClick={this.handleActiveTab("ypf")}>Edit profile and setting</a>
                             {
-                                isAuthenticated().user.permission > 0 &&
+                                isAuthenticated().user.roles.permission > 0 &&
                                 <a href="#announcements/new" id="wacm" onClick={this.handleActiveTab("wacm")} >Wrtie announcement</a>
                             }
                         </div>
@@ -80,7 +80,7 @@ class UserDetail extends React.Component {
                     </div>
 
                     {
-                        activeTab === true && isAuthenticated().user.permission > 0 ? <AddAnnouncement /> : 
+                        activeTab === true && isAuthenticated().user.roles.permission > 0 ? <AddAnnouncement /> : 
                         <div id="mainbar" className="subtag mt36">
                             <div id="tag-profile">
                                 <UserDetailBasic userPayload={userPayloadInfo}/>

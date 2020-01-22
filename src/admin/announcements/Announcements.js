@@ -34,7 +34,7 @@ class Announcements extends Component {
 
     render() {
         const { message, acms } = this.state;
-        
+        console.log(acms)
         return (
             <>
                 <div className="main-head">
