@@ -16,3 +16,47 @@
     fill: #3B4045;
 }
 
+.svg-icont {
+    width: 1.5em;
+    height: 1.5em;
+}
+  
+.svg-icont path,
+.svg-icont polygon,
+.svg-icont rect {
+    fill: #4691f6;
+}
+  
+.svg-icont circle {
+    stroke: #4691f6;
+    stroke-width: 1;
+}
+
+button.accept-request, button.reject-request {
+    border: none;
+    background-color: transparent;
+}
+.stroke-green {
+    stroke: green;
+}
+.stroke-red {
+    stroke: red;
+}
+.stroke-d2d2d2 {
+    stroke: #d2d2d2;
+}
+.stroke-yellow {
+    stroke: yellow
+}
+
+button[role="handle-request"] {
+    opacity: .7;
+}
+button[role="handle-request"]:hover {
+    opacity: 1;
+}
+
+.loading-request {
+    background: url("../images/22.gif") center center no-repeat;
+    background-size: 50px;
+}

@@ -14,6 +14,7 @@ import EditAcm from './announcements/EditAcm';
 import PrivateRouteAdmin from './PrivateRouteAdmin';
 import { Switch } from 'react-router-dom';
 import NotFound from '../client/components/NotFound';
+import RequestUpgrade from './request/RequestUpgrade';
 
 const RouteAdmin = props => {
     return <>
@@ -22,7 +23,7 @@ const RouteAdmin = props => {
             <Header />
             <div id="content">
                 <Switch>
-                    <PrivateRouteAdmin exact path="/admin" component={Content}></PrivateRouteAdmin>
+                    <PrivateRouteAdmin exact path="/admin" component={RequestUpgrade}></PrivateRouteAdmin>
                     <PrivateRouteAdmin exact path="/admin/tags" component={Tags}></PrivateRouteAdmin>
                     <PrivateRouteAdmin exact path="/admin/tags/new" component={AddTag}></PrivateRouteAdmin>
                     <PrivateRouteAdmin exact path="/admin/users" component={UsersComponent}></PrivateRouteAdmin>
@@ -30,6 +31,8 @@ const RouteAdmin = props => {
                     <PrivateRouteAdmin exact path="/admin/announcements" component={Announcements}></PrivateRouteAdmin>
                     <PrivateRouteAdmin exact path="/admin/announcements/new" component={AddAnnouncement}></PrivateRouteAdmin>
                     <PrivateRouteAdmin exact path="/admin/announcements/edit/:acmId" component={EditAcm}></PrivateRouteAdmin>
+                    
+                    {/* <PrivateRouteAdmin exact path="/admin/request/upgrade-account-to-special" component={RequestUpgrade}></PrivateRouteAdmin> */}
                     
                     <PrivateRouteAdmin component={NotFound} />
                 </Switch>

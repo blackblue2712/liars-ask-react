@@ -24,6 +24,8 @@ import SinglePost from './questions/SingleQuestion'
 import ImagesGallery from './images-gallery/ImagesGallery';
 import PrivateRoute from '../PirvateRoute';
 import NotFound from './components/NotFound';
+import RequestUpgrade from './users/RequestUpgrade';
+import ActiveUpgrade from './request/ActiveUpgrade';
 
 const RouteClient = props => {
     return <>
@@ -53,6 +55,9 @@ const RouteClient = props => {
                 <PrivateRoute exact path="/blogs/:blogId" component={SingleBlog} />
                 <PrivateRoute exact path="/blogs/edit/:blogId" component={EditBlog} />
                 <PrivateRoute exact path="/images-gallery" component={ImagesGallery} />
+
+                <PrivateRoute exact path="/upgrade-account" component={RequestUpgrade} />
+                <PrivateRoute exact path="/upgrade-account/:activeCode" component={ActiveUpgrade} />
 
                 <PrivateRoute component={NotFound} to="/404"/>
                 <PrivateRoute component={NotFound} />

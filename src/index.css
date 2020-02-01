@@ -59,6 +59,10 @@ body {
   background-color: var(--bg-color);
 }
 
+button {
+  cursor: pointer;
+}
+
 ul {
   list-style-type: none;
   padding: 0;

@@ -227,3 +227,4 @@ export const putChangePrivileges = (uid, pid, token) => {
         console.log("PUT CHANGE PRIVILEGES");
     })
 }
+

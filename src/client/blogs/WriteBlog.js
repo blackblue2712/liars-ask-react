@@ -90,7 +90,7 @@ class WriteBlog extends React.Component {
         const { tagDom, message } = this.state;
         return (
             <div id="content">
-                <div id="mainbar" style={{width: "100%"}}>
+                <div id="mainbar" className="w-100">
                     <Notify />  
                     {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />}
                     <div id="announ-form">
