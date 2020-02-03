@@ -89,7 +89,7 @@
 .item-top:hover .svg-icon {
     fill: #3B4045;
 }
-.item-top a {
+.item-top > a {
     height: 100%;
     display: inline-block;
     padding: 0 6px;
@@ -118,7 +118,7 @@
     color: #535a60;
     width: 100%;
     border-radius: 2px;
-    
+    display: block;
 }
 
 .s-popover a:hover{

@@ -31,7 +31,7 @@ class RequestUpgrade extends Component {
     }
 
 
-    handleAcceptRequest = (rid, reciever, orderBt) => {
+    handleAcceptRequest = (rid, receiver, orderBt) => {
         let confirm = window.confirm("Are you sure to accpet this request?");
         if(confirm) {
             try {
@@ -45,7 +45,7 @@ class RequestUpgrade extends Component {
                 let name = isAuthenticated().user.fullname || isAuthenticated().user.email;
                 let token = isAuthenticated().token;
 
-                postAcceptRequestUpgradeToSpecialAccount({owner: _id, photo, name, rid, reciever}, token)
+                postAcceptRequestUpgradeToSpecialAccount({owner: _id, photo, name, rid, receiver}, token)
                 .then( res => {
                     if(typeof wrapBt !== undefined) {
                         wrapBt.classList.remove("loading-request");
@@ -62,7 +62,7 @@ class RequestUpgrade extends Component {
         }
     }
 
-    handleRejectRequest = (rid, reciever, orderBt) => {
+    handleRejectRequest = (rid, receiver, orderBt) => {
         let confirm = window.confirm("Are you sure to reject this request?");
         if(confirm) {
             try {
@@ -76,7 +76,7 @@ class RequestUpgrade extends Component {
                 let name = isAuthenticated().user.fullname || isAuthenticated().user.email;
                 let token = isAuthenticated().token;
 
-                postRejectRequestUpgradeToSpecialAccount({owner: _id, photo, name, rid, reciever}, token)
+                postRejectRequestUpgradeToSpecialAccount({owner: _id, photo, name, rid, receiver}, token)
                 .then( res => {
                     if(typeof wrapBt !== undefined) {
                         wrapBt.classList.remove("loading-request");
@@ -123,7 +123,7 @@ class RequestUpgrade extends Component {
                                     let classStroke = rq.status === 0 ? "" : rq.status === 1 ? "stroke-yellow" : rq.status === 2 ? "stroke-green" : "stroke-red";
                                     return (
                                         <tr key={i} style={{borderBottom: "1px solid #d6d9dc"}} className="ps-relative">
-                                            <td><Link to={`/users/${rq.owner._id}`}>{rq.owner.fullname || rq.owner.email}</Link></td>
+                                            <td><Link to={`/users/${rq.owner._id}`}>{rq.owner.fullname || rq.owner.email}</Link> - {rq.email}</td>
                                             <td style={{"width": "400px"}}>{rq.description}</td>
                                             <td><img width="150" className="rq-photo" src={rq.photo} /></td>
                                             <td>{new Date(rq.created).toLocaleDateString()}</td>

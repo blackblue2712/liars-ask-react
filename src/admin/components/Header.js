@@ -4,6 +4,8 @@ import brandLogo from '../../images/logo.png';
 import signoutIcon from '../../images/logout.svg'
 import Default from '../../images/default.png';
 import { isAuthenticated, getSignout } from '../../controllers/userController';
+import { getNotifications } from "../../controllers/notifyController";
+import dfimg from '../../images/solar-system.png';
 
 class Header extends Component {
 
@@ -16,15 +18,28 @@ class Header extends Component {
             toggleProducts: false,
             toggleUser: false,
             uid: null,
-            photo: ''
+            photo: '',
+            notifications: []
         }
 
         // this.handleToggleMenu = this.handleToggleMenu.bind(this);
     }
 
+    clickRoot = () => {
+        this.setState( {toggleMenu: false, toggleSearch: false, toggleProducts: false, toggleNotify: false, toggleUser: false} );
+    }
+
     componentDidMount () {
+        document.getElementById("root").addEventListener("click", this.clickRoot);
         if(isAuthenticated()) {
-            this.setState( {uid: isAuthenticated().user._id, photo: isAuthenticated().user.photo} );
+            let uid = isAuthenticated().user._id;
+            let token = isAuthenticated().token;
+            getNotifications(uid, token)
+            .then( res => {
+                this.setState( {notifications: res} )
+            })
+            this.setState( {uid, photo: isAuthenticated().user.photo} );
+            
         }
     }
 
@@ -76,6 +91,15 @@ class Header extends Component {
         this.setState( function(prevState, props) {
             return { toggleProducts: !prevState.toggleProducts }
         })
+
+        
+        document.getElementById("root").addEventListener("click", () => {
+            try {
+                document.querySelector("#products-popover").style.display = "none";
+            } catch (e) {
+
+            }
+        })
     }
 
     handleToggleUser = () => {
@@ -92,6 +116,31 @@ class Header extends Component {
         this.setState( function(prevState, props) {
             return { toggleUser: !prevState.toggleUser }
         })
+        document.getElementById("root").addEventListener("click", () => {
+            try {
+                document.querySelector("#user-popover").style.display = "none";
+            } catch (e) {
+
+            }
+        })
+    }
+
+    handleToggleNotify = () => {
+        let { toggleNotify }  = this.state;
+        if(!toggleNotify) {
+            document.querySelector(".list-notify-box").style.display = "block";
+        } else {
+            document.querySelector(".list-notify-box").style.display = "none";
+        }
+
+        this.setState( {toggleNotify: !this.state.toggleNotify});
+        document.getElementById("root").addEventListener("click", () => {
+            try {
+                document.querySelector(".list-notify-box").style.display = "none";
+            } catch (e) {
+
+            }
+        })
     }
 
     handleSignout = () => {
@@ -103,7 +152,7 @@ class Header extends Component {
     }
 
     render() {
-        const { uid, photo } = this.state;
+        const { uid, photo, notifications } = this.state;
         return (
             <header id="header" className="ps-fixed w-100">
                 <div className="container d-flex align-items-center">
@@ -208,6 +257,33 @@ class Header extends Component {
                                         </button>
                                     </li>
                                 </ul>
+                            </div>
+                        </li>
+                        <li className="item-top">
+                            <div class="notification-box" onClick={this.handleToggleNotify}>
+                                <span class="notification-count">{notifications.length}</span>
+                                <div class="notification-bell">
+                                    <span class="bell-top"></span>
+                                    <span class="bell-middle"></span>
+                                    <span class="bell-bottom"></span>
+                                    <span class="bell-rad"></span>
+                                </div>
+                                <div className="list-notify-box">
+                                    <ul className="">
+                                        {
+                                            notifications.length > 0 ? notifications.map( (ntf, i) => {
+                                                return <li className="item-notify">
+                                                    <Link className="w-100 content-notify-item " to="/#">
+                                                        <img style={{float: "left", marginRight: "10px"}} className="bd50" width="50" height="50" src={ntf.photo || dfimg} alt="avatar" />
+                                                        <span>
+                                                            {ntf.content.length > 100 ? ntf.content.substr(0, 100) + "..." : ntf.content}
+                                                        </span>
+                                                    </Link>
+                                                </li>
+                                            }) : <span>No notification</span>
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                         </li>
                         <li className="item-top">
