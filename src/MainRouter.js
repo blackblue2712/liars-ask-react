@@ -1,18 +1,14 @@
 import React from 'react';
-import { Switch, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import RouteClient from './client/RouteClient';
 import RouteAdmin from './admin/RouteAdmin';
-import Auth from './client/auth/Auth';
+import RouteAuth from './client/AuthRoute';
 
 class MainRouter extends React.Component {
     render() {
         let isAdminPage = this.props.location.pathname.split("/")[1];
         if(isAdminPage === "auth") {
-            return <Switch>
-                <>
-                   <Auth />
-                </>
-            </Switch>
+            return <RouteAuth />
         } else if (isAdminPage === "admin"){
             return <RouteAdmin />
         } else {

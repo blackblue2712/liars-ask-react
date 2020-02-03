@@ -3,7 +3,7 @@ import './style.css';
 import Header from './components/Header';
 import Footer from './components/Footer'
 import Content from './components/Content';
-import LeftSidenar from './components/LeftSidebar';
+import LeftSidebar from './components/LeftSidebar';
 import Tags from './tags/Tags';
 import AddTag from './tags/AddTag';
 import UsersComponent from './users/UsersComponent';
@@ -19,7 +19,7 @@ import RequestUpgrade from './request/RequestUpgrade';
 const RouteAdmin = props => {
     return <>
         <div className="container" style={{marginTop: "50px"}}>
-            <LeftSidenar />
+            <LeftSidebar />
             <Header />
             <div id="content">
                 <Switch>

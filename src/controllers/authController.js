@@ -30,3 +30,20 @@ export const forgotPassword = (email) => {
         return { message: "ERROR FORGOT PASSWORD" }
     });
 }
+
+export const resestPassword = (resetCode, pwd) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/auth/reset-password`, {
+        method: "POST",
+        headers: {
+            Accept: "Application/json",
+            "Content-Type": "Application/json"
+        },
+        body: JSON.stringify( {resetCode, pwd} )
+    })
+    .then( res => {
+        return res.json();
+    })
+    .catch( err => {
+        return { message: "ERROR RESET PASSWORD" }
+    });
+}
