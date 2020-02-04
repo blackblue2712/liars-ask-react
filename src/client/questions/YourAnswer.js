@@ -37,7 +37,8 @@ class YourAnswer extends React.Component {
                             email,
                             photo,
                             votes: []
-                        }
+                        },
+                        votesDown: []
                     })
                 }
             })
