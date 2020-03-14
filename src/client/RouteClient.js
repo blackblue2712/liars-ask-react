@@ -26,6 +26,7 @@ import PrivateRoute from '../PirvateRoute';
 import NotFound from './components/NotFound';
 import RequestUpgrade from './users/RequestUpgrade';
 import ActiveUpgrade from './request/ActiveUpgrade';
+// import PrivateChat from './chats/PrivateChawt';
 
 
 const RouteClient = props => {
@@ -56,6 +57,8 @@ const RouteClient = props => {
                 <PrivateRoute exact path="/blogs/:blogId" component={SingleBlog} />
                 <PrivateRoute exact path="/blogs/edit/:blogId" component={EditBlog} />
                 <PrivateRoute exact path="/images-gallery" component={ImagesGallery} />
+
+                {/* <PrivateRoute exact path="/chats/chanels" component={PrivateChat} /> */}
 
                 <PrivateRoute exact path="/upgrade-account" component={RequestUpgrade} />
                 <PrivateRoute exact path="/upgrade-account/:activeCode" component={ActiveUpgrade} />
