@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Tags from '../components/Tags';
-import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
 class ListItem extends Component {
@@ -38,9 +37,7 @@ class ListItem extends Component {
                         <Link to={`/blogs/${id}`} className="hyper-link">{title}</Link>
                     </h3>
                     <div className="list-body--text mb4" style={{}}>
-                        <ReactMarkdown
-                            source={body.length > 100 ? body.slice(0, 100) + "..." : body}
-                        />
+                        {body.length > 100 ? body.slice(0, 100) + "..." : body}
                     </div>
                     {
                         tags && tags.map( (t, i) => {

@@ -7,7 +7,7 @@ class Questions extends React.Component {
     constructor() {
         super();
         this.state = {
-            questions: []
+            questions: null
         }
     }
 

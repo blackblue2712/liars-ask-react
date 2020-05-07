@@ -26,6 +26,7 @@ import PrivateRoute from '../PirvateRoute';
 import NotFound from './components/NotFound';
 import RequestUpgrade from './users/RequestUpgrade';
 import ActiveUpgrade from './request/ActiveUpgrade';
+import AdvanceSearch from './search/AdvanceSerach';
 // import PrivateChat from './chats/PrivateChawt';
 
 
@@ -62,6 +63,8 @@ const RouteClient = props => {
 
                 <PrivateRoute exact path="/upgrade-account" component={RequestUpgrade} />
                 <PrivateRoute exact path="/upgrade-account/:activeCode" component={ActiveUpgrade} />
+
+                <PrivateRoute exact path="/advance/serach" component={AdvanceSearch} />
 
                 <PrivateRoute component={NotFound} to="/404"/>
                 <PrivateRoute component={NotFound} />

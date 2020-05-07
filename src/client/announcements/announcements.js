@@ -19,7 +19,7 @@ class Announcement extends React.Component {
     constructor() {
         super();
         this.state = {
-            acms: [],
+            acms: null,
             message: ""
         }
     }

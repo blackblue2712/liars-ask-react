@@ -800,7 +800,7 @@ input[type=checkbox]:checked:after {
 }
 
 .btn-loading {
-
+    width: fit-content;
 }
 .btn-loading:before {
     content: "";

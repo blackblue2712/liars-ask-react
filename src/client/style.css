@@ -60,3 +60,9 @@ button[role="handle-request"]:hover {
     background: url("../images/22.gif") center center no-repeat;
     background-size: 50px;
 }
+
+@media (max-width: 460px) {
+    .item-list .cp {
+        display: none !important;
+    }
+}

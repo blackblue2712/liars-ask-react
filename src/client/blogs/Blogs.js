@@ -8,7 +8,7 @@ class Blogs extends React.Component {
     constructor() {
         super();
         this.state = {
-            blogs: []
+            blogs: null
         }
     }
 

@@ -8,7 +8,7 @@ import { isAuthenticated, getSignout } from '../../controllers/userController';
 import { getNotifications } from "../../controllers/notifyController";
 import dfimg from '../../images/solar-system.png';
 import { onSearchQuestions } from '../../controllers/askController';
-// import socketIOClient from 'socket.io-client';
+import Notify from './Notify';
 
 
 class Header extends Component {
@@ -25,7 +25,8 @@ class Header extends Component {
             uid: null,
             photo: "",
             notifications: [],
-            questions: []
+            questions: [],
+            message: ""
         }
 
         // this.handleToggleMenu = this.handleToggleMenu.bind(this);
@@ -36,17 +37,6 @@ class Header extends Component {
     }
 
     componentDidMount () {
-        import('socket.io-client').then( socketIOClient => {
-            let socket = socketIOClient.connect(process.env.REACT_APP_API_URL , {transports: ['websocket']});
-            socket.emit("getNotifications", {token: "token sdfsdf"});
-            
-            
-            socket.on("getNotifications", function(data) {
-                console.log(data);
-                console.log(socket)
-            })
-        })
-
         // document.getElementById("root").addEventListener("click", this.clickRoot);
         if(isAuthenticated()) {
             let uid = isAuthenticated().user._id;
@@ -152,14 +142,29 @@ class Header extends Component {
         if(querySearch) {
             const response = await onSearchQuestions(querySearch);
             console.log(response)
-            this.setState({ questions: response.payload })
+            if(response && !response.error) {
+                this.setState({ questions: response.payload, message: response.message })
+                document.getElementById("root").addEventListener("click", this.closeSearch)
+            }
         }
     }
 
+    closeSearch = () => {
+        this.setState({ questions: [] })
+        document.getElementById("root").removeEventListener("click", this.closeSearch)
+    }
+
+    clearMess = (mes) => {
+        this.setState({ message: mes });
+    }
+
     render() {
-        const { uid, photo, notifications, questions } = this.state;
+        const { uid, photo, notifications, questions, message } = this.state;
+        console.log(message)
         return (
             <header id="header" className="ps-fixed w-100">
+                <Notify />
+                {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />}
                 <div className="container d-flex align-items-center">
                     <div className="brand-logo d-flex align-items-center">
                         <Link to="/">
@@ -190,26 +195,32 @@ class Header extends Component {
                                         </Link>
                                     </li>
                                     <li>
-                                        <a href="/teams">
+                                        <Link to="/advance/serach">
+                                            <span className="fs-body1 d-block">Advance Search</span>
+                                            <span className="fs-caption d-block">Advance Search</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <a href="#teams">
                                             <span className="fs-body1 d-block">Teams</span>
                                             <span className="fs-caption d-block">Private questions and answers for your team</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/teams">
+                                        <a href="#teams">
                                             <span className="fs-body1 d-block">Enterprise</span>
                                             <span className="fs-caption d-block">Private self-hosted questions and answers for your enterprise</span>
                                         </a>
                                     </li>
                                     <hr className="oc7"/>
                                     <li>
-                                        <a href="/teams">
+                                        <a href="#teams">
                                             <span className="fs-body1 d-block">Talent</span>
                                             <span className="fs-caption d-block">Hire technical talent</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/teams">
+                                        <a href="#teams">
                                             <span className="fs-body1 d-block">Advertising</span>
                                             <span className="fs-caption d-block">Reach developers worldwide</span>
                                         </a>
@@ -234,7 +245,7 @@ class Header extends Component {
                                                 return (
                                                     <div class="list-sumary w-100" key={i}>
                                                         <h3>
-                                                            <a className="hyper-link" href={`/questions/ask/${ques._id}`}>{ques.title}</a>
+                                                            <Link className="hyper-link" to={`/questions/ask/${ques._id}`}>{ques.title}</Link>
                                                         </h3>
                                                     </div>
                                                 )
