@@ -7,6 +7,9 @@ import Default from '../../images/default.png';
 import { isAuthenticated, getSignout } from '../../controllers/userController';
 import { getNotifications } from "../../controllers/notifyController";
 import dfimg from '../../images/solar-system.png';
+import { onSearchQuestions } from '../../controllers/askController';
+import Notify from './Notify';
+
 
 class Header extends Component {
 
@@ -21,7 +24,9 @@ class Header extends Component {
             toggleUser: false,
             uid: null,
             photo: "",
-            notifications: []
+            notifications: [],
+            questions: [],
+            message: ""
         }
 
         // this.handleToggleMenu = this.handleToggleMenu.bind(this);
@@ -32,7 +37,7 @@ class Header extends Component {
     }
 
     componentDidMount () {
-        document.getElementById("root").addEventListener("click", this.clickRoot);
+        // document.getElementById("root").addEventListener("click", this.clickRoot);
         if(isAuthenticated()) {
             let uid = isAuthenticated().user._id;
             let token = isAuthenticated().token;
@@ -54,13 +59,11 @@ class Header extends Component {
         if(!toggleMenu) {
             toggleButton.classList.add("topbar-icon-on");
             leftSide.classList.add("topbar-icon-on");
-            // this.setState( {toggleMenu: true} );
         } else {
-            
             toggleButton.classList.remove("topbar-icon-on");
             leftSide.classList.remove("topbar-icon-on");
-            // this.setState( {toggleMenu: false} );
         }
+
         this.setState( function (prevState, props) {
             return {toggleMenu: !prevState.toggleMenu}
         });
@@ -94,14 +97,6 @@ class Header extends Component {
             return { toggleProducts: !prevState.toggleProducts }
         })
 
-        
-        document.getElementById("root").addEventListener("click", () => {
-            try {
-                document.querySelector("#products-popover").style.display = "none";
-            } catch (e) {
-
-            }
-        })
     }
 
     handleToggleUser = () => {
@@ -118,13 +113,7 @@ class Header extends Component {
         this.setState( function(prevState, props) {
             return { toggleUser: !prevState.toggleUser }
         })
-        document.getElementById("root").addEventListener("click", () => {
-            try {
-                document.querySelector("#user-popover").style.display = "none";
-            } catch (e) {
-
-            }
-        })
+       
     }
 
     handleToggleNotify = () => {
@@ -136,13 +125,7 @@ class Header extends Component {
         }
 
         this.setState( {toggleNotify: !this.state.toggleNotify});
-        document.getElementById("root").addEventListener("click", () => {
-            try {
-                document.querySelector(".list-notify-box").style.display = "none";
-            } catch (e) {
-
-            }
-        })
+       
     }
 
     handleSignout = () => {
@@ -153,10 +136,35 @@ class Header extends Component {
         })
     }
 
+    handleSearch = async (e) => {
+        e.preventDefault();
+        let querySearch = document.getElementById("query-search").value;
+        if(querySearch) {
+            const response = await onSearchQuestions(querySearch);
+            console.log(response)
+            if(response && !response.error) {
+                this.setState({ questions: response.payload, message: response.message })
+                document.getElementById("root").addEventListener("click", this.closeSearch)
+            }
+        }
+    }
+
+    closeSearch = () => {
+        this.setState({ questions: [] })
+        document.getElementById("root").removeEventListener("click", this.closeSearch)
+    }
+
+    clearMess = (mes) => {
+        this.setState({ message: mes });
+    }
+
     render() {
-        const { uid, photo, notifications } = this.state;
+        const { uid, photo, notifications, questions, message } = this.state;
+        console.log(message)
         return (
             <header id="header" className="ps-fixed w-100">
+                <Notify />
+                {message !== "" &&  <Notify class="on" text={message} clearMess={this.clearMess} />}
                 <div className="container d-flex align-items-center">
                     <div className="brand-logo d-flex align-items-center">
                         <Link to="/">
@@ -187,26 +195,32 @@ class Header extends Component {
                                         </Link>
                                     </li>
                                     <li>
-                                        <a href="/teams">
+                                        <Link to="/advance/serach">
+                                            <span className="fs-body1 d-block">Advance Search</span>
+                                            <span className="fs-caption d-block">Advance Search</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <a href="#teams">
                                             <span className="fs-body1 d-block">Teams</span>
                                             <span className="fs-caption d-block">Private questions and answers for your team</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/teams">
+                                        <a href="#teams">
                                             <span className="fs-body1 d-block">Enterprise</span>
                                             <span className="fs-caption d-block">Private self-hosted questions and answers for your enterprise</span>
                                         </a>
                                     </li>
                                     <hr className="oc7"/>
                                     <li>
-                                        <a href="/teams">
+                                        <a href="#teams">
                                             <span className="fs-body1 d-block">Talent</span>
                                             <span className="fs-caption d-block">Hire technical talent</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/teams">
+                                        <a href="#teams">
                                             <span className="fs-body1 d-block">Advertising</span>
                                             <span className="fs-caption d-block">Reach developers worldwide</span>
                                         </a>
@@ -215,9 +229,9 @@ class Header extends Component {
                             </div>
                         </li>
                         <li className="w-100">
-                            <form action="#search">
+                            <form action="#search" onSubmit={this.handleSearch}>
                                 <div className="ps-relative">
-                                    <input type="text" name="q" placeholder="Search..." maxLength="240" className="s-input s-input__search js-search-field w-100" />
+                                    <input type="text" name="q" placeholder="Search..." maxLength="240" className="s-input s-input__search js-search-field w-100" id="query-search" autocomplete="off" />
                                     <svg aria-hidden="true" className="svg-icon s-input-icon s-input-icon__search iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"></path></svg>
                                     <svg
                                         aria-hidden="false" className="svg-icon s-input-icon s-input-icon__search iconSearch d-none" width="18" height="18" viewBox="0 0 18 18"
@@ -225,6 +239,19 @@ class Header extends Component {
                                     >
                                             <path d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"></path>
                                     </svg>
+                                    <div className="search-questions-payload">
+                                        {
+                                            questions.map( (ques, i) => {
+                                                return (
+                                                    <div class="list-sumary w-100" key={i}>
+                                                        <h3>
+                                                            <Link className="hyper-link" to={`/questions/ask/${ques._id}`}>{ques.title}</Link>
+                                                        </h3>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
                             </form>
                         </li>

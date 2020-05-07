@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import Tags from '../components/Tags';
 
-import { Link } from 'react-router-dom';
 
 class ListItem extends Component {
 
