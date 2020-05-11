@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LeftSideBar/> -> <NavItems /> take a snapshot of NavItem 1`] = `ShallowWrapper {}`;
+
+exports[`<LeftSideBar/> -> <NavItems /> take a snapshot of NavItems 1`] = `ShallowWrapper {}`;

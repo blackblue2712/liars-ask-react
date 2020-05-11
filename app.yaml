@@ -1,36 +1,41 @@
+runtime: nodejs10
+instance_class: F2
+automatic_scaling:
+  max_instances: 1
+
 # [START runtime]
-runtime: python27
-api_version: 1
-threadsafe: true
+#runtime: python27
+#api_version: 1
+#threadsafe: true
 # [END runtime]
 
 # [START handlers]
-handlers:
-  - url: '/service-worker.js'
-    secure: always
-    static_files: build/service-worker.js
-    upload: build/service-worker.js
-    mime_type: application/javascript
+#handlers:
+#  - url: '/service-worker.js'
+#    secure: always
+#    static_files: build/service-worker.js
+#    upload: build/service-worker.js
+#    mime_type: application/javascript
 
-  - url: /(precache-manifest.*)$
-    secure: always
-    mime_type: application/javascript
-    static_files: build/\1
-    upload: build/(precache-manifest.*)$
+#  - url: /(precache-manifest.*)$
+#    secure: always
+#    mime_type: application/javascript
+#    static_files: build/\1
+#    upload: build/(precache-manifest.*)$
 
-  - url: /(.*\.js)$
-    secure: always
-    static_files: build/\1
-    upload: build/.*\.js$
-    mime_type: application/javascript
+#  - url: /(.*\.js)$
+#    secure: always
+#    static_files: build/\1
+#    upload: build/.*\.js$
+#    mime_type: application/javascript
 
-  - url: /(.*\.(css|map|png|jpg|svg|ico|json|txt|woff))$
-    secure: always
-    static_files: build/\1
-    upload: build/.*\.(css|map|png|jpg|svg|ico|json|txt|woff)$
+#  - url: /(.*\.(css|map|png|jpg|svg|ico|json|txt|woff))$
+#    secure: always
+#    static_files: build/\1
+#    upload: build/.*\.(css|map|png|jpg|svg|ico|json|txt|woff)$
 
-  - url: '/(.*)'
-    secure: always
-    static_files: build/index.html
-    upload: build/index.html
+#  - url: '/(.*)'
+#    secure: always
+#    static_files: build/index.html
+#    upload: build/index.html
 # [END handlers]
