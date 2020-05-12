@@ -18,7 +18,7 @@ const ListWrapper = props => {
                     
                     {
                         questions && questions.map( (ques, i) => {
-                            return <ListItem key={i} title={ques.title} body={ques.body} tags={ques.tags} id={ques._id} answers={ques.answers.length} /> 
+                            return <ListItem key={i} title={ques.title} tags={ques.tags} id={ques._id} answers={ques.answers.length} /> 
                         })
                     }
                 </div>

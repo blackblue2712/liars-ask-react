@@ -65,4 +65,10 @@ button[role="handle-request"]:hover {
     .item-list .cp {
         display: none !important;
     }
+
+    .post-layout {
+        flex-direction: column;
+        align-self: flex-start;
+    }
 }
+

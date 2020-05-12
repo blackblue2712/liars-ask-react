@@ -11,7 +11,7 @@ class ListItem extends Component {
     }
 
     render() {
-        const { title, body, tags, id, answers } = this.props;
+        const { title, tags, id, answers } = this.props;
         return (
             <div className={`item-list narrow d-flex`}>
                 <div className="cp d-flex">
@@ -38,10 +38,10 @@ class ListItem extends Component {
                     <h3>
                         <Link to={`/questions/ask/${id}`} className="hyper-link">{title}</Link>
                     </h3>
-                    <div className="list-body--text mb4" style={{}}>
+                    {/* <div className="list-body--text mb4" style={{}}>
                         
                         {body.length > 200 ? body.slice(0, 200) + "..." : body}
-                    </div>
+                    </div> */}
                     {
                         tags && tags.map( (t, i) => {
                             return <Tags key={i} name={t.name}/>

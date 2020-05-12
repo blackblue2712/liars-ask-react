@@ -439,11 +439,11 @@ code {
     width: 500px;
   } */
   #sidebar {
-    width: 500px !important;
+    /* width: 500px !important; */
   }
 }
 
-@media screen and (max-width: 526px) {
+@media screen and (max-width: 740px) {
   #content {
     width: 100% !important;
     border: none !important;
@@ -483,14 +483,18 @@ code {
     display: block !important;
   }
   #mainbar {
-    width: 500px !important;
+    /* width: 500px !important; */
+  }
+
+  .left-sidebar-toggle {
+    display: block !important;
   }
 }
-@media screen and (min-width: 527px) {
+/* @media screen and (min-width: 527px) {
   .left-sidebar-toggle {
     display: none !important;
   }
-}
+} */
 
 
 .topbar-icon-on {
