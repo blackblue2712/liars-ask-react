@@ -41,6 +41,7 @@ class AnswerItem extends React.Component {
     render() {
         const { count, active } = this.state;
         const ans = this.props.data;
+        console.log(ans)
         let isActive = "";
         if(isAuthenticated()) {
             isActive = this.props.data.votes.indexOf(isAuthenticated().user._id) !== -1 ? "active" : "";

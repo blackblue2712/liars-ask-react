@@ -58,7 +58,7 @@ export class Header extends Component {
                         </Link>
                     </div>
                     <a
-                        className="left-sidebar-toggle d-flex align-items-center justify-content-center"
+                        className="left-sidebar-toggle align-items-center justify-content-center"
                         id="left-sidebar-toggle"
                         href="#tg"
                         onClick={this.handleToggleMenu}

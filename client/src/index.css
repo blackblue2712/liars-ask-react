@@ -469,7 +469,7 @@ code {
     display: none !important;
   }
   .left-sidebar-toggle {
-    display: block !important;
+    display: flex !important;
   }
 
   .js-search-field {
@@ -486,9 +486,6 @@ code {
     /* width: 500px !important; */
   }
 
-  .left-sidebar-toggle {
-    display: block !important;
-  }
 }
 /* @media screen and (min-width: 527px) {
   .left-sidebar-toggle {
